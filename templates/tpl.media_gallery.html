@@ -1,0 +1,33 @@
+<!-- BEGIN media_block -->
+<form action="{FORM_TARGET}" method="post">
+	<div class="xlel_media_2">
+		<!--<h1 class="xlel_matlist">-->
+
+			<!-- BEGIN admin_block -->
+		<!--<span class="xlel_comment_actions">-->
+			<!---->
+		<!--</span>-->
+			<!-- END admin_block -->
+			<!--{TITLE}-->
+		<!--</h1>-->
+		<ul class="sortable">
+			<!-- BEGIN movable_block -->
+			<li>
+				<a href="{SRC2}" rel="lightbox[{LIGHTBOX}]">
+					<div class="FSXsort ui-state-default {ADMCSS}"
+					     style="background-image: url({SRC}); height: {SZ}px; width: {WZ}px;">
+						<!-- BEGIN admin_mode -->
+						<input type="hidden" name="img[]" value="{VALUE}">
+						<!-- END admin_mode -->
+					</div>
+				</a>
+				<!-- BEGIN delete_picture -->
+				<input type="checkbox" name="media_ids[]" value="{IMG_ID}">
+				<!-- END delete_picture -->
+			</li>
+			<!-- END movable_block -->
+		</ul>
+		<input type="submit" class="submit" name="cmd[confirmDeleteImage]" value="{BUTTON_NEW}">
+	</div>
+</form>
+<!-- END media_block -->

@@ -1,0 +1,61 @@
+<!-- language file start -->
+obj_xlel#:#Lernort
+objs_xlel#:#Lernorte
+obj_xlel_duplicate#:#Kopieren
+objs_xlel_duplicate#:#Lernort kopieren
+obj_xlel_select#:#lernort auswählen
+xlel_add#:#Lernort hinzufügen
+xlel_new#:#Neuen Lernort erstellen
+xlel_read#:#Leserechte auf lernort
+xlel_write#:#Lernort bearbeiten
+xlel_delete#:#Lernort löschen
+xlel_visible#:#Lernort ist sichtbar
+xlel_edit_permission#:#Rechteeinstellungen ändern
+crs_create_xlel#:#Lernort erstellen
+grp_create_xlel#:#Lernort erstellen
+fold_create_xlel#:#lernort erstellen
+root_create_xlel#:#Lernort erstellen
+cat_create_xlel#:#Lernort erstellen
+content#:#Inhalt
+properties#:#Einstellungen
+edit_properties#:#Einstellungen bearbeiten
+title#:#Titel
+description#:#Beschreibung
+save#:#Speichern
+cancel#:#Abbrechen
+edit#:#Bearbeiten
+status#:#Status
+offline#:#Offline
+learnloc_plugin_configuration#:#LearningLocation Plugin Configuration
+saving_invoked#:#Save procedure has been executed. Please note that this example does not save anything to DB.
+location_selector#:#Ort auswählen
+init_mob_id_selector#:#Neues Bild zum Lernort hinzufügen
+no_map_api#:#Bitte aktivieren Sie die Google-Maps API für diese ILIAS-Installation. Kontaktieren Sie Ihre lokale ILIAS-Administration.
+images_init#:#Bilder Lernort
+images_comments#:#Bilder Kommentare
+media#:#Bilder
+comments#:#Kommentare
+new_comment#:#Neuer Kommentar
+new_answer#:#Antworten
+save_new_comment#:#Kommentar speichern
+delete_comment#:#löschen
+body#:#Kommentar
+image#:#Bild
+add_new_items#:#zum Ordner wechseln, um Objekte hinzuzufügen
+folder_content#:#Material
+comment_saved#:#Kommentar gespeichert
+confirm_delete_header#:#Möchten Sie die Medien wirklich löschen?
+export_arcgis#:#Export
+export_csv#:#Export CSV
+export_gpx#:#Export GPX
+keywords_export#:#Keywords
+keywords_save#:#Keywords speichern
+keywords_update#:#Update Keywords
+keywords_delete#:#Keywords löschen
+keywords_title#:#Keywords
+keywords_edit#:#Keywords bearbeiten
+keywords_info#:#Keywords Komma-getrennt
+msg_images_deleted#:#Medien wurden gelöscht
+delete_images#:#Ausgewählte Bilder löschen
+block_title_init#:#Bilder zum Lernort
+block_title_comments#:#Bilder aus Kommentaren

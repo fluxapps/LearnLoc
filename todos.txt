@@ -1,0 +1,5 @@
+- Löschen (inkl. Medianobjekte und Folder [bestätigen])
+- Objekt erstellen refactoring
+- json schnittstelle neu
+- Export Tab
+- Löschen von Bildern

@@ -1,0 +1,318 @@
+<services>
+	<service>
+		<name>getCourses</name>
+		<in>
+			<username type='string'></username>
+			<password type='string'></password>
+		</in>
+		<out case='success'>
+			<user>
+				<id type='int'></id>
+				<writing-permission type='int' desc='no-write-access'>0</writing-permission>
+				<writing-permission type='int' desc='write-access'>1</writing-permission>
+				<courses>
+					<course>
+						<title type='string'></title>
+						<id type='int'></id>
+					</course>
+					<!-- ... -->
+				</courses>
+			</user>
+		</out>
+		<out case='failure'>
+			<error>
+				<errorcode type='int'></errorcode>
+				<description type='string'></description>
+			</error>
+		</out>
+	</service>
+	<service>
+		<name>getLocations</name>
+		<in>
+			<username type='string'></username>
+			<password type='string'></password>
+			<course-id type='int'></course-id>
+		</in>
+		<out case='success'>
+			<course>
+				<id type='int'></id>
+				<description type='string' desc='no-write-access'></description>
+				<locations>
+					<location>
+						<id type='int'></id>
+						<title type='string'></title>
+						<latitude type='float'></latitude>
+						<longitude type='float'></longitude>
+						<elevation type='float'></elevation>
+						<address type='string'></address>
+						<description type='string'></description>
+						<allow-comments type='int' desc="allowed">1</allow-comments>
+						<allow-comments type='int' desc="not allowed">0</allow-comments>
+					</location>
+					<!-- ... -->
+				</locations>
+			</course>
+		</out>
+		<out case='failure'>
+			<error>
+				<errorcode type='int'></errorcode>
+				<description type='string'></description>
+			</error>
+		</out>
+	</service>
+	<service>
+		<name>addLocation</name>
+		<in>
+			<username type='string'></username>
+			<password type='string'></password>
+			<course-id type='int'></course-id>
+            <name type='string'></name>
+            <description type='string'></description>
+			<longitude type='float'></longitude>
+			<latitude type='float'></latitude>
+			<elevation type='float'></elevation>
+		</in>
+		<out case='success'>
+
+		</out>
+		<out case='failure'>
+			<error>
+				<errorcode type='int'></errorcode>
+				<description type='string'></description>
+			</error>
+		</out>
+	</service>
+	<service>
+		<name>getComment</name>
+		<in>
+			<username type='string'></username>
+			<password type='string'></password>
+			<comment-id type='int'></comment-id>
+		</in>
+		<out case='success'>
+
+		</out>
+		<out case='failure'>
+			<error>
+				<errorcode type='int'></errorcode>
+				<description type='string'></description>
+			</error>
+		</out>
+	</service>
+	<service>
+		<name>getComment</name>
+		<!-- wird die noch benötigt? -->
+		<in>
+			<username type='string'></username>
+			<password type='string'></password>
+			<comment-id type='int'></comment-id>
+		</in>
+		<out case='success'>
+			<comments>
+				<count type='int'>1</count>
+				<comment>
+					<id type='int'></id>
+					<title type='string'></title>
+					<body type='string'></body>
+					<username type='string'></username>
+					<date type='int'></date>
+					<haspicture type='int'></haspicture>
+					<replies>
+							[...]
+					</replies>
+				</comment>
+			</comments>
+		</out>
+		<out case='failure'>
+			<error>
+				<errorcode type='int'></errorcode>
+				<description type='string'></description>
+			</error>
+		</out>
+	</service>
+	<service>
+		<name>getComments</name>
+		<in>
+			<username type='string'></username>
+			<password type='string'></password>
+			<location-id type='int'></location-id>
+			<start type='int'></start>
+			<count type='int'></count>
+		</in>
+		<out case='success'>
+			<comments>
+				<count type='int'>1</count>
+				<comment>
+					<id type='int'></id>
+					<title type='string'></title>
+					<body type='string'></body>
+					<username type='string'></username>
+					<date type='int'></date>
+					<haspicture type='int'></haspicture>
+					<replies>
+						[...]
+					</replies>
+				</comment>
+				[...]
+			</comments>
+		</out>
+		<out case='failure'>
+			<error>
+				<errorcode type='int'></errorcode>
+				<description type='string'></description>
+			</error>
+		</out>
+	</service>
+	<service>
+		<name>addComment</name>
+		<in>
+			<username type='string'></username>
+			<password type='string'></password>
+			<location-id type='int'></location-id>
+			<body type='sttring'></body>
+		</in>
+		<out case='success'>
+		</out>
+		<out case='failure'>
+			<error>
+				<errorcode type='int'></errorcode>
+				<description type='string'></description>
+			</error>
+		</out>
+	</service>
+	<service>
+		<name>getCommentThumb</name>
+		<in>
+			<username type='string'></username>
+			<password type='string'></password>
+			<comment-id type='int'></comment-id>
+		</in>
+		<out case='success'>
+			<base64></base64>
+		</out>
+		<out case='failure'>
+			<error>
+				<errorcode type='int'></errorcode>
+				<description type='string'></description>
+			</error>
+		</out>
+	</service>
+	<service>
+		<name>getCommentImage</name>
+		<in>
+			<username type='string'></username>
+			<password type='string'></password>
+			<comment-id type='int'></comment-id>
+		</in>
+		<out case='success'>
+			<base64></base64>
+		</out>
+		<out case='failure'>
+			<error>
+				<errorcode type='int'></errorcode>
+				<description type='string'></description>
+			</error>
+		</out>
+	</service>
+	<service>
+		<name>getLocationThumb</name>
+		<in>
+			<username type='string'></username>
+			<password type='string'></password>
+			<location-id type='int'></location-id>
+		</in>
+		<out case='success'>
+			<base64></base64>
+		</out>
+		<out case='failure'>
+			<error>
+				<errorcode type='int'></errorcode>
+				<description type='string'></description>
+			</error>
+		</out>
+	</service>
+	<service>
+		<name>getLocationImage</name>
+		<in>
+			<username type='string'></username>
+			<password type='string'></password>
+			<location-id type='int'></location-id>
+		</in>
+		<out case='success'>
+			<base64></base64>
+		</out>
+		<out case='failure'>
+			<error>
+				<errorcode type='int'></errorcode>
+				<description type='string'></description>
+			</error>
+		</out>
+	</service>
+	<service>
+		<name>getLocationHeaderImage</name>
+		<in>
+			<username type='string'></username>
+			<password type='string'></password>
+			<location-id type='int'></location-id>
+		</in>
+		<out case='success'>
+			<base64></base64>
+		</out>
+		<out case='failure'>
+			<error>
+				<errorcode type='int'></errorcode>
+				<description type='string'></description>
+			</error>
+		</out>
+	</service>
+	<service>
+		<name>getLoginType</name>
+		<in>
+			<username type='string'></username>
+			<password type='string'></password>
+		</in>
+		<out case='success'>
+			<login-type type="int" desc="failed">0</login-type>
+			<login-type type="int" desc="campus">1</login-type>
+			<login-type type="int" desc="ilias">2</login-type>
+		</out>
+		<out case='failure'>
+			<error>
+				<errorcode type='int'></errorcode>
+				<description type='string'></description>
+			</error>
+		</out>
+	</service>
+	<service>
+		<name>getCampusTour</name>
+		<in>
+			<username type='string'></username>
+			<password type='string'></password>
+		</in>
+		<out case='success'>
+			<user>
+				<id type='int'></id>
+				<writing-permission type='int' desc='no-write-access'>0</writing-permission>
+				<writing-permission type='int' desc='write-access'>1</writing-permission>
+				<courses>
+					<course>
+						<title type='string'></title>
+						<id type='int'></id>
+					</course>
+				</courses>
+			</user>
+		</out>
+		<out case='failure'>
+			<error>
+				<errorcode type='int'></errorcode>
+				<description type='string'></description>
+			</error>
+		</out>
+		<out case='failure'>
+			<error>
+				<errorcode type='int'></errorcode>
+				<description type='string'></description>
+			</error>
+		</out>
+	</service>
+</services>

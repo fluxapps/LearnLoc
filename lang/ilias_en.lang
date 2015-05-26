@@ -1,0 +1,61 @@
+<!-- language file start -->
+obj_xlel#:#Learn Location
+objs_xlel#:#Learn Locations
+obj_xlel_duplicate#:#Copy
+objs_xlel_duplicate#:#Copy Learn Location
+obj_xlel_select#:#Choose Learn Location
+xlel_add#:#Add Learn Location
+xlel_new#:#Add new Learn Location
+xlel_read#:#Write-Access to Learn Location
+xlel_write#:#Edit Learn Location
+xlel_delete#:#Delete Learn Location
+xlel_visible#:#Learn Location is visible
+xlel_edit_permission#:#Edit Permissions
+crs_create_xlel#:#Create Learn Location
+grp_create_xlel#:#Create Learn Location
+fold_create_xlel#:#Create Learn Location
+root_create_xlel#:#Create Learn Location
+cat_create_xlel#:#Create Learn Location
+content#:#Content
+properties#:#Settings
+edit_properties#:#Edit Settings
+title#:#Title
+description#:#Description
+save#:#Save
+cancel#:#Cancel
+edit#:#Edit
+status#:#Status
+offline#:#Offline
+learnloc_plugin_configuration#:#LearningLocation Plugin Configuration
+saving_invoked#:#Save procedure has been executed. Please note that this example does not save anything to DB.
+location_selector#:#Choose Location
+init_mob_id_selector#:#Add new Image to Learn Location
+no_map_api#:#Please activate the Google-Maps API.
+images_init#:#Images Learn Location
+images_comments#:#Images Comments
+media#:#Gallery
+comments#:#Comments
+new_comment#:#New Comment
+new_answer#:#Answer
+save_new_comment#:#Save Comment
+delete_comment#:#Delete
+body#:#Comment
+image#:#Image
+add_new_items#:#Choose Folder to add new Objects
+folder_content#:#Content
+comment_saved#:#Comment saved
+confirm_delete_header#:#Do you really want to delete this media?
+export_arcgis#:#Export
+export_csv#:#Export CSV
+export_gpx#:#Export GPX
+keywords_export#:#Keywords
+keywords_save#:#Save Keywords
+keywords_update#:#Update Keywords
+keywords_delete#:#Delete Keywords
+keywords_title#:#Keywords
+keywords_edit#:#Edit Keywords
+keywords_info#:#Enter keywords coma-separated
+msg_images_deleted#:#Media was deleted
+delete_images#:#Delete selected images
+block_title_init#:#Learning-Location Images
+block_title_comments#:#Images from Comments

@@ -1,0 +1,262 @@
+<ns:gpx version="1.1" creator="string" xmlns:ns="http://www.topografix.com/GPX/1/1">
+	<!--Optional:-->
+	<ns:metadata>
+		<!--Optional:-->
+		<ns:name>string</ns:name>
+		<!--Optional:-->
+		<ns:desc>string</ns:desc>
+		<!--Optional:-->
+		<ns:author>
+			<!--Optional:-->
+			<ns:name>string</ns:name>
+			<!--Optional:-->
+			<ns:email id="string" domain="string"/>
+			<!--Optional:-->
+			<ns:link href="http://www.company.org/cum/sonoras">
+				<!--Optional:-->
+				<ns:text>string</ns:text>
+				<!--Optional:-->
+				<ns:type>string</ns:type>
+			</ns:link>
+		</ns:author>
+		<!--Optional:-->
+		<ns:copyright author="string">
+			<!--Optional:-->
+			<ns:year>2004</ns:year>
+			<!--Optional:-->
+			<ns:license>http://www.your.org/per/turbine</ns:license>
+		</ns:copyright>
+		<!--Zero or more repetitions:-->
+		<ns:link href="http://www.test.org/nimborum/fremunt">
+			<!--Optional:-->
+			<ns:text>string</ns:text>
+			<!--Optional:-->
+			<ns:type>string</ns:type>
+		</ns:link>
+		<!--Optional:-->
+		<ns:time>2012-09-13T15:00:34+02:00</ns:time>
+		<!--Optional:-->
+		<ns:keywords>string</ns:keywords>
+		<!--Optional:-->
+		<ns:bounds minlat="90.0" minlon="179.0" maxlat="90.0" maxlon="179.0"/>
+		<!--Optional:-->
+		<ns:extensions>
+			<!--You may enter ANY elements at this point-->
+			<AnyElement/>
+		</ns:extensions>
+	</ns:metadata>
+	<!--Zero or more repetitions:-->
+	<ns:wpt lat="90.0" lon="179.0">
+		<!--Optional:-->
+		<ns:ele>1000.00</ns:ele>
+		<!--Optional:-->
+		<ns:time>2009-10-14T09:16:36</ns:time>
+		<!--Optional:-->
+		<ns:magvar>359.0</ns:magvar>
+		<!--Optional:-->
+		<ns:geoidheight>1000.00</ns:geoidheight>
+		<!--Optional:-->
+		<ns:name>string</ns:name>
+		<!--Optional:-->
+		<ns:cmt>string</ns:cmt>
+		<!--Optional:-->
+		<ns:desc>string</ns:desc>
+		<!--Optional:-->
+		<ns:src>string</ns:src>
+		<!--Zero or more repetitions:-->
+		<ns:link href="http://www.any.org/speluncis/profundum">
+			<!--Optional:-->
+			<ns:text>string</ns:text>
+			<!--Optional:-->
+			<ns:type>string</ns:type>
+		</ns:link>
+		<!--Optional:-->
+		<ns:sym>string</ns:sym>
+		<!--Optional:-->
+		<ns:type>string</ns:type>
+		<!--Optional:-->
+		<ns:fix>pps</ns:fix>
+		<!--Optional:-->
+		<ns:sat>200</ns:sat>
+		<!--Optional:-->
+		<ns:hdop>1000.00</ns:hdop>
+		<!--Optional:-->
+		<ns:vdop>1000.00</ns:vdop>
+		<!--Optional:-->
+		<ns:pdop>1000.00</ns:pdop>
+		<!--Optional:-->
+		<ns:ageofdgpsdata>1000.00</ns:ageofdgpsdata>
+		<!--Optional:-->
+		<ns:dgpsid>100</ns:dgpsid>
+		<!--Optional:-->
+		<ns:extensions>
+			<!--You may enter ANY elements at this point-->
+			<AnyElement/>
+		</ns:extensions>
+	</ns:wpt>
+	<!--Zero or more repetitions:-->
+	<ns:rte>
+		<!--Optional:-->
+		<ns:name>string</ns:name>
+		<!--Optional:-->
+		<ns:cmt>string</ns:cmt>
+		<!--Optional:-->
+		<ns:desc>string</ns:desc>
+		<!--Optional:-->
+		<ns:src>string</ns:src>
+		<!--Zero or more repetitions:-->
+		<ns:link href="http://www.any.edu/ac/hoc">
+			<!--Optional:-->
+			<ns:text>string</ns:text>
+			<!--Optional:-->
+			<ns:type>string</ns:type>
+		</ns:link>
+		<!--Optional:-->
+		<ns:number>200</ns:number>
+		<!--Optional:-->
+		<ns:type>string</ns:type>
+		<!--Optional:-->
+		<ns:extensions>
+			<!--You may enter ANY elements at this point-->
+			<AnyElement/>
+		</ns:extensions>
+		<!--Zero or more repetitions:-->
+		<ns:rtept lat="90.0" lon="179.0">
+			<!--Optional:-->
+			<ns:ele>1000.00</ns:ele>
+			<!--Optional:-->
+			<ns:time>2014-06-10T20:33:25+02:00</ns:time>
+			<!--Optional:-->
+			<ns:magvar>359.0</ns:magvar>
+			<!--Optional:-->
+			<ns:geoidheight>1000.00</ns:geoidheight>
+			<!--Optional:-->
+			<ns:name>string</ns:name>
+			<!--Optional:-->
+			<ns:cmt>string</ns:cmt>
+			<!--Optional:-->
+			<ns:desc>string</ns:desc>
+			<!--Optional:-->
+			<ns:src>string</ns:src>
+			<!--Zero or more repetitions:-->
+			<ns:link href="http://www.sample.com/aris/coniunx">
+				<!--Optional:-->
+				<ns:text>string</ns:text>
+				<!--Optional:-->
+				<ns:type>string</ns:type>
+			</ns:link>
+			<!--Optional:-->
+			<ns:sym>string</ns:sym>
+			<!--Optional:-->
+			<ns:type>string</ns:type>
+			<!--Optional:-->
+			<ns:fix>none</ns:fix>
+			<!--Optional:-->
+			<ns:sat>200</ns:sat>
+			<!--Optional:-->
+			<ns:hdop>1000.00</ns:hdop>
+			<!--Optional:-->
+			<ns:vdop>1000.00</ns:vdop>
+			<!--Optional:-->
+			<ns:pdop>1000.00</ns:pdop>
+			<!--Optional:-->
+			<ns:ageofdgpsdata>1000.00</ns:ageofdgpsdata>
+			<!--Optional:-->
+			<ns:dgpsid>100</ns:dgpsid>
+			<!--Optional:-->
+			<ns:extensions>
+				<!--You may enter ANY elements at this point-->
+				<AnyElement/>
+			</ns:extensions>
+		</ns:rtept>
+	</ns:rte>
+	<!--Zero or more repetitions:-->
+	<ns:trk>
+		<!--Optional:-->
+		<ns:name>string</ns:name>
+		<!--Optional:-->
+		<ns:cmt>string</ns:cmt>
+		<!--Optional:-->
+		<ns:desc>string</ns:desc>
+		<!--Optional:-->
+		<ns:src>string</ns:src>
+		<!--Zero or more repetitions:-->
+		<ns:link href="http://www.any.edu/circum/imperio">
+			<!--Optional:-->
+			<ns:text>string</ns:text>
+			<!--Optional:-->
+			<ns:type>string</ns:type>
+		</ns:link>
+		<!--Optional:-->
+		<ns:number>200</ns:number>
+		<!--Optional:-->
+		<ns:type>string</ns:type>
+		<!--Optional:-->
+		<ns:extensions>
+			<!--You may enter ANY elements at this point-->
+			<AnyElement/>
+		</ns:extensions>
+		<!--Zero or more repetitions:-->
+		<ns:trkseg>
+			<!--Zero or more repetitions:-->
+			<ns:trkpt lat="90.0" lon="179.0">
+				<!--Optional:-->
+				<ns:ele>1000.00</ns:ele>
+				<!--Optional:-->
+				<ns:time>2017-10-20T03:04:37</ns:time>
+				<!--Optional:-->
+				<ns:magvar>359.0</ns:magvar>
+				<!--Optional:-->
+				<ns:geoidheight>1000.00</ns:geoidheight>
+				<!--Optional:-->
+				<ns:name>string</ns:name>
+				<!--Optional:-->
+				<ns:cmt>string</ns:cmt>
+				<!--Optional:-->
+				<ns:desc>string</ns:desc>
+				<!--Optional:-->
+				<ns:src>string</ns:src>
+				<!--Zero or more repetitions:-->
+				<ns:link href="http://www.sample.gov/ac/sed">
+					<!--Optional:-->
+					<ns:text>string</ns:text>
+					<!--Optional:-->
+					<ns:type>string</ns:type>
+				</ns:link>
+				<!--Optional:-->
+				<ns:sym>string</ns:sym>
+				<!--Optional:-->
+				<ns:type>string</ns:type>
+				<!--Optional:-->
+				<ns:fix>3d</ns:fix>
+				<!--Optional:-->
+				<ns:sat>200</ns:sat>
+				<!--Optional:-->
+				<ns:hdop>1000.00</ns:hdop>
+				<!--Optional:-->
+				<ns:vdop>1000.00</ns:vdop>
+				<!--Optional:-->
+				<ns:pdop>1000.00</ns:pdop>
+				<!--Optional:-->
+				<ns:ageofdgpsdata>1000.00</ns:ageofdgpsdata>
+				<!--Optional:-->
+				<ns:dgpsid>100</ns:dgpsid>
+				<!--Optional:-->
+				<ns:extensions>
+					<!--You may enter ANY elements at this point-->
+					<AnyElement/>
+				</ns:extensions>
+			</ns:trkpt>
+			<!--Optional:-->
+			<ns:extensions>
+				<!--You may enter ANY elements at this point-->
+				<AnyElement/>
+			</ns:extensions>
+		</ns:trkseg>
+	</ns:trk>
+	<!--Optional:-->
+	<ns:extensions>
+		<!--You may enter ANY elements at this point-->
+		<AnyElement/>
+	</ns:extensions>
+</ns:gpx>
