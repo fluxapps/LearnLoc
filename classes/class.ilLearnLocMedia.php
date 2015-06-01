@@ -280,10 +280,10 @@ class ilLearnLocMedia {
 		//		}
 		//		endif;
 
-		$imagePath = $_SERVER['DOCUMENT_ROOT'] . '/' . str_ireplace('./', '', $imagePath);
+		$imagePath = ILIAS_ABSOLUTE_PATH . '/' . str_ireplace('./', '', $imagePath);
 
 		if (file_exists($imagePath) == false):
-			$imagePath = $_SERVER['DOCUMENT_ROOT'] . $imagePath;
+            $imagePath = $_SERVER['DOCUMENT_ROOT'] . $imagePath;
 			if (file_exists($imagePath) == false):
 				//				throw new Exception('image not found');
 			endif;

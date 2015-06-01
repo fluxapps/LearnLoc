@@ -2,9 +2,6 @@
 
 /* Copyright (c) 1998-2013 ILIAS open source, Extended GPL, see docs/LICENSE */
 
-//require_once('class.ilLearnLocPlugin.php');
-//require_once('./Services/UICore/classes/class.ilCtrl.php');
-require_once("./Services/GoogleMaps/classes/class.ilGoogleMapGUI.php");
 require_once('class.ilLearnLocMedia.php');
 require_once './Services/Utilities/classes/class.ilConfirmationGUI.php';
 

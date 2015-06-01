@@ -22,7 +22,6 @@
 */
 
 require_once('./Services/Repository/classes/class.ilObjectPluginGUI.php');
-require_once('./Services/GoogleMaps/classes/class.ilGoogleMapUtil.php');
 require_once('./Services/Form/classes/class.ilPropertyFormGUI.php');
 require_once('class.ilObjLearnLoc.php');
 require_once('class.ilLearnLocCommentGUI.php');

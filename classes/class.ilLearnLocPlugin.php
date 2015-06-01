@@ -110,5 +110,3 @@ class ilLearnLocPlugin extends ilRepositoryObjectPlugin {
 		$this->updateLanguages();
 	}
 }
-
-?>

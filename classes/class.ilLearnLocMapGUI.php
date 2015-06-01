@@ -3,7 +3,12 @@
 /* Copyright (c) 1998-2013 ILIAS open source, Extended GPL, see docs/LICENSE */
 //require_once('class.ilLearnLocPlugin.php');
 //require_once('./Services/UICore/classes/class.ilCtrl.php');
-require_once("./Services/GoogleMaps/classes/class.ilGoogleMapGUI.php");
+
+if (is_file('./Services/GoogleMaps/classes/class.ilGoogleMapGUI.php')) {
+    require_once('./Services/GoogleMaps/classes/class.ilGoogleMapGUI.php');
+} else {
+    require_once('./Services/Maps/classes/class.ilGoogleMapGUI.php');
+}
 
 /**
  * Class ilLearnLocMapGUI
