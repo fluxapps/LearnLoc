@@ -212,7 +212,6 @@ class ilLearnLocMedia {
 //			return false;
 		}
 		$root = substr(__FILE__, 0, strpos(__FILE__, 'LearnLoc')) . 'LearnLoc';
-
 		if ($images[$img] == $root . '/templates/images/init.jpg') {
 			$imagePath = $images[$img];
 		} elseif ($images[$img] == '') {
@@ -228,8 +227,7 @@ class ilLearnLocMedia {
 			chmod($base . "/cache", 0755);
 		}
 
-		$cacheFolder = $_SERVER['DOCUMENT_ROOT'] . '/' . str_ireplace('./', '', $base . "/cache/");
-
+		$cacheFolder = ILIAS_ABSOLUTE_PATH . '/' . str_ireplace('./', '', $base . "/cache/");
 		$remoteFolder = '';
 		$defaults = array(
 			'crop' => false,

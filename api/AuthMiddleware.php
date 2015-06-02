@@ -40,6 +40,11 @@ class AuthMiddleware extends Middleware
      */
     public function call()
     {
+        // Skip auth middleware if we are on the route -> this will display infos about the service
+        if ($this->app->request()->getPathInfo() == '/') {
+            $this->next->call();
+            return;
+        }
         $valid = false;
         if (isset($_GET['username']) && isset($_GET['password'])) {
             $_POST['username'] = $_GET['username'];
