@@ -4,6 +4,7 @@ use LearnLocApi\CampusTourService;
 use LearnLocApi\CommentsService;
 use LearnLocApi\CoursesService;
 use LearnLocApi\CreateCommentService;
+use LearnLocApi\CreateLocationService;
 use LearnLocApi\LocationImageService;
 use LearnLocApi\LocationsService;
 use Slim\Slim;
@@ -77,7 +78,8 @@ $app->get('/', function () use ($app) {
         'GET /location/:id/thumb' => 'Returns a thumbnail version of the location image',
         'GET /campusTour' => 'Returns all locations (and folders) from the campus tour',
         'GET /location/:id/comments' => 'Returns all comments for the location. Pass GET-Parameters "start" and "count" for paging',
-        'POST /location/:id/comment' => 'Create a new Comment. Post Parameters (url-encoded): title, body, image, parent_id'
+        'POST /location/:id/comment' => 'Create a new Comment. Post parameters (url-encoded): title, body, image, parent_id',
+        'POST /course/:id' => 'Create a new location under the given course (Ref-ID). Post parameters (url-encoded): title, description, latitude, longitude, image, address'
     ));
 });
 
@@ -121,6 +123,19 @@ $app->post('/location/:id/comment', function($id) use ($app) {
         'image' => $app->request->post('image'),
     );
     $service = new CreateCommentService($id, $parent_id, $data);
+    response($service->getResponse());
+});
+
+$app->post('/course/:id', function($id) use ($app) {
+    $data = array(
+        'title' => $app->request()->post('title'),
+        'description' => $app->request()->post('description'),
+        'image' => $app->request->post('image'),
+        'latitude' => $app->request->post('latitude'),
+        'longitude' => $app->request->post('longitude'),
+        'address' => $app->request->post('address'),
+    );
+    $service = new CreateLocationService($id, $data);
     response($service->getResponse());
 });
 

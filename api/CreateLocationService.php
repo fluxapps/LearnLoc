@@ -4,17 +4,12 @@
 namespace LearnLocApi;
 
 /**
- * Class CreateCommentService
+ * Class CreateLocationService
  *
  * @author Stefan Wanzenried <sw@studer-raimann.ch>
  */
-class CreateCommentService implements Service
+class CreateLocationService implements Service
 {
-
-    /**
-     * @var int
-     */
-    protected $location_id = 0;
 
     /**
      * @var int
@@ -31,22 +26,23 @@ class CreateCommentService implements Service
      */
     protected $data = array(
         'title' => '',
-        'body' => '',
+        'description' => '',
         'image' => '', // Base64 encoded
+        'latitude' => null,
+        'longitude' => null,
+        'address' => '',
     );
 
 
     /**
-     * @param $location_id
-     * @param $parent_id
+     * @param $parent_id Ref-ID!! of a parent
      * @param $data
      * @param int $user_id
      */
-    function __construct($location_id, $parent_id, $data, $user_id = 0)
+    function __construct($parent_id, $data, $user_id = 0)
     {
         global $ilUser;
 
-        $this->location_id = $location_id;
         $this->parent_id = $parent_id;
         $this->user_id = $user_id ? $user_id : $ilUser->getId();
         $this->data = array_merge($this->data, $data);
@@ -59,39 +55,47 @@ class CreateCommentService implements Service
     public function getResponse()
     {
         try {
-            $this->createComment();
+            $this->createLocation();
 
-            return array('success' => 'Successfully created comment');
+            return array('success' => 'Successfully created location');
         } catch (\Exception $e) {
             return array('error' => $e->getMessage());
         }
     }
 
 
-    protected function createComment()
+    protected function createLocation()
     {
-        $comment = new \ilLearnLocComment();
-        $comment->setRefId($this->location_id); // It's the object ID!
-        $comment->setTitle($this->get('title'));
-        $comment->setBody($this->get('body'));
-        $comment->setParentId($this->parent_id);
-        $comment->setUserId($this->user_id);
+        $location = new \ilObjLearnLoc();
+        $location->create();
+        $location->setTitle($this->get('title'));
+        $location->setDescription($this->get('description'));
+        $location->update();
+        $location->setOnline(1);
+        $location->setLatitude($this->get('latitude'));
+        $location->setLongitude($this->get('longitude'));
+        $location->setElevation(6);
+        $location->setAddress($this->get('address'));
         if ($this->get('image')) {
             $mob = new \ilLearnLocMedia();
-            $mob->setTitle('lelcommentmob');
+            $mob->setTitle('lelinitmob');
             $mob->create();
             $name = '/img_ws_' . time() . '_' . rand(1000, 9999) . '.jpg';
             $file_upload = $mob->getPath() . $name;
-            file_put_contents($file_upload, base64_decode($this->get('image')));
+            $img = str_replace('data:image/png;base64,', '', $this->get('image'));
+            $img = str_replace(' ', '+', $img);
+            $data = base64_decode($img);
+            file_put_contents($file_upload, $data);
             $file['image']['tmp_name'] = $file_upload;
             $file['image']['name'] = $name;
             $mob->setFile($file);
             $mob->addImage();
-            $mob_id = $mob->getId();
-            $comment->setMediaId($mob_id);
+            $location->setInitMobId($mob->getId());
         }
-        $comment->setCreationDate(time());
-        $comment->create();
+        $location->update();
+        $location->createReference();
+        $location->setPermissions($this->parent_id);
+        $location->putInTree($this->parent_id);
     }
 
 
