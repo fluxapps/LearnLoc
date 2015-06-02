@@ -44,6 +44,12 @@ $app->configureMode('production', function () use ($app, $settings) {
 // Add Auth middleware which takes care of creating a session and bootstrapping ILIAS
 $app->add(new AuthMiddleware());
 
+// Disable CORS
+$app->response->headers->set('Access-Control-Allow-Origin', '*');
+
+
+// 2. HELPERS
+// ********************************************************************************************
 
 /**
  * Helper function to return JSON
