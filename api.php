@@ -3,6 +3,7 @@ use LearnLocApi\AuthMiddleware;
 use LearnLocApi\CampusTourService;
 use LearnLocApi\CommentsService;
 use LearnLocApi\CoursesService;
+use LearnLocApi\CreateCommentService;
 use LearnLocApi\LocationImageService;
 use LearnLocApi\LocationsService;
 use Slim\Slim;
@@ -75,7 +76,8 @@ $app->get('/', function () use ($app) {
         'GET /location/:id/image' => 'Returns the location image',
         'GET /location/:id/thumb' => 'Returns a thumbnail version of the location image',
         'GET /campusTour' => 'Returns all locations (and folders) from the campus tour',
-        'GET /location/:id/comments' => 'Returns all comments for the location. Pass GET-Parameters "start" and "count" for paging'
+        'GET /location/:id/comments' => 'Returns all comments for the location. Pass GET-Parameters "start" and "count" for paging',
+        'POST /location/:id/comment' => 'Create a new Comment. Post Parameters (url-encoded): title, body, image, parent_id'
     ));
 });
 
@@ -105,9 +107,20 @@ $app->get('/campusTour', function () use ($app) {
 });
 
 $app->get('/location/:id/comments', function($id) use ($app) {
-    $start = isset($_GET['start']) ? (int) $_GET['start'] : 0;
-    $count = isset($_GET['count']) ? (int) $_GET['count'] : 100;
+    $start = $app->request()->get('start') ? (int) $app->request()->get('start') : 0;
+    $count = $app->request()->get('count') ? (int) $app->request()->get('count') : 100;
     $service = new CommentsService($id, $start, $count);
+    response($service->getResponse());
+});
+
+$app->post('/location/:id/comment', function($id) use ($app) {
+    $parent_id = $app->request()->post('parent_id');
+    $data = array(
+        'title' => $app->request()->post('title'),
+        'body' => $app->request()->post('body'),
+        'image' => $app->request->post('image'),
+    );
+    $service = new CreateCommentService($id, $parent_id, $data);
     response($service->getResponse());
 });
 
