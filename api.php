@@ -7,6 +7,7 @@ use LearnLocApi\CreateCommentService;
 use LearnLocApi\CreateLocationService;
 use LearnLocApi\LocationImageService;
 use LearnLocApi\LocationsService;
+use LearnLocApi\CommentImageService;
 use Slim\Slim;
 
 require 'vendor/autoload.php';
@@ -78,6 +79,8 @@ $app->get('/', function () use ($app) {
         'GET /location/:id/thumb' => 'Returns a thumbnail version of the location image',
         'GET /campusTour' => 'Returns all locations (and folders) from the campus tour',
         'GET /location/:id/comments' => 'Returns all comments for the location. Pass GET-Parameters "start" and "count" for paging',
+        'GET /comment/:id/image' => 'Returns image of comment',
+        'GET /comment/:id/thumb' => 'Returns thumbnail image of comment',
         'POST /location/:id/comment' => 'Create a new Comment. Post parameters (url-encoded): title, body, image, parent_id',
         'POST /course/:id' => 'Create a new location under the given course (Ref-ID). Post parameters (url-encoded): title, description, latitude, longitude, image, address'
     ));
@@ -108,14 +111,24 @@ $app->get('/campusTour', function () use ($app) {
     response($service->getResponse());
 });
 
-$app->get('/location/:id/comments', function($id) use ($app) {
+$app->get('/location/:id/comments', function ($id) use ($app) {
     $start = $app->request()->get('start') ? (int) $app->request()->get('start') : 0;
     $count = $app->request()->get('count') ? (int) $app->request()->get('count') : 100;
     $service = new CommentsService($id, $start, $count);
     response($service->getResponse());
 });
 
-$app->post('/location/:id/comment', function($id) use ($app) {
+$app->get('/comment/:id/thumb', function ($id) use ($app) {
+    $service = new CommentImageService($id, array('w' => 64, 'h' => 64, 'crop' => true));
+    imageResponse($service->getResponse());
+});
+
+$app->get('/comment/:id/image', function ($id) use ($app) {
+    $service = new CommentImageService($id, array('w' => 960, 'h' => 960, 'crop' => false));
+    imageResponse($service->getResponse());
+});
+
+$app->post('/location/:id/comment', function ($id) use ($app) {
     $parent_id = $app->request()->post('parent_id');
     $data = array(
         'title' => $app->request()->post('title'),
@@ -126,7 +139,7 @@ $app->post('/location/:id/comment', function($id) use ($app) {
     response($service->getResponse());
 });
 
-$app->post('/course/:id', function($id) use ($app) {
+$app->post('/course/:id', function ($id) use ($app) {
     $data = array(
         'title' => $app->request()->post('title'),
         'description' => $app->request()->post('description'),
