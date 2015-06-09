@@ -498,8 +498,9 @@ class ilLearnLocJsonService {
 		global $ilUser;
 		require_once('class.ilLearnLocComment.php');
 		foreach (ilLearnLocComment::_getNumberOfCommentsForObjId($this->getDF("location-id"), $this->getDF("start"), $this->getDF("count")) as $comObj) {
-			foreach ($comObj->children as $child) {
-				$replies[] = array(
+            $replies = array();
+            foreach ($comObj->children as $child) {
+                $replies[] = array(
 					'id' => $child->getId(),
 					'title' => $child->getTitle(),
 					'body' => $child->getBody(),
