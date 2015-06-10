@@ -159,6 +159,7 @@ class ilLearnLocJsonService {
 		require_once('class.ilObjLearnLoc.php');
 		require_once('./Services/Logging/classes/class.ilLog.php');
 		require_once('class.ilLearnLocConfigGUI.php');
+		require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/class.ilObjLearnLocAccess.php');
 	}
 
 
@@ -307,7 +308,7 @@ class ilLearnLocJsonService {
 		 */
 		$cont = ilObjectFactory::getInstanceByRefId($this->getDF('course-id'));
 		$locations = $this->getLearnLocsForContObj($cont);
-//		$folders = $this->getFoldersForContObj($cont);
+		$folders = $this->getFoldersForContObj($cont);
 		$return = array(
 			"course" => array(
 				"id" => $cont->getRefId(),
@@ -375,30 +376,26 @@ class ilLearnLocJsonService {
 	 * @return array
 	 */
 	public function getTypeIdsForContObj($obj, $type = 'xlel', $ref_id = 0) {
-//		require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/class.ilObjLearnLocAccess.php');
 		global $ilAccess, $ilUser, $tree;
+
 		/**
 		 * @var $obj ilObjCourse
 		 */
 		$subitems = $obj->getSubItems();
 		$ref_ids = array();
+		$is_xlel = $type == ilLearnLocPlugin::_getType();
 		foreach ($subitems[$type] as $ref_id) {
 			$online = ilObjLearnLocAccess::checkOnlineForRefId($ref_id['ref_id']);
-			$is_xlel = $type == ilLearnLocPlugin::_getType();
 			$has_xlels = false;
 			if(!$is_xlel) {
 				$has_xlels = count($this->getTypeIdsForContObj(ilObjectFactory::getInstanceByRefId($ref_id['ref_id']), ilLearnLocPlugin::_getType())) > 0;
 			}
 			$can_create_xlel = $ilAccess->checkAccessOfUser($ilUser->getId(), 'create', '', $ref_id['ref_id'], 'xlel');
 			$is_pool = ilObjLearnLoc::_isPool($ref_id['ref_id']);
-//			echo "!";
-//			var_dump($has_xlels); // FSX
-//			var_dump(($can_create_xlel AND ! $is_pool)); // FSX
 			if (($is_xlel AND $online) OR $has_xlels OR (!$is_xlel AND $can_create_xlel AND ! $is_pool)) {
 				$ref_ids[] = $ref_id['ref_id'];
 			}
 		}
-//		echo '<pre>' . print_r($ref_ids, 1) . '</pre>';
 
 		return $ref_ids;
 	}
