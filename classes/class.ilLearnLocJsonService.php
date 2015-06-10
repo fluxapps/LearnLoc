@@ -30,7 +30,7 @@
  */
 class ilLearnLocJsonService {
 
-	const DEV = true;
+	const DEV = false;
 	const LOG = false;
 	//
 	// Construct & Authenticate
@@ -55,11 +55,13 @@ class ilLearnLocJsonService {
 		$this->setRoot(str_ireplace("Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/"
 			. basename($_SERVER['SCRIPT_FILENAME']), "", $_SERVER['SCRIPT_FILENAME']));
 		// END Refactor
+		global $ilUser;
 		$this->includes();
 		$this->setLogging();
 		$this->pl = new ilLearnLocPlugin();
-		$dummy = $this->xlelAuth();
-		if (!$this->failed) {
+		$this->xlelAuth();
+		//		var_dump($ilUser); // FSX
+		if (! $this->failed) {
 			$this->log->write("Login ok for user " . $this->getUsername() . ", IP: " . $_SERVER['REMOTE_ADDR']);
 			$service = $data["service"];
 			global $ilDB;
@@ -111,7 +113,7 @@ class ilLearnLocJsonService {
 
 				);
 				foreach (get_class_methods($this) as $met) {
-					if (!in_array($met, $protected)) {
+					if (! in_array($met, $protected)) {
 						$services[] = $met;
 					}
 				}
@@ -134,8 +136,9 @@ class ilLearnLocJsonService {
 		require_once('./Services/AuthShibboleth/classes/class.ilShibboleth.php');
 		require_once("./Services/Authentication/classes/class.ilAuthUtils.php");
 		ilAuthUtils::_initAuth();
+
 		global $ilAuth;
-		if (!$ilAuth->getAuth()) {
+		if (! $ilAuth->getAuth()) {
 			$res = array( "error" => array( "errorcode" => 1, "description" => "Wrong credentials" ) );
 			$this->setResponse($res);
 			$this->log->write("Login for User " . $this->getUsername() . " failed, IP: " . $_SERVER['REMOTE_ADDR']);
@@ -149,7 +152,7 @@ class ilLearnLocJsonService {
 		require_once('./include/inc.ilias_version.php');
 		require_once('./Services/Component/classes/class.ilComponent.php');
 		require_once('./Services/Context/classes/class.ilContext.php');
-		ilContext::init(ilContext::CONTEXT_WEB);
+		ilContext::init(ilContext::CONTEXT_WEB_ACCESS_CHECK);
 		require_once('./Services/Init/classes/class.ilInitialisation.php');
 		ilInitialisation::initILIAS();
 		require_once('class.ilLearnLocPlugin.php');
@@ -204,7 +207,7 @@ class ilLearnLocJsonService {
 	//
 	public function getLearnLocCountForRefId($a_ref_id) {
 		global $tree;
-		$this->count_locs += count($tree->getChildsByType($a_ref_id, 'xlel'));
+		$this->count_locs += count($tree->getChildsByType($a_ref_id, 'xlel')); // TODO Filter offline
 		foreach ($tree->getChildsByType($a_ref_id, 'fold') as $ref) {
 			$this->getLearnLocCountForRefId($ref['ref_id']);
 		}
@@ -214,32 +217,20 @@ class ilLearnLocJsonService {
 
 
 	public function getCourses() {
-		global $ilAccess, $ilUser, $tree;
+		global $ilAccess, $ilUser, $tree, $ilDB;
 		$ref_ids = array();
 		foreach (ilObject2::_getObjectsByType(ilLearnLocPlugin::_getType()) as $xlel) {
 			foreach (ilObject2::_getAllReferences($xlel['obj_id']) as $xlel_ref) {
-				if ($ilAccess->checkAccessOfUser($ilUser->getId(), "read", "", $xlel_ref, ilLearnLocPlugin::_getType())
-					AND $ilAccess->checkAccessOfUser($ilUser->getId(), "read", "view", $tree->getParentId($xlel_ref))
-				) {
+				$read_access = $ilAccess->checkAccessOfUser($ilUser->getId(), "read", "", $xlel_ref, ilLearnLocPlugin::_getType());
+				$read_access_course = $ilAccess->checkAccessOfUser($ilUser->getId(), "read", "view", $tree->getParentId($xlel_ref));
+				if ($read_access AND $read_access_course) {
 					$obj = ilObjectFactory::getInstanceByRefId($tree->getParentId($xlel_ref));
-					//					if($obj->getType() == 'crs') {
-					//						if(!in_array($obj->getRefId(), $ref_ids)) {
-					//							$courses[] = array(
-					//								"title" => $obj->getTitle(),
-					//								"id" => $obj->getRefId(),
-					//								"write-permission" => ($ilAccess->checkAccessOfUser($ilUser->getId(), "create", "", $obj->getRefId(), "xlel") ? 1 : 0),
-					//								"loc_count" => $this->getLearnLocCountForRefId($obj->getRefId())
-					//							);
-					//							$this->count_locs = 0;
-					//						}
-					//						$ref_ids[] = $obj->getRefId();
-					//					}
 					$x = 0;
 					while ($obj->getType() != 'crs' && $x < 3) {
 						$obj = ilObjectFactory::getInstanceByRefId($tree->getParentId($obj->getRefId()));
 						$x ++;
 					}
-					if (!in_array($obj->getRefId(), $ref_ids) && $obj->getType() == 'crs') {
+					if (! in_array($obj->getRefId(), $ref_ids) && $obj->getType() == 'crs') {
 						$courses[] = array(
 							"title" => $obj->getTitle(),
 							"id" => $obj->getRefId(),
@@ -314,10 +305,9 @@ class ilLearnLocJsonService {
 		/**
 		 * @var $cont ilObjCourse
 		 */
-
 		$cont = ilObjectFactory::getInstanceByRefId($this->getDF('course-id'));
 		$locations = $this->getLearnLocsForContObj($cont);
-		$folders = $this->getFoldersForContObj($cont);
+//		$folders = $this->getFoldersForContObj($cont);
 		$return = array(
 			"course" => array(
 				"id" => $cont->getRefId(),
@@ -355,7 +345,7 @@ class ilLearnLocJsonService {
 	 *
 	 * @return array
 	 */
-	private function getLearnLocsForContObj(&$obj) {
+	private function getLearnLocsForContObj($obj) {
 		global $tree;
 		foreach ($this->getTypeIdsForContObj($obj, ilLearnLocPlugin::_getType()) as $ref_id) {
 			$xlelObj = ilObjLearnLoc::getInstance($ref_id);
@@ -384,18 +374,31 @@ class ilLearnLocJsonService {
 	 *
 	 * @return array
 	 */
-	public function getTypeIdsForContObj(&$obj, $type = 'xlel', $ref_id = 0) {
+	public function getTypeIdsForContObj($obj, $type = 'xlel', $ref_id = 0) {
+//		require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/class.ilObjLearnLocAccess.php');
 		global $ilAccess, $ilUser, $tree;
+		/**
+		 * @var $obj ilObjCourse
+		 */
 		$subitems = $obj->getSubItems();
+		$ref_ids = array();
 		foreach ($subitems[$type] as $ref_id) {
-			if ($type == ilLearnLocPlugin::_getType() OR
-				count($this->getTypeIdsForContObj(ilObjectFactory::getInstanceByRefId($ref_id['ref_id']), ilLearnLocPlugin::_getType())) > 0
-				OR ($ilAccess->checkAccessOfUser($ilUser->getId(), 'create', '', $ref_id['ref_id'], 'xlel')
-					AND !ilObjLearnLoc::_isPool($ref_id['ref_id']))
-			) {
+			$online = ilObjLearnLocAccess::checkOnlineForRefId($ref_id['ref_id']);
+			$is_xlel = $type == ilLearnLocPlugin::_getType();
+			$has_xlels = false;
+			if(!$is_xlel) {
+				$has_xlels = count($this->getTypeIdsForContObj(ilObjectFactory::getInstanceByRefId($ref_id['ref_id']), ilLearnLocPlugin::_getType())) > 0;
+			}
+			$can_create_xlel = $ilAccess->checkAccessOfUser($ilUser->getId(), 'create', '', $ref_id['ref_id'], 'xlel');
+			$is_pool = ilObjLearnLoc::_isPool($ref_id['ref_id']);
+//			echo "!";
+//			var_dump($has_xlels); // FSX
+//			var_dump(($can_create_xlel AND ! $is_pool)); // FSX
+			if (($is_xlel AND $online) OR $has_xlels OR (!$is_xlel AND $can_create_xlel AND ! $is_pool)) {
 				$ref_ids[] = $ref_id['ref_id'];
 			}
 		}
+//		echo '<pre>' . print_r($ref_ids, 1) . '</pre>';
 
 		return $ref_ids;
 	}
@@ -498,9 +501,9 @@ class ilLearnLocJsonService {
 		global $ilUser;
 		require_once('class.ilLearnLocComment.php');
 		foreach (ilLearnLocComment::_getNumberOfCommentsForObjId($this->getDF("location-id"), $this->getDF("start"), $this->getDF("count")) as $comObj) {
-            $replies = array();
-            foreach ($comObj->children as $child) {
-                $replies[] = array(
+			$replies = array();
+			foreach ($comObj->children as $child) {
+				$replies[] = array(
 					'id' => $child->getId(),
 					'title' => $child->getTitle(),
 					'body' => $child->getBody(),
@@ -586,7 +589,7 @@ class ilLearnLocJsonService {
 		} else {
 			$file = "./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/templates/images/init.jpg";
 		}
-		$scale = (!$crop) ? true : false;
+		$scale = (! $crop) ? true : false;
 		if ($mx) {
 			$crop = true;
 			$scale = false;
@@ -647,7 +650,7 @@ class ilLearnLocJsonService {
 		$obj = ilObjectFactory::getInstanceByObjId($this->getDF('location-id')); //new ilObjLearnLoc($this->getDF('location-id'));
 		require_once('class.ilLearnLocMedia.php');
 		$mediaObj = new ilLearnLocMedia($obj->getInitMobId());
-		$scale = (!$crop) ? true : false;
+		$scale = (! $crop) ? true : false;
 		if ($mx) {
 			$crop = true;
 			$scale = false;
@@ -756,6 +759,7 @@ class ilLearnLocJsonService {
 		$services = array(
 			"getCourses" => array(),
 			"getLocations" => array( "course-id" ),
+			"getLocationsAndFolders" => array( "course-id" ),
 			"addLocation" => array( "name", "description", "longitude", "latitude", "elevation", "course-id" ),
 			"getComment" => array( "comment-id" ),
 			"getComments" => array( "location-id", "start", "count" ),
