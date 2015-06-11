@@ -423,23 +423,7 @@ class ilLearnLocJsonService {
 
 
 	public function addLocation() {
-		if ($this->getDF("image")) {
-			require_once('class.ilLearnLocMedia.php');
-			$mob = new ilLearnLocMedia();
-			$mob->setTitle('lelinitmob');
-			$mob->create();
-			$name = '/img_ws_' . time() . '_' . rand(1000, 9999) . '.jpg';
-			$file_upload = $mob->getPath() . $name;
-			$img = str_replace('data:image/png;base64,', '', $this->getDF("image"));
-			$img = str_replace(' ', '+', $img);
-			$data = base64_decode($img);
-			file_put_contents($file_upload, $data);
-			$file['image']['tmp_name'] = $file_upload;
-			$file['image']['name'] = $name;
-			$mob->setFile($file);
-			$mob->addImage();
-			$mob_id = $mob->getId();
-		}
+
 
 		$xlelObj = new ilObjLearnLoc();
 		$xlelObj->create();
@@ -451,11 +435,29 @@ class ilLearnLocJsonService {
 		$xlelObj->setLongitude($this->getDF("longitude"));
 		$xlelObj->setElevation(6); //$ob->elevation);
 		$xlelObj->setAddress($this->getDF("address"));
-		$xlelObj->setInitMobId($mob_id);
-		$xlelObj->update();
 		$xlelObj->createReference();
 		$xlelObj->setPermissions($this->getDF("course-id"));
 		$xlelObj->putInTree($this->getDF("course-id"));
+
+		if ($this->getDF("image")) {
+			require_once('class.ilLearnLocMedia.php');
+			$mob = new ilLearnLocMedia();
+			$mob->setTitle('lelinitmob');
+			$mob->create($xlelObj->getRefId(), true);
+			$name = '/img_ws_' . time() . '_' . rand(1000, 9999) . '.jpg';
+			$file_upload = $mob->getPath() . $name;
+			$img = str_replace('data:image/png;base64,', '', $this->getDF("image"));
+			$img = str_replace(' ', '+', $img);
+			$data = base64_decode($img);
+			file_put_contents($file_upload, $data);
+			$file['image']['tmp_name'] = $file_upload;
+			$file['image']['name'] = $name;
+			$mob->setFile($file);
+			$mob->addImage();
+			$mob_id = $mob->getId();
+			$xlelObj->setInitMobId($mob_id);
+			$xlelObj->update();
+		}
 	}
 
 
@@ -554,7 +556,7 @@ class ilLearnLocJsonService {
 			require_once('class.ilLearnLocMedia.php');
 			$mob = new ilLearnLocMedia();
 			$mob->setTitle('lelcommentmob');
-			$mob->create();
+			$mob->create($this->getDF("location-id"), true);
 			$name = '/img_ws_' . time() . '_' . rand(1000, 9999) . '.jpg';
 			$file_upload = $mob->getPath() . $name;
 			file_put_contents($file_upload, base64_decode($this->getDF("image")));

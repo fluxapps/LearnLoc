@@ -290,7 +290,7 @@ class ilObjLearnLocGUI extends ilObjectPluginGUI {
 			if (!$this->object->getInitMobId()) {
 				$mob = new ilLearnLocMedia();
 				$mob->setTitle('lelinitmob');
-				$mob->create();
+				$mob->create($_GET['ref_id'], true);
 				$mob->setFile($_FILES);
 				$mob->addImage();
 				$mob_id = $mob->getId();

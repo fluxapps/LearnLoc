@@ -78,18 +78,16 @@ class ilLearnLocCommentGUI {
 		global $ilUser, $ilCtrl;
 		$this->getInitCommentForm();
 
-		if ($this->cmform->checkInput($_POST[parent_id])) {
-
+		if ($this->cmform->checkInput($_POST['parent_id'])) {
 			$newComment = new ilLearnLocComment();
 			if ($_FILES['image']['name']) {
 				$mo = new ilLearnLocMedia();
 				$mo->setTitle('LearnLocCommentMedia');
-				$mo->create();
+				$mo->create($_GET['ref_id'], true);
 				$mo->setFile($_FILES);
 				$mo->addImage();
 				$newComment->setMediaId($mo->getId());
 			}
-
 			$newComment->setRefId($this->ref_id);
 			$newComment->setParentId($this->cmform->getInput('parent_id'));
 			$newComment->setUserId($ilUser->getId());

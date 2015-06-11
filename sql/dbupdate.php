@@ -134,3 +134,14 @@
 		}
 
 		?>
+<#5>
+<?php
+$q = "INSERT INTO mob_usage (id, usage_type, usage_id, usage_hist_nr, usage_lang)
+SELECT media_id AS id, 'mep' AS usage_type, ref_id AS usage_id, 0 as usage_hist_nr, '-' AS usage_lang FROM rep_robj_xlel_data AS dat
+INNER JOIN rep_robj_xlel_comments AS com ON dat.id = com.ref_id;";
+$ilDB->manipulate($q);
+
+$q = "INSERT INTO mob_usage (id, usage_type, usage_id, usage_hist_nr, usage_lang)
+SELECT init_mob_id AS id, 'mep' AS usage_type, id AS usage_id, 0 as usage_hist_nr, '-' AS usage_lang FROM rep_robj_xlel_data WHERE init_mob_id IS NOT NULL;";
+$ilDB->manipulate($q);
+?>
