@@ -141,13 +141,15 @@
 //INNER JOIN rep_robj_xlel_comments AS com ON dat.id = com.ref_id;";
 $q = "INSERT INTO mob_usage (id, usage_type, usage_id, usage_hist_nr)
 SELECT media_id AS id, 'mep' AS usage_type, ref_id AS usage_id, 0 as usage_hist_nr FROM rep_robj_xlel_data AS dat
-INNER JOIN rep_robj_xlel_comments AS com ON dat.id = com.ref_id;";
-$ilDB->manipulate($q);
+INNER JOIN rep_robj_xlel_comments AS com ON dat.id = com.ref_id
+WHERE media_id > 0;";
+//$ilDB->manipulate($q);
 
 //$q = "INSERT INTO mob_usage (id, usage_type, usage_id, usage_hist_nr, usage_lang)
 //SELECT init_mob_id AS id, 'mep' AS usage_type, id AS usage_id, 0 as usage_hist_nr, '-' AS usage_lang FROM rep_robj_xlel_data WHERE init_mob_id IS NOT NULL;";
 
 $q = "INSERT INTO mob_usage (id, usage_type, usage_id, usage_hist_nr)
-SELECT init_mob_id AS id, 'mep' AS usage_type, id AS usage_id, 0 as usage_hist_nr FROM rep_robj_xlel_data WHERE init_mob_id IS NOT NULL;";
-$ilDB->manipulate($q);
+SELECT init_mob_id AS id, 'mep' AS usage_type, id AS usage_id, 0 as usage_hist_nr FROM rep_robj_xlel_data
+WHERE init_mob_id > 0;";
+//$ilDB->manipulate($q);
 ?>
