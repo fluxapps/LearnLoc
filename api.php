@@ -139,7 +139,7 @@ $app->post('/location/:id/comment', function ($id) use ($app) {
     $data = array(
         'title' => $app->request()->post('title'),
         'body' => $app->request()->post('body'),
-        'image' => $app->request->post('image'),
+        'image' => $app->request()->post('image'),
     );
     $service = new CreateCommentService($id, $parent_id, $data);
     response($service->getResponse());
@@ -149,10 +149,10 @@ $app->post('/course/:id', function ($id) use ($app) {
     $data = array(
         'title' => $app->request()->post('title'),
         'description' => $app->request()->post('description'),
-        'image' => $app->request->post('image'),
-        'latitude' => $app->request->post('latitude'),
-        'longitude' => $app->request->post('longitude'),
-        'address' => $app->request->post('address'),
+        'image' => $app->request()->post('image'),
+        'latitude' => $app->request()->post('latitude'),
+        'longitude' => $app->request()->post('longitude'),
+        'address' => $app->request()->post('address'),
     );
     $service = new CreateLocationService($id, $data);
     response($service->getResponse());
