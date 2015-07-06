@@ -216,8 +216,8 @@ class ilLearnLocMedia {
 		if ($images[0] == self::INIT_IMG OR ilObject2::_lookupType($this->getId()) != 'mob') {
 			//			return false;
 		}
-		$root = substr(__FILE__, 0, strpos(__FILE__, 'LearnLoc')) . 'LearnLoc';
-		if ($images[$img] == $root . '/templates/images/init.jpg') {
+        $root = './Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc';
+        if ($images[$img] == $root . '/templates/images/init.jpg') {
 			$imagePath = $images[$img];
 		} elseif ($images[$img] == '') {
 			$imagePath = $root . '/templates/images/init.jpg';
