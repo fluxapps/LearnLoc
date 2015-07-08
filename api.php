@@ -69,9 +69,13 @@ function response(array $data)
 function imageResponse($image_path)
 {
     $app = Slim::getInstance();
-    $app->response->headers()->set('Content-Type', 'image/jpeg');
-    $app->response->headers()->set('Content-Length', filesize($image_path));
-    $app->response->body(file_get_contents($image_path));
+    if (!is_file($image_path)) {
+        $app->response->setStatus(404);
+    } else {
+        $app->response->headers()->set('Content-Type', 'image/jpeg');
+        $app->response->headers()->set('Content-Length', filesize($image_path));
+        $app->response->body(file_get_contents($image_path));
+    }
 }
 
 // 3. ROUTES FOR THE SERVICES

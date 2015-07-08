@@ -222,7 +222,7 @@ class ilLearnLocMedia {
 		} elseif ($images[$img] == '') {
 			$imagePath = $root . '/templates/images/init.jpg';
 		} else {
-			$imagePath = $this->getPath() . "/" . $images[$img];
+			$imagePath = $this->getPath() . "/" . ltrim($images[$img], '/');
 		}
 
 		$base = dirname($imagePath);
