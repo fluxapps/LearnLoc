@@ -27,8 +27,7 @@ class CampusTourService implements Service
     public function __construct($ref_id = 0)
     {
         $this->ref_id = ($ref_id > 0) ? $ref_id : (int) \ilLearnLocConfigGUI::_getValue('campus_tour_node');
-        $obj_id = \ilObject::_lookupObjId($this->ref_id);
-        $this->locations_service = new LocationsService($obj_id);
+        $this->locations_service = new LocationsService($this->ref_id);
     }
 
     /**
