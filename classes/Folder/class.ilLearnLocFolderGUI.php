@@ -43,10 +43,10 @@ class ilLearnLocFolderGUI {
 				$html->setCurrentBlock("matlist_row");
 				$html->setVariable("XLEL_FILE", $mat->title);
 				$html->setVariable("XLEL_FILE_LINK", ilLink::_getStaticLink($mat->ref_id, $mat->type));
-				if (file_exists(ilUtil::getImagePath("icon_" . $mat->type . ".png"))) {
-					$icon = ilUtil::getImagePath("icon_" . $mat->type . ".png");
+				if (file_exists(ilUtil::getImagePath("icon_" . $mat->type . ".svg"))) {
+					$icon = ilUtil::getImagePath("icon_" . $mat->type . ".svg");
 				} else {
-					$icon = ilUtil::getImagePath("icon_" . $mat->type . ".gif");
+					$icon = ilUtil::getImagePath("icon_" . $mat->type . ".png");
 				}
 
 				$html->setVariable("XLEL_FILE_ICON", $icon);
@@ -60,6 +60,8 @@ class ilLearnLocFolderGUI {
 			$html->setVariable("XLEL_FILE_LINK", ilLink::_getStaticLink($this->id, "fold"));
 			$html->parseCurrentBlock();
 		}
+		return $html->get();
+
 		$block->setContentHtml($html->get());
 
 		return $block->getHTML();

@@ -106,7 +106,7 @@ class ilLearnLocMedia {
 	/**
 	 * Create New LearnLoc Media Object
 	 */
-	public function create($id = null, $is_ref_id = false) {
+	public function create($id = NULL, $is_ref_id = false) {
 		$this->media_object->setTitle($this->getTitle());
 		$this->media_object->create();
 		$this->media_object->createDirectory();
@@ -117,7 +117,7 @@ class ilLearnLocMedia {
 		if ($is_ref_id) {
 			$id = ilObject2::_lookupObjId($id);
 		}
-		if($id) {
+		if ($id) {
 			ilObjMediaObject::_saveUsage($this->media_object->getId(), 'mep', $id);
 		}
 	}
@@ -165,6 +165,10 @@ class ilLearnLocMedia {
 	}
 
 
+	public function getFirstImageSrc() {
+	}
+
+
 	/**
 	 * @param $absolut_path
 	 *
@@ -205,6 +209,11 @@ class ilLearnLocMedia {
 	}
 
 
+	public function getFirstImageForImgTag() {
+		return self::getRelativePath($this->resizeFirstImage());
+	}
+
+
 	/**
 	 * @param $img
 	 *
@@ -216,8 +225,8 @@ class ilLearnLocMedia {
 		if ($images[0] == self::INIT_IMG OR ilObject2::_lookupType($this->getId()) != 'mob') {
 			//			return false;
 		}
-        $root = './Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc';
-        if ($images[$img] == $root . '/templates/images/init.jpg') {
+		$root = './Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc';
+		if ($images[$img] == $root . '/templates/images/init.jpg') {
 			$imagePath = $images[$img];
 		} elseif ($images[$img] == '') {
 			$imagePath = $root . '/templates/images/init.jpg';
@@ -310,7 +319,7 @@ class ilLearnLocMedia {
 			elseif (! empty($h)):
 				$newPath = $cacheFolder . $filename . '_h' . $h . '.' . $ext;
 			else:
-				//throw new Exception( 'image not found');
+				$newPath = $cacheFolder . $filename . '.' . $ext;
 			endif;
 		}
 
@@ -362,8 +371,11 @@ class ilLearnLocMedia {
 			endif;
 
 			//ilUtil::execConvert(str_ireplace($path_to_convert, '' ,$cmd));
-
+			//var_dump($cmd); // FSX
+			//			exit;
 			exec($cmd);
+//			var_dump($newPath); // FSX
+
 
 			return $newPath;
 
@@ -417,6 +429,10 @@ class ilLearnLocMedia {
 	 * @return array
 	 */
 	public function getOptions() {
+		if (! is_array($this->options)) {
+			return array();
+		}
+
 		return $this->options;
 	}
 

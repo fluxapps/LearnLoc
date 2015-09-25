@@ -1,20 +1,11 @@
 <!-- BEGIN media_block -->
 <form action="{FORM_TARGET}" method="post">
-	<div class="xlel_media_2">
-		<!--<h1 class="xlel_matlist">-->
-
-			<!-- BEGIN admin_block -->
-		<!--<span class="xlel_comment_actions">-->
-			<!---->
-		<!--</span>-->
-			<!-- END admin_block -->
-			<!--{TITLE}-->
-		<!--</h1>-->
+	<div class="">
 		<ul class="sortable">
 			<!-- BEGIN movable_block -->
 			<li>
 				<a href="{SRC2}" rel="lightbox[{LIGHTBOX}]">
-					<div class="FSXsort ui-state-default {ADMCSS}"
+					<div class="FSXsort ui-state-default {ADMCSS} img-thumbnail"
 					     style="background-image: url({SRC}); height: {SZ}px; width: {WZ}px;">
 						<!-- BEGIN admin_mode -->
 						<input type="hidden" name="img[]" value="{VALUE}">
@@ -27,7 +18,10 @@
 			</li>
 			<!-- END movable_block -->
 		</ul>
-		<input type="submit" class="submit" name="cmd[confirmDeleteImage]" value="{BUTTON_NEW}">
+		<!-- BEGIN button -->
+
+		<input type="submit" class="btn btn-default" name="cmd[confirmDeleteImage]" value="{BUTTON_NEW}">
+		<!-- END button -->
 	</div>
 </form>
 <!-- END media_block -->
