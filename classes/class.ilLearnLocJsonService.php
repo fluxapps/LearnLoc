@@ -703,6 +703,7 @@ class ilLearnLocJsonService {
 		$rec = $this->db->fetchObject($set);
 		require_once './Services/MediaObjects/classes/class.ilObjMediaObject.php';
 		$media_obj = new ilObjMediaObject($rec->init_mob_id);
+
 		if ($rec->init_mob_id != 0 && $rec->init_mob_id != '') {
 			$data['dir'] = ilObjMediaObject::_getDirectory($media_obj->getId());
 			foreach ($media_obj->getMediaItems() as $i => $med) {
@@ -713,6 +714,16 @@ class ilLearnLocJsonService {
 		} else {
 			$file = "./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/templates/images/init.jpg";
 		}
+
+		require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/class.ilLearnLocMedia.php');
+
+		$ilLearnLocMedia = new ilLearnLocMedia();
+
+
+		$this->setImageResponse(file_get_contents($ilLearnLocMedia->resize(0)));
+		return;
+
+
 		list($width, $height) = getimagesize($file);
 		if ($width / $height > 1 && $width / $height < 2) // Querformat
 		{
