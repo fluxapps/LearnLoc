@@ -61,9 +61,17 @@ class ilLearnLocComment {
 	 */
 	protected $creation_date;
 	/**
-	 * @var id
+	 * @var int
 	 */
 	protected $media_id;
+	/**
+	 * @var ilLearnLocComment[]
+	 */
+	protected $children;
+	/**
+	 * @var bool
+	 */
+	protected $children_loaded = false;
 
 
 	/**
@@ -101,15 +109,42 @@ class ilLearnLocComment {
 		global $ilDB;
 
 		$ilDB->insert('rep_robj_xlel_comments', array(
-			'id' => array( 'integer', $ilDB->nextID('rep_robj_xlel_comments') ),
-			'ref_id' => array( 'integer', $this->getRefId() ),
-			'parent_id' => array( 'integer', $this->getParentId() ),
-			'user_id' => array( 'integer', $this->getUserId() ),
-			'title' => array( 'text', $this->getTitle() ),
-			'description' => array( 'text', $this->getDescription() ),
-			'body' => array( 'text', $this->getBody() ),
-			'creation_date' => array( 'timestamp', date('Y-m-d H:i:s', $this->getCreationDate()) ),
-			'media_id' => array( 'integer', $this->getMediaId() ),
+			'id' => array(
+				'integer',
+				$ilDB->nextID('rep_robj_xlel_comments')
+			),
+			'ref_id' => array(
+				'integer',
+				$this->getRefId()
+			),
+			'parent_id' => array(
+				'integer',
+				$this->getParentId()
+			),
+			'user_id' => array(
+				'integer',
+				$this->getUserId()
+			),
+			'title' => array(
+				'text',
+				$this->getTitle()
+			),
+			'description' => array(
+				'text',
+				$this->getDescription()
+			),
+			'body' => array(
+				'text',
+				$this->getBody()
+			),
+			'creation_date' => array(
+				'timestamp',
+				date('Y-m-d H:i:s', $this->getCreationDate())
+			),
+			'media_id' => array(
+				'integer',
+				$this->getMediaId()
+			),
 		));
 
 		return true;
@@ -122,7 +157,7 @@ class ilLearnLocComment {
 	public function delete() {
 		global $ilDB;
 
-		if (!$this->getId()) {
+		if (! $this->getId()) {
 			return false;
 		}
 		$result = $ilDB->queryF('DELETE FROM rep_robj_xlel_comments WHERE id = %s', array( 'integer' ), array( $this->getId() ));
@@ -155,20 +190,34 @@ class ilLearnLocComment {
 
 
 	/**
-	 * @return array|bool
+	 * @return bool
 	 */
 	public function loadChildren() {
+		if ($this->isChildrenLoaded()) {
+			return false;
+		}
 		global $ilDB;
-		$objs = array();
 		$sel = 'SELECT * FROM rep_robj_xlel_comments WHERE parent_id = ' . $ilDB->quote($this->getId(), 'integer')
 			. ' ORDER BY creation_date DESC LIMIT 0,1000;';
 		$result = $ilDB->query($sel);
+		$objs = array();
 		while ($row = $ilDB->fetchObject($result)) {
 			$objs[] = new ilLearnLocComment($row->id);
 		}
-		if (count($objs) > 0) {
-			$this->children = $objs;
-		}
+		$this->setChildrenLoaded(true);
+		$this->setChildren($objs);
+
+		return true;
+	}
+
+
+	/**
+	 * @return bool
+	 */
+	public function hasChildren() {
+		$this->loadChildren();
+
+		return count($this->getChildren()) > 0;
 	}
 
 
@@ -206,7 +255,7 @@ class ilLearnLocComment {
 		while ($row = $ilDB->fetchObject($result)) {
 			$newCommentObj = new ilLearnLocComment($row->id);
 			$newCommentObj->loadChildren();
-			if (!$newCommentObj->hasParent()) {
+			if (! $newCommentObj->hasParent()) {
 				$objs[] = $newCommentObj;
 			}
 		}
@@ -240,7 +289,7 @@ class ilLearnLocComment {
 			}
 			$newCommentObj = new ilLearnLocComment($row->id);
 			$newCommentObj->loadChildren();
-			if (!$newCommentObj->hasParent()) {
+			if (! $newCommentObj->hasParent()) {
 				$x ++;
 				$objs[] = $newCommentObj;
 			}
@@ -433,5 +482,37 @@ class ilLearnLocComment {
 	 */
 	public function getUserId() {
 		return $this->user_id;
+	}
+
+
+	/**
+	 * @return ilLearnLocComment[]
+	 */
+	public function getChildren() {
+		return $this->children;
+	}
+
+
+	/**
+	 * @param ilLearnLocComment[] $children
+	 */
+	public function setChildren($children) {
+		$this->children = $children;
+	}
+
+
+	/**
+	 * @return boolean
+	 */
+	public function isChildrenLoaded() {
+		return $this->children_loaded;
+	}
+
+
+	/**
+	 * @param boolean $children_loaded
+	 */
+	public function setChildrenLoaded($children_loaded) {
+		$this->children_loaded = $children_loaded;
 	}
 }

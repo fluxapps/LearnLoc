@@ -22,7 +22,6 @@
 */
 
 require_once('./Services/Repository/classes/class.ilObjectPluginGUI.php');
-require_once('./Services/GoogleMaps/classes/class.ilGoogleMapUtil.php');
 require_once('./Services/Form/classes/class.ilPropertyFormGUI.php');
 require_once('class.ilObjLearnLoc.php');
 require_once('class.ilLearnLocCommentGUI.php');
@@ -291,7 +290,7 @@ class ilObjLearnLocGUI extends ilObjectPluginGUI {
 			if (!$this->object->getInitMobId()) {
 				$mob = new ilLearnLocMedia();
 				$mob->setTitle('lelinitmob');
-				$mob->create();
+				$mob->create($_GET['ref_id'], true);
 				$mob->setFile($_FILES);
 				$mob->addImage();
 				$mob_id = $mob->getId();
@@ -336,14 +335,19 @@ class ilObjLearnLocGUI extends ilObjectPluginGUI {
 		$this->tabs->activateTab("content");
 
 		// GUIS
-		$new_comments = new ilLearnLocCommentGUI($this);
+//		$new_comments = new ilLearnLocCommentGUI($this);
 		$new_map = new ilLearnLocMapGUI($this);
 		$new_gallery = new ilLearnLocMediaGUI($this, $this->object->getInitMobId());
 		$folder = new ilLearnLocFolderGUI($this, $this->object->getContainerId());
 
+		require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/Comments/class.xlelCommentRenderGUI.php');
+		$xlelCommentRenderGUI = new xlelCommentRenderGUI();
+		$comments = ilLearnLocComment::_getAllForRefId($this->obj_id);
+		$xlelCommentRenderGUI->setComments($comments);
+
 		// Set Content
 		$html->setVariable("LEL_CONTENT", $folder->getHTML()); // ok
-		$html->setVariable("LEL_COMMENTS", $new_comments->getHTML()); //ok
+		$html->setVariable("LEL_COMMENTS", $xlelCommentRenderGUI->getHTML()); //ok
 		$html->setVariable("LEL_MAP", $new_map->getHTML()); // ok
 		$html->setVariable("LEL_GALLERY", $new_gallery->getOverviewHTML()); // ok
 		$html->setVariable("LEL_TITLE", $this->object->getTitle()); //ok

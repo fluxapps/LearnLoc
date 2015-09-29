@@ -78,18 +78,16 @@ class ilLearnLocCommentGUI {
 		global $ilUser, $ilCtrl;
 		$this->getInitCommentForm();
 
-		if ($this->cmform->checkInput($_POST[parent_id])) {
-
+		if ($this->cmform->checkInput($_POST['parent_id'])) {
 			$newComment = new ilLearnLocComment();
 			if ($_FILES['image']['name']) {
 				$mo = new ilLearnLocMedia();
 				$mo->setTitle('LearnLocCommentMedia');
-				$mo->create();
+				$mo->create($_GET['ref_id'], true);
 				$mo->setFile($_FILES);
 				$mo->addImage();
 				$newComment->setMediaId($mo->getId());
 			}
-
 			$newComment->setRefId($this->ref_id);
 			$newComment->setParentId($this->cmform->getInput('parent_id'));
 			$newComment->setUserId($ilUser->getId());
@@ -226,25 +224,29 @@ class ilLearnLocCommentGUI {
 		$block = new ilLearnLocBlockGUI();
 		$block->setTitle($this->pl->txt('comments'));
 
-		$this->html = $this->pl->getTemplate("tpl.com_row.html", true, true);
-		$this->html->setVariable("XLEL_COMMENTLIST_TITEL", $this->pl->txt('comments'));
+		require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/Comments/class.xlelCommentRenderGUI.php');
+//
+//		$this->html = $this->pl->getTemplate("tpl.com_row.html", true, false);
+//		$this->html->setVariable("XLEL_COMMENTLIST_TITEL", $this->pl->txt('comments'));
+//
+//		if (count($this->comments) > 0) {
+//			foreach ($this->comments as $comment) {
+//				$this->setCommentRow($comment);
+//				if (is_array($comment->children)) {
+//					foreach ($comment->children as $child) {
+//						$this->setCommentRow($child, true);
+//					}
+//					$this->html->touchBlock("xlel_thread");
+//				}
+//			}
+//		} else {
+//			$this->html->setCurrentBlock("xlel_comment_noitem");
+//			$this->html->setVariable("XLEL_COMMENT_NOITEM", $this->parent_obj->object->lng->txt('rep_robj_xlel_no_items'));
+//			$this->html->parseCurrentBlock();
+//		}
 
-		if (count($this->comments) > 0) {
-			foreach ($this->comments as $comment) {
-				$this->setCommentRow($comment);
-				if (is_array($comment->children)) {
-					foreach ($comment->children as $child) {
-						$this->setCommentRow($child, true);
-					}
-					$this->html->touchBlock("xlel_thread");
-				}
-			}
-		} else {
-			$this->html->setCurrentBlock("xlel_comment_noitem");
-			$this->html->setVariable("XLEL_COMMENT_NOITEM", $this->parent_obj->object->lng->txt('rep_robj_xlel_no_items'));
-			$this->html->parseCurrentBlock();
-		}
-		$block->setContentHtml($this->html->get());
+		$xlelCommentRenderGUI = new xlelCommentRenderGUI($this->comments);
+		$block->setContentHtml($xlelCommentRenderGUI->getHTML());
 		$block->addHeaderCommand($this->ctrl->getLinkTarget($this, 'addComment'), $this->pl->txt('new_comment'));
 
 		return $block->getHTML();

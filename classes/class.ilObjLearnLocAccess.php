@@ -75,6 +75,23 @@ class ilObjLearnLocAccess extends ilObjectPluginAccess {
 		return (boolean)$rec['is_online'];
 	}
 
+	/**
+	 * @param $a_id
+	 *
+	 * @return bool
+	 */
+	static function checkOnlineForRefId($a_id) {
+		global $ilDB;
+		$q = "SELECT * FROM rep_robj_xlel_data AS dat
+JOIN object_reference AS ref ON ref.obj_id = dat.id
+WHERE ref.ref_id = ".$ilDB->quote($a_id, 'integer');
+
+		$set = $ilDB->query($q);
+		$rec = $ilDB->fetchAssoc($set);
+
+		return (boolean)$rec['is_online'];
+	}
+
 
 	/**
 	 * @param $a_permission

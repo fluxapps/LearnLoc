@@ -1,88 +1,24 @@
-<script>
 
-	/*$(document).ready(function () {
-		$('#addNewComment').click(function () {
-			$('.comment_init').toggle(100);
-		});
-
-		$('.addNewAnswer').click(function (e) {
-			$("#" + e.target.id + "_form").toggle(100);
-		});
-
-		$('.xlel_comment_actions input[name^="cmd[addComment]"]').click(function (e) {
-			//console.log(e);
-			return false;
-			//$("#" + e.target.id + "_form").toggle(100);
-		});
-
-
-
-		$(document).ready(function(){
-			$("a#test").click(function(){
-				$("div#content").load("http://localhost/jquery_tests/content.php");
-				return false;
-			});
-		});
-	});*/
-
-
-</script>
-
-<div class="xlel_comment_list2">
-	<!--<h1 class="xlel_matlist">-->
-		<!--{XLEL_COMMENTLIST_TITEL}-->
-		<!--<span class="xlel_comment_actions">-->
-			<!--{NEW_COMMENT_BUTTON}-->
-		<!--</span>-->
-	<!--</h1>-->
-
-	<div class="new_comment comment_init">
-		{NEW_COMMENT_FORM}
-	</div>
-	<!-- BEGIN xlel_thread -->
-
-	<!-- BEGIN xlel_comment_row -->
-	<div class="xlel_comment_row {CSS}">
-		<h1 class="xlel_comment_header">
-			{XLEL_COMMENT_HEADER}
-			<span class="xlel_comment_actions">
-				{BUTTONS}
-				<!-- BEGIN xlel_comment_answer -->
-				<a class="submit addNewAnswer" id="resp_{ID}">{BUTTON_ANSWER}</a>
-				<!-- END xlel_comment_answer -->
-				<!-- BEGIN xlel_comment_delete -->
-				<a class="submit addNewAnswer" href="{DELETE_LINK}">{BUTTON_DELETE}</a>
-				<!-- END xlel_comment_delete -->
-			</span>
-		</h1>
-		<span class="xlel_comment_date xlel_comment_small">{XLEL_COMMENT_DATE}</span>
-		<span class="xlel_comment_user xlel_comment_small">{XLEL_COMMENT_USER}</span>
-
-		<div style="clear:both;"></div>
-		<!-- BEGIN xlel_comment_img -->
-		<div class="xlel_comment_image">
-			{XLEL_COMMENT_IMAGE}
-		</div>
-		<!-- END xlel_comment_img -->
-		<p class="xlel_comment_body">{XLEL_COMMENT_BODY}</p>
-
-		<div style="clear:both;"></div>
-	</div>
-	<div class="new_comment response" id="resp_{ID}_form">
-		{NEW_ANSWER_FORM}
-	</div>
-
-	<!-- END xlel_comment_row -->
-	<!-- END xlel_thread -->
-
-	<!-- BEGIN xlel_comment_noitem -->
-	<div class="xlel_comment_row">
-		<span>
-			{XLEL_COMMENT_NOITEMA}
-		</span>
-	</div>
-	<!-- END xlel_comment_noitem -->
+<div class="new_comment comment_init">
+	<!--{NEW_COMMENT_FORM}-->
 </div>
+<!-- BEGIN xlel_thread -->
+<ul class="list-group">
+	<!-- BEGIN xlel_comment_row -->
+	<li class="list-group-item">
 
+			<!-- BEGIN xlel_comment_img -->
+
+				{XLEL_COMMENT_IMAGE}
+
+			<!-- END xlel_comment_img -->
+			<div class="media-body">
+				<h4 class="media-heading">{XLEL_COMMENT_HEADER}</h4>
+			</div>
+
+	</li>
+	<!-- END xlel_comment_row -->
+</ul>
+<!-- BEGIN xlel_thread -->
 
 

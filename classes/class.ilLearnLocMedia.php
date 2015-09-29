@@ -106,21 +106,26 @@ class ilLearnLocMedia {
 	/**
 	 * Create New LearnLoc Media Object
 	 */
-	public function create() {
-
+	public function create($id = NULL, $is_ref_id = false) {
 		$this->media_object->setTitle($this->getTitle());
 		$this->media_object->create();
 		$this->media_object->createDirectory();
 		$this->media_object->update();
+		//		$this->media_object->setRefId();
 		$this->setId($this->media_object->getId());
 		$this->read();
+		if ($is_ref_id) {
+			$id = ilObject2::_lookupObjId($id);
+		}
+		if ($id) {
+			ilObjMediaObject::_saveUsage($this->media_object->getId(), 'mep', $id);
+		}
 	}
 
 
 	public function addImage() {
 		$media_item = new ilMediaItem();
 		$this->media_object->addMediaItem($media_item);
-
 		$file = $this->getFile();
 		$file_upload = $this->getPath() . "/" . $file['image']['name'];
 		ilUtil::moveUploadedFile($file['image']['tmp_name'], $file['image']['name'], $file_upload);
@@ -157,6 +162,10 @@ class ilLearnLocMedia {
 		$first_key = @key($imgs);
 
 		return $this->getImageById($first_key);
+	}
+
+
+	public function getFirstImageSrc() {
 	}
 
 
@@ -200,6 +209,11 @@ class ilLearnLocMedia {
 	}
 
 
+	public function getFirstImageForImgTag() {
+		return self::getRelativePath($this->resizeFirstImage());
+	}
+
+
 	/**
 	 * @param $img
 	 *
@@ -209,27 +223,25 @@ class ilLearnLocMedia {
 	public function resize($img) {
 		$images = $this->getImages();
 		if ($images[0] == self::INIT_IMG OR ilObject2::_lookupType($this->getId()) != 'mob') {
-//			return false;
+			//			return false;
 		}
-		$root = substr(__FILE__, 0, strpos(__FILE__, 'LearnLoc')) . 'LearnLoc';
-
+		$root = './Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc';
 		if ($images[$img] == $root . '/templates/images/init.jpg') {
 			$imagePath = $images[$img];
 		} elseif ($images[$img] == '') {
 			$imagePath = $root . '/templates/images/init.jpg';
 		} else {
-			$imagePath = $this->getPath() . "/" . $images[$img];
+			$imagePath = $this->getPath() . "/" . ltrim($images[$img], '/');
 		}
 
 		$base = dirname($imagePath);
 
-		if (!is_dir($base . "/cache") AND $base) {
+		if (! is_dir($base . "/cache") AND $base) {
 			mkdir($base . "/cache");
 			chmod($base . "/cache", 0755);
 		}
 
-		$cacheFolder = $_SERVER['DOCUMENT_ROOT'] . '/' . str_ireplace('./', '', $base . "/cache/");
-
+		$cacheFolder = ILIAS_ABSOLUTE_PATH . '/' . str_ireplace('./', '', $base . "/cache/");
 		$remoteFolder = '';
 		$defaults = array(
 			'crop' => false,
@@ -280,7 +292,7 @@ class ilLearnLocMedia {
 		//		}
 		//		endif;
 
-		$imagePath = $_SERVER['DOCUMENT_ROOT'] . '/' . str_ireplace('./', '', $imagePath);
+		$imagePath = ILIAS_ABSOLUTE_PATH . '/' . str_ireplace('./', '', $imagePath);
 
 		if (file_exists($imagePath) == false):
 			$imagePath = $_SERVER['DOCUMENT_ROOT'] . $imagePath;
@@ -298,16 +310,16 @@ class ilLearnLocMedia {
 		if (false !== $opts['output-filename']) {
 			$newPath = $opts['output-filename'];
 		} else {
-			if (!empty($w) and !empty($h)):
+			if (! empty($w) and ! empty($h)):
 				$newPath = $cacheFolder . $filename . '_w' . $w . '_h' . $h . (isset($opts['crop'])
 					&& $opts['crop'] == true ? "_cp" : "") . (isset($opts['scale'])
 					&& $opts['scale'] == true ? "_sc" : "") . '.' . $ext;
-			elseif (!empty($w)):
+			elseif (! empty($w)):
 				$newPath = $cacheFolder . $filename . '_w' . $w . '.' . $ext;
-			elseif (!empty($h)):
+			elseif (! empty($h)):
 				$newPath = $cacheFolder . $filename . '_h' . $h . '.' . $ext;
 			else:
-				//throw new Exception( 'image not found');
+				$newPath = $cacheFolder . $filename . '.' . $ext;
 			endif;
 		}
 
@@ -325,7 +337,7 @@ class ilLearnLocMedia {
 		endif;
 
 		if ($create == true):
-			if (!empty($w) and !empty($h)):
+			if (! empty($w) and ! empty($h)):
 
 				list($width, $height) = getimagesize($imagePath);
 				$resize = $w;
@@ -353,14 +365,17 @@ class ilLearnLocMedia {
 				endif;
 
 			else:
-				$cmd = $path_to_convert . " " . escapeshellarg($imagePath) . " -thumbnail " . (!empty($h) ? 'x' : '') . $w . ""
+				$cmd = $path_to_convert . " " . escapeshellarg($imagePath) . " -thumbnail " . (! empty($h) ? 'x' : '') . $w . ""
 					. (isset($opts['maxOnly']) && $opts['maxOnly'] == true ? "\>" : "") . " -quality " . escapeshellarg($opts['quality']) . " "
 					. escapeshellarg($newPath);
 			endif;
 
 			//ilUtil::execConvert(str_ireplace($path_to_convert, '' ,$cmd));
-
+			//var_dump($cmd); // FSX
+			//			exit;
 			exec($cmd);
+//			var_dump($newPath); // FSX
+
 
 			return $newPath;
 
@@ -414,6 +429,10 @@ class ilLearnLocMedia {
 	 * @return array
 	 */
 	public function getOptions() {
+		if (! is_array($this->options)) {
+			return array();
+		}
+
 		return $this->options;
 	}
 

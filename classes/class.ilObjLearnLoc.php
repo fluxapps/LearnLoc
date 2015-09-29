@@ -511,6 +511,15 @@ class ilObjLearnLoc extends ilObjectPlugin {
 
 		return $newPath;
 	}
+
+
+	public static function getAllOnlineObjects() {
+		global $ilDB;
+		/**
+		 * @var $ilDB ilDB
+		 */
+
+	}
 }
 
 ?>
