@@ -7,9 +7,15 @@
 				<img class="media-object img-thumbnail" src="{IMG_SRC}">
 				<!-- END img -->
 			</div>
-			<div class="col-md-10">
+			<div class="col-md-9">
 				<h5>{TITLE}</h5>
 				<p>{BODY}</p>
+			</div>
+			<div class="col-md-1">
+				<a href="{LINK_RESPONSE}" class="btn btn-default"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></a>
+				<!-- BEGIN delete-->
+				<a href="{LINK_DELETE}" class="btn btn-default"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+				<!-- END delete -->
 			</div>
 		</div>
 		<!-- BEGIN response -->
@@ -24,6 +30,7 @@
 				<p>{RESPONSE_BODY}</p>
 			</div>
 		</div>
+		<!-- END response -->
 	</div>
 </div>
 <!-- END comment -->

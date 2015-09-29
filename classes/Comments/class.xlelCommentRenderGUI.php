@@ -1,4 +1,5 @@
 <?php
+require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/class.ilLearnLocCommentGUI.php');
 
 /**
  * Class xlelCommentRenderGUI
@@ -8,6 +9,7 @@
  */
 class xlelCommentRenderGUI {
 
+	const SIZE = 32;
 	/**
 	 * @var ilLearnLocComment[]
 	 */
@@ -21,6 +23,7 @@ class xlelCommentRenderGUI {
 	 */
 	public function __construct(array $comments = array()) {
 		$this->comments = $comments;
+		$this->pl = ilLearnLocPlugin::getInstance();
 	}
 
 
@@ -29,17 +32,26 @@ class xlelCommentRenderGUI {
 	 */
 	public function getHTML() {
 		$tpl = ilLearnLocPlugin::getInstance()->getTemplate("ilias5/tpl.comments.html", true, true);
-
+		global $ilCtrl, $ilUser;
+		/**
+		 * @var $ilCtrl ilCtrl
+		 */
 		foreach ($this->getComments() as $comment) {
 			$tpl->touchBlock('comment');
 			$tpl->setVariable('TITLE', $comment->getTitle());
 			$tpl->setVariable('BODY', $comment->getBody());
+			$ilCtrl->setParameterByClass('ilLearnLocCommentGUI', 'comment_id', $comment->getId());
+			$tpl->setVariable('LINK_RESPONSE', $ilCtrl->getLinkTargetByClass('ilLearnLocCommentGUI', 'addComment'));
 
+			if ($ilUser->getId() == $comment->getUserId()) {
+				//$tpl->touchBlock('delete');
+				$tpl->setVariable('LINK_DELETE', $ilCtrl->getLinkTargetByClass('ilLearnLocCommentGUI', 'response'));
+			}
 			if ($comment->getMediaId()) {
 				$img = new ilLearnLocMedia($comment->getMediaId());
 				$img->setOptions(array(
-					'w' => 64,
-					'h' => 64,
+					'w' => self::SIZE,
+					'h' => self::SIZE,
 					'crop' => true,
 					'scale' => false,
 					'canvas-color' => '#ffffff'
@@ -49,6 +61,19 @@ class xlelCommentRenderGUI {
 
 			if ($comment->hasChildren()) {
 				foreach ($comment->getChildren() as $child) {
+					if ($child->getMediaId()) {
+						$img = new ilLearnLocMedia($child->getMediaId());
+						$img->setOptions(array(
+							'w' => self::SIZE,
+							'h' => self::SIZE,
+							'crop' => true,
+							'scale' => false,
+							'canvas-color' => '#ffffff'
+						));
+						$tpl->setVariable('RESPONSE_IMG_SRC', $img->getFirstImageForImgTag());
+					}
+
+
 					//					$tpl->touchBlock('response');
 					$tpl->setVariable('RESPONSE_TITLE', $child->getTitle());
 					$tpl->setVariable('RESPONSE_BODY', $child->getBody());
@@ -59,6 +84,51 @@ class xlelCommentRenderGUI {
 		}
 
 		return $tpl->get();
+	}
+
+
+	/**
+	 * @param bool $parent
+	 *
+	 * @return string
+	 */
+	public function getCommentForm($parent = false) {
+		global $ilCtrl, $tpl;
+
+		require_once('./Services/Form/classes/class.ilPropertyFormGUI.php');
+		$cmform = new ilPropertyFormGUI();
+
+		$cmform->setTableWidth('100%');
+
+		// Title
+		$ti = new ilTextInputGUI($this->pl->txt("title"), "title");
+		$ti->setRequired(true);
+		$cmform->addItem($ti);
+
+		// Description
+		$ta = new ilTextAreaInputGUI($this->pl->txt("body"), "body");
+		$ta->setRequired(true);
+		$cmform->addItem($ta);
+
+		if ($parent) {
+			$hi = new ilHiddenInputGUI("parent_id");
+			$hi->setValue($parent);
+			$cmform->addItem($hi);
+		}
+
+		$imgs = new ilImageFileInputGUI($this->pl->txt("image"), "image");
+		$imgs->setSuffixes(array(
+			"jpg",
+			"jpeg"
+		));
+		$cmform->addItem($imgs);
+
+		$cmform->addCommandButton("saveComment", $this->pl->txt("save_new_comment"));
+
+		$cmform->setTitle($this->pl->txt("new_comment"));
+		$cmform->setFormAction($ilCtrl->getFormAction($this));
+
+		return $cmform->getHTML();
 	}
 
 
