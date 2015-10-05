@@ -37,6 +37,12 @@ class xlelCommentRenderGUI {
 		 * @var $ilCtrl ilCtrl
 		 */
 		require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/Form/class.xlelIconButton.php');
+		$toolbar = new ilToolbarGUI();
+		$b = ilLinkButton::getInstance();
+		$b->setCaption('rep_robj_xlel_new_comment');
+		$b->setUrl($ilCtrl->getLinkTargetByClass('ilLearnLocCommentGUI', 'addComment'));
+		$toolbar->addButtonInstance($b);
+		$tpl->setVariable('TOOLBAR', $toolbar->getHTML());
 		foreach ($this->getComments() as $comment) {
 			$tpl->touchBlock('comment');
 			$tpl->setVariable('TITLE', $comment->getTitle());
