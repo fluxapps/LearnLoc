@@ -12,10 +12,8 @@
 				<p>{BODY}</p>
 			</div>
 			<div class="col-md-1">
-				<a href="{LINK_RESPONSE}" class="btn btn-default"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></a>
-				<!-- BEGIN delete-->
-				<a href="{LINK_DELETE}" class="btn btn-default"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-				<!-- END delete -->
+				{BUTTON_RESPONSE}
+				{BUTTON_DELETE}
 			</div>
 		</div>
 		<!-- BEGIN response -->
@@ -25,9 +23,11 @@
 				<img class="media-object img-thumbnail" src="{RESPONSE_IMG_SRC}">
 				<!-- END response_img -->
 			</div>
-			<div class="col-md-9">
+			<div class="col-md-8">
 				<h5>{RESPONSE_TITLE}</h5>
 				<p>{RESPONSE_BODY}</p>
+			</div><div class="col-md-1">
+				{BUTTON_DELETE_CHILD}
 			</div>
 		</div>
 		<!-- END response -->

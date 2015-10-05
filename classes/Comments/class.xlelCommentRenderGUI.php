@@ -36,16 +36,23 @@ class xlelCommentRenderGUI {
 		/**
 		 * @var $ilCtrl ilCtrl
 		 */
+		require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/Form/class.xlelIconButton.php');
 		foreach ($this->getComments() as $comment) {
 			$tpl->touchBlock('comment');
 			$tpl->setVariable('TITLE', $comment->getTitle());
 			$tpl->setVariable('BODY', $comment->getBody());
 			$ilCtrl->setParameterByClass('ilLearnLocCommentGUI', 'comment_id', $comment->getId());
-			$tpl->setVariable('LINK_RESPONSE', $ilCtrl->getLinkTargetByClass('ilLearnLocCommentGUI', 'addComment'));
+
+			$b = xlelIconButton::getInstance();
+			$b->setIcon('share-alt');
+			$b->setUrl($ilCtrl->getLinkTargetByClass('ilLearnLocCommentGUI', 'addComment'));
+			$tpl->setVariable('BUTTON_RESPONSE', $b->render());
 
 			if ($ilUser->getId() == $comment->getUserId()) {
-				//$tpl->touchBlock('delete');
-				$tpl->setVariable('LINK_DELETE', $ilCtrl->getLinkTargetByClass('ilLearnLocCommentGUI', 'response'));
+				$b = xlelIconButton::getInstance();
+				$b->setIcon('remove');
+				$b->setUrl($ilCtrl->getLinkTargetByClass('ilLearnLocCommentGUI', 'delete'));
+				$tpl->setVariable('BUTTON_DELETE', $b->render());
 			}
 			if ($comment->getMediaId()) {
 				$img = new ilLearnLocMedia($comment->getMediaId());
@@ -72,7 +79,13 @@ class xlelCommentRenderGUI {
 						));
 						$tpl->setVariable('RESPONSE_IMG_SRC', $img->getFirstImageForImgTag());
 					}
-
+					if ($ilUser->getId() == $child->getUserId()) {
+						$ilCtrl->setParameterByClass('ilLearnLocCommentGUI', 'comment_id', $child->getId());
+						$b = xlelIconButton::getInstance();
+						$b->setIcon('remove');
+						$b->setUrl($ilCtrl->getLinkTargetByClass('ilLearnLocCommentGUI', 'confirmDeleteComment'));
+						$tpl->setVariable('BUTTON_DELETE_CHILD', $b->render());
+					}
 
 					//					$tpl->touchBlock('response');
 					$tpl->setVariable('RESPONSE_TITLE', $child->getTitle());
