@@ -59,12 +59,19 @@ class ilLearnLocCommentGUI {
 
 
 	public function confirmDeleteComment() {
-		global $ilCtrl, $lng, $tpl, $ilTabs;
+		global $ilCtrl, $lng, $tpl, $ilUser;
 
 		$conf = new ilConfirmationGUI();
 		$conf->setFormAction($ilCtrl->getFormAction($this));
 		$conf->setHeaderText($this->pl->txt('confirm_delete_header'));
 		$newComment = new ilLearnLocComment($_GET['comment_id']);
+		if ($ilUser->getId() != $newComment->getUserId()) {
+			ilUtil::sendFailure('Access denied', true);
+			/**
+			 * @var $ilCtrl ilCtrl
+			 */
+			$ilCtrl->redirect($this->parent_obj);
+		}
 		$conf->addItem('comment_id', $_GET['comment_id'], $newComment->getTitle() . ': ' . $newComment->getBody());
 
 		$conf->setConfirm($lng->txt('delete'), 'deleteComment');
@@ -105,9 +112,16 @@ class ilLearnLocCommentGUI {
 
 
 	public function deleteComment() {
-		global $ilCtrl;
+		global $ilCtrl, $ilUser;
 
 		$comment = new ilLearnLocComment($_POST['comment_id']);
+		if ($ilUser->getId() != $comment->getUserId()) {
+			ilUtil::sendFailure('Access denied', true);
+			/**
+			 * @var $ilCtrl ilCtrl
+			 */
+			$ilCtrl->redirect($this->parent_obj);
+		}
 		$comment->delete();
 		ilUtil::sendSuccess($this->pl->txt('comment_deleted'));
 		$ilCtrl->redirect($this->parent_obj);
@@ -125,53 +139,6 @@ class ilLearnLocCommentGUI {
 		$tpl->setContent($this->getInitCommentForm($_GET['comment_id']));
 	}
 
-
-	/**
-	 * @param ilLearnLocComment $comment
-	 */
-	public function setCommentRow(ilLearnLocComment $comment, $is_child = false) {
-		global $ilUser, $ilCtrl;
-		//$ilCtrl = new ilCtrl();
-		$ilCtrl->setParameter($this, "comment_id", $comment->getId());
-		$buttons = new ilToolbarGUI();
-		$buttons->setFormAction($ilCtrl->getFormAction($this));
-
-		$this->html->setCurrentBlock("xlel_comment_row");
-		if ($is_child) {
-			$this->html->setVariable("CSS", "xlel_answerrow");
-		} else {
-			$this->html->setVariable("NEW_ANSWER_FORM", $this->getInitCommentForm($comment->getId()));
-			//$this->html->setVariable("BUTTON_ANSWER", $this->pl->txt('new_answer'));
-			$this->html->setVariable("ID", $comment->getId());
-		}
-		$this->html->setVariable("XLEL_COMMENT_HEADER", $comment->getTitle());
-		$this->html->setVariable("XLEL_COMMENT_DATE", $comment->getCreationDate());
-		$this->html->setVariable("XLEL_COMMENT_USER", $ilUser->_lookupFullname($comment->getUserId()));
-		$this->html->setVariable("XLEL_COMMENT_BODY", $comment->getBody());
-		if ($comment->getMediaId()) {
-			$img = new ilLearnLocMedia($comment->getMediaId());
-			$img->setOptions(array(
-				'w' => 64,
-				'h' => 64,
-				'crop' => true,
-				'scale' => false,
-				'canvas-color' => '#ffffff'
-			));
-			$img->setLink($ilCtrl->getLinkTarget($this->parent_obj, 'showMedia'));
-			$this->html->setVariable("XLEL_COMMENT_IMAGE", $img->getFirstImage());
-		}
-
-		if ($comment->isDeletable()) {
-			$buttons->addFormButton($this->pl->txt('delete_comment'), 'confirmDeleteComment');
-		}
-		if (!$comment->hasParent()) {
-			$buttons->addFormButton($this->pl->txt('new_answer'), 'addComment');
-		}
-
-		$this->html->setVariable("BUTTONS", $buttons->getHTML());
-
-		$this->html->parseCurrentBlock();
-	}
 
 
 	/**
@@ -204,7 +171,10 @@ class ilLearnLocCommentGUI {
 		}
 
 		$imgs = new ilImageFileInputGUI($this->pl->txt("image"), "image");
-		$imgs->setSuffixes(array( "jpg", "jpeg" ));
+		$imgs->setSuffixes(array(
+			"jpg",
+			"jpeg"
+		));
 		$this->cmform->addItem($imgs);
 
 		$this->cmform->addCommandButton("saveComment", $this->pl->txt("save_new_comment"));
@@ -225,25 +195,25 @@ class ilLearnLocCommentGUI {
 		$block->setTitle($this->pl->txt('comments'));
 
 		require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/Comments/class.xlelCommentRenderGUI.php');
-//
-//		$this->html = $this->pl->getTemplate("tpl.com_row.html", true, false);
-//		$this->html->setVariable("XLEL_COMMENTLIST_TITEL", $this->pl->txt('comments'));
-//
-//		if (count($this->comments) > 0) {
-//			foreach ($this->comments as $comment) {
-//				$this->setCommentRow($comment);
-//				if (is_array($comment->children)) {
-//					foreach ($comment->children as $child) {
-//						$this->setCommentRow($child, true);
-//					}
-//					$this->html->touchBlock("xlel_thread");
-//				}
-//			}
-//		} else {
-//			$this->html->setCurrentBlock("xlel_comment_noitem");
-//			$this->html->setVariable("XLEL_COMMENT_NOITEM", $this->parent_obj->object->lng->txt('rep_robj_xlel_no_items'));
-//			$this->html->parseCurrentBlock();
-//		}
+		//
+		//		$this->html = $this->pl->getTemplate("tpl.com_row.html", true, false);
+		//		$this->html->setVariable("XLEL_COMMENTLIST_TITEL", $this->pl->txt('comments'));
+		//
+		//		if (count($this->comments) > 0) {
+		//			foreach ($this->comments as $comment) {
+		//				$this->setCommentRow($comment);
+		//				if (is_array($comment->children)) {
+		//					foreach ($comment->children as $child) {
+		//						$this->setCommentRow($child, true);
+		//					}
+		//					$this->html->touchBlock("xlel_thread");
+		//				}
+		//			}
+		//		} else {
+		//			$this->html->setCurrentBlock("xlel_comment_noitem");
+		//			$this->html->setVariable("XLEL_COMMENT_NOITEM", $this->parent_obj->object->lng->txt('rep_robj_xlel_no_items'));
+		//			$this->html->parseCurrentBlock();
+		//		}
 
 		$xlelCommentRenderGUI = new xlelCommentRenderGUI($this->comments);
 		$block->setContentHtml($xlelCommentRenderGUI->getHTML());
