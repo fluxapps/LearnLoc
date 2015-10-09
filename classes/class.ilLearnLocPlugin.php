@@ -3,11 +3,10 @@
 require_once('./Services/Repository/classes/class.ilRepositoryObjectPlugin.php');
 
 /**
- * LearnLoc repository object plugin
+ * Class ilLearnLocPlugin
  *
  * @author        Fabian Schmid <fs@studer-raimann.ch>
  * @version       $Id$
- *
  */
 class ilLearnLocPlugin extends ilRepositoryObjectPlugin {
 
@@ -17,11 +16,16 @@ class ilLearnLocPlugin extends ilRepositoryObjectPlugin {
 	protected static $instance;
 
 
+	protected function uninstallCustom() {
+		// TODO
+	}
+
+
 	/**
 	 * @return ilLearnLocPlugin
 	 */
 	public static function getInstance() {
-		if (!isset(self::$instance)) {
+		if (! isset(self::$instance)) {
 			self::$instance = new self();
 		}
 
@@ -61,7 +65,12 @@ class ilLearnLocPlugin extends ilRepositoryObjectPlugin {
 		$lines = array();
 		$lines[] = 'part;var;' . $key_language . ';' . $additional_language;
 		foreach ($sets[$key_language] as $id => $rec) {
-			$lines[] = implode(';', array( $rec->identifier, '', $rec->value, $sets[$additional_language][$rec->identifier]->value ));
+			$lines[] = implode(';', array(
+				$rec->identifier,
+				'',
+				$rec->value,
+				$sets[$additional_language][$rec->identifier]->value
+			));
 		}
 		$path = substr(__FILE__, 0, strpos(__FILE__, 'classes')) . 'lang/lang.csv';
 		file_put_contents($path, implode("\n", $lines));
@@ -104,7 +113,7 @@ class ilLearnLocPlugin extends ilRepositoryObjectPlugin {
 			$status = file_put_contents($path . 'ilias_' . $lng_key . '.lang', $start . implode(PHP_EOL, $lang));
 		}
 
-		if (!$status) {
+		if (! $status) {
 			ilUtil::sendFailure('Language-Files coul\'d not be written');
 		}
 		$this->updateLanguages();
