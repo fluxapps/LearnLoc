@@ -8,6 +8,7 @@ use LearnLocApi\CreateLocationService;
 use LearnLocApi\LocationImageService;
 use LearnLocApi\LocationsService;
 use LearnLocApi\CommentImageService;
+use LearnLocApi\PingService;
 use Slim\Slim;
 
 require 'vendor/autoload.php';
@@ -83,6 +84,7 @@ function imageResponse($image_path)
 
 $app->get('/', function () use ($app) {
     response(array(
+        'GET /ping' => 'is Alive?',
         'GET /courses' => 'List of courses',
         'GET /course/:id/locations' => 'Returns all locations (and folders) of the given course ref-ID',
         'GET /location/:id/image' => 'Returns the location image',
@@ -94,6 +96,11 @@ $app->get('/', function () use ($app) {
         'POST /location/:id/comment' => 'Create a new Comment. Post parameters (url-encoded): title, body, image, parent_id',
         'POST /course/:id' => 'Create a new location under the given course (Ref-ID). Post parameters (url-encoded): title, description, latitude, longitude, image, address'
     ));
+});
+
+$app->get('/ping', function () use ($app) {
+    $service = new PingService();
+    response($service->getResponse());
 });
 
 $app->get('/courses', function () use ($app) {
