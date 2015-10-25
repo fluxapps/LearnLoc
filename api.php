@@ -109,7 +109,7 @@ $app->get('/courses', function () use ($app) {
 	response($service->getResponse());
 });
 
-$app->get('/all_courses', function () use ($app) {
+$app->get('/allCourses', function () use ($app) {
 	$service = new CoursesService(0, true);
 	response($service->getResponse());
 });
