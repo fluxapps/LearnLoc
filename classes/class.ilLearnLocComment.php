@@ -67,7 +67,7 @@ class ilLearnLocComment {
 	/**
 	 * @var ilLearnLocComment[]
 	 */
-	protected $children;
+	public $children;
 	/**
 	 * @var bool
 	 */
