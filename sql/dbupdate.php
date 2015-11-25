@@ -159,7 +159,7 @@ global $ilDB;
 require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/Config/class.xlelConfig.php');
 xlelConfig::installDB();
 
-$res = $ilDB->query('SELECT * FROM rel50.rep_robj_xlel_conf;');
+$res = $ilDB->query('SELECT * FROM rep_robj_xlel_conf;');
 while ($data = $ilDB->fetchObject($res)) {
 	$setting[$data->xlel_key] = $data->xlel_value;
 }
