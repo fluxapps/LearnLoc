@@ -11,133 +11,41 @@ require_once('class.ilLearnLocPlugin.php');
  * @version $Id$
  *
  */
-
 class ilLearnLocConfigGUI extends ilPluginConfigGUI {
 
-	const PREFIX = '';
+	public function executeCommand() {
+		global $ilCtrl, $ilTabs, $lng, $tpl;
+		/**
+		 * @var $ilCtrl ilCtrl
+		 */
 
-	/**
-	 * @var array
-	 */
-	protected $checkboxes = array('campus_tour' => array('node' => 'ilTextInputGUI','username' => 'ilTextInputGUI','password' => 'ilTextInputGUI',),);
+		$ilCtrl->redirectByClass(array(
+			'ilUIPluginRouterGUI',
+			'xlelMainGUI'
+		));
+		$ilCtrl->setParameterByClass("ilobjcomponentsettingsgui", "ctype", $_GET["ctype"]);
+		$ilCtrl->setParameterByClass("ilobjcomponentsettingsgui", "cname", $_GET["cname"]);
+		$ilCtrl->setParameterByClass("ilobjcomponentsettingsgui", "slot_id", $_GET["slot_id"]);
+		$ilCtrl->setParameterByClass("ilobjcomponentsettingsgui", "plugin_id", $_GET["plugin_id"]);
+		$ilCtrl->setParameterByClass("ilobjcomponentsettingsgui", "pname", $_GET["pname"]);
 
+		$tpl->setTitle($lng->txt("cmps_plugin") . ": " . $_GET["pname"]);
+		$tpl->setDescription("");
 
-	function __construct() {
-		$this->pl = new ilLearnLocPlugin();
-	}
+		$ilTabs->clearTargets();
 
-	function performCommand($cmd) {
-		switch ($cmd) {
-			case 'configure':
-			case 'save':
-				$this->$cmd();
-				break;
-
-		}
-	}
-
-	function configure() {
-		global $tpl;
-
-		$this->initConfigurationForm();
-		$this->getValues();
-		$tpl->setContent($this->form->getHTML());
-	}
-
-	public function getValues() {
-		foreach ($this->checkboxes as $key => $cb) {
-			if (!is_array($cb)) {
-				$values[$cb] = $this->_getValue($cb);
-			} else {
-				$values[$key] = $this->_getValue($key);
-				foreach ($cb as $field => $gui) {
-					$values[$key . '_' . $field] = $this->_getValue($key . '_' . $field);
-				}
-			}
-
-		}
-		$this->form->setValuesByArray($values);
-	}
-
-	public function initConfigurationForm() {
-		global $lng, $ilCtrl;
-
-		require_once('./Services/Form/classes/class.ilPropertyFormGUI.php');
-		$this->form = new ilPropertyFormGUI();
-
-		foreach ($this->checkboxes as $key => $cb) {
-			if (!is_array($cb)) {
-				$checkbox = new ilCheckboxInputGUI($this->plugin_object->txt($cb), $cb);
-				$this->form->addItem($checkbox);
-			} else {
-				$checkbox = new ilCheckboxInputGUI($this->plugin_object->txt($key), $key);
-				foreach ($cb as $field => $gui) {
-					$sub = new $gui($this->plugin_object->txt($key . '_' . $field), $key . '_' . $field);
-					$checkbox->addSubItem($sub);
-				}
-				$this->form->addItem($checkbox);
-			}
-
-		}
-
-		$this->form->addCommandButton('save', $lng->txt('save'));
-		$this->form->setTitle($this->plugin_object->txt('configuration'));
-		$this->form->setFormAction($ilCtrl->getFormAction($this));
-
-		return $this->form;
-	}
-
-	public function save() {
-		global $tpl, $ilCtrl;
-
-		$this->initConfigurationForm();
-		if ($this->form->checkInput()) {
-			foreach ($this->checkboxes as $key => $cb) {
-				if (!is_array($cb)) {
-					$this->setValue($cb, $this->form->getInput($cb));
-				} else {
-					$this->setValue($key, $this->form->getInput($key));
-					foreach ($cb as $field => $gui) {
-						$this->setValue($key . '_' . $field, $this->form->getInput($key . '_' . $field));
-					}
-				}
-			}
-			$ilCtrl->redirect($this, 'configure');
+		if ($_GET["plugin_id"]) {
+			$ilTabs->setBackTarget($lng->txt("cmps_plugin"), $ilCtrl->getLinkTargetByClass("ilobjcomponentsettingsgui", "showPlugin"));
 		} else {
-			$this->form->setValuesByPost();
-			$tpl->setContent($this->form->getHtml());
+			$ilTabs->setBackTarget($lng->txt("cmps_plugins"), $ilCtrl->getLinkTargetByClass("ilobjcomponentsettingsgui", "listPlugins"));
 		}
+
+		$a_gui_object = new xlelMainGUI();
+		$a_gui_object->executeCommand();
 	}
 
-	/**
-	 * @param $key
-	 * @param $value
-	 */
-	public function setValue($key, $value) {
-		global $ilDB;
 
-		if (!is_string($this->_getValue($key))) {
-			$ilDB->insert('rep_robj_'.ilLearnLocPlugin::_getType().'_conf', array(''.ilLearnLocPlugin::_getType().'_key' => array('text', $key), ''.ilLearnLocPlugin::_getType().'_value' => array('text', $value)));
-		} else {
-			$ilDB->update('rep_robj_'.ilLearnLocPlugin::_getType().'_conf', array(''.ilLearnLocPlugin::_getType().'_key' => array('text', $key), ''.ilLearnLocPlugin::_getType().'_value' => array('text', $value)), array(''.ilLearnLocPlugin::_getType().'_key' => array('text', $key)));
-		}
-	}
-
-	/**
-	 * @param $key
-	 *
-	 * @return bool|string
-	 */
-	public static function _getValue($key) {
-		global $ilDB;
-
-		$result = $ilDB->query('SELECT '.ilLearnLocPlugin::_getType().'_value FROM rep_robj_'.ilLearnLocPlugin::_getType().'_conf WHERE '.ilLearnLocPlugin::_getType().'_key = ' . $ilDB->quote($key, 'text'));
-		if ($result->numRows() == 0) {
-			return false;
-		}
-		$record = $ilDB->fetchAssoc($result);
-
-		return (string)$record[ilLearnLocPlugin::_getType().'_value'];
+	public function performCommand($cmd) {
 	}
 }
 

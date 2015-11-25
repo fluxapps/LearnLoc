@@ -131,15 +131,15 @@ class ilObjLearnLocJson {
 		$ilInit->returnBeforeAuth(true);
 		$ilInit->initILIAS();
 		if (! $this->postdata['username'] && ! $this->postdata['password']
-			|| $this->postdata['username'] == ilLearnLocConfigGUI::_getValue('campus_tour_username')
+			|| $this->postdata['username'] == xlelConfig::get('campus_tour_username')
 		) {
 			if (! $this->postdata['username']) {
 				$this->emptylogin = true;
 			}
-			$this->postdata['username'] = ilLearnLocConfigGUI::_getValue('campus_tour_username');
-			$_POST['username'] = ilLearnLocConfigGUI::_getValue('campus_tour_username');
-			$this->postdata['password'] = ilLearnLocConfigGUI::_getValue('campus_tour_password');
-			$_POST['password'] = ilLearnLocConfigGUI::_getValue('campus_tour_password');
+			$this->postdata['username'] = xlelConfig::get('campus_tour_username');
+			$_POST['username'] = xlelConfig::get('campus_tour_username');
+			$this->postdata['password'] = xlelConfig::get('campus_tour_password');
+			$_POST['password'] = xlelConfig::get('campus_tour_password');
 			$this->nologin = true;
 		}
 		$_COOKIE = "";
@@ -248,8 +248,8 @@ class ilObjLearnLocJson {
 	public function getCampusTour() {
 		global $ilUser, $ilAccess;
 		require_once('class.ilLearnLocConfigGUI.php');
-		if (ilLearnLocConfigGUI::_getValue('campus_tour_node')) {
-			$crs = ilLearnLocConfigGUI::_getValue('campus_tour_node');
+		if (xlelConfig::get('campus_tour_node')) {
+			$crs = xlelConfig::get('campus_tour_node');
 		} else {
 			$crs = 126717;
 		}

@@ -59,3 +59,16 @@ msg_images_deleted;;Medien wurden gelöscht;Media was deleted
 delete_images;;Ausgewählte Bilder löschen;Delete selected images
 block;title_init;Bilder zum Lernort;Learning-Location Images
 block;title_comments;Bilder aus Kommentaren;Images from Comments
+admin;form_title;Einstellungen;Settings
+admin;range;Range;Range
+admin;range_allow_override;Range in Objekt festlegen;Set Range in Object
+admin;campus_tour_header;Campus-Tour;Campus-Tour
+admin;campus_tour;Campus-Tour;Campus-Tour
+admin;campus_tour_node;ILIAS-Ref-ID;ILIAS-Ref-Id
+admin;campus_tour_username;Benutzername;Username
+admin;campus_tour_password;Passwort;Password
+
+
+
+
+

@@ -30,7 +30,6 @@ require_once('class.ilLearnLocMediaGUI.php');
 require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/Folder/class.ilLearnLocFolderGUI.php');
 require_once('class.ilLearnLocExportGUI.php');
 
-
 /**
  * User Interface class for LearnLoc repository object.
  *
@@ -83,7 +82,7 @@ class ilObjLearnLocGUI extends ilObjectPluginGUI {
 		global $tpl, $ilCtrl, $ilTabs;
 		parent::__construct($a_ref_id, $a_id_type, $a_parent_node_id);
 		$this->pl = ilLearnLocPlugin::getInstance();
-//		$this->pl->updateLanguageFiles();
+		//		$this->pl->updateLanguageFiles();
 		$this->ctrl = $ilCtrl;
 		$this->tpl = $tpl;
 		$this->tabs = $ilTabs;
@@ -190,7 +189,8 @@ class ilObjLearnLocGUI extends ilObjectPluginGUI {
 			$this->tabs->addTab('media', $this->txt('media'), $this->ctrl->getLinkTarget($this, 'showMedia'));
 		}
 
-		if ($ilAccess->checkAccess('write', '', $this->object->getRefId()) AND ilComponent::isVersionGreaterString(ILIAS_VERSION_NUMERIC, '4.2.999')
+		if ($ilAccess->checkAccess('write', '', $this->object->getRefId())
+			AND ilComponent::isVersionGreaterString(ILIAS_VERSION_NUMERIC, '4.2.999')
 		) {
 			$this->tabs->addTab('export_arcgis', $this->txt('export_arcgis'), $this->ctrl->getLinkTargetByClass('ilLearnLocExportGUI', 'listExportFiles'));
 		}
@@ -253,7 +253,11 @@ class ilObjLearnLocGUI extends ilObjectPluginGUI {
 		}*/
 
 		$imgs = new ilImageFileInputGUI($this->txt("init_mob_id_selector"), "image");
-		$imgs->setSuffixes(array( "jpg", "jpeg", 'png' ));
+		$imgs->setSuffixes(array(
+			"jpg",
+			"jpeg",
+			'png'
+		));
 		$this->form->addItem($imgs);
 
 		$this->form->addCommandButton("updateProperties", $this->txt("save"));
@@ -335,7 +339,7 @@ class ilObjLearnLocGUI extends ilObjectPluginGUI {
 		$this->tabs->activateTab("content");
 
 		// GUIS
-//		$new_comments = new ilLearnLocCommentGUI($this);
+		//		$new_comments = new ilLearnLocCommentGUI($this);
 		$new_map = new ilLearnLocMapGUI($this);
 		$new_gallery = new ilLearnLocMediaGUI($this, $this->object->getInitMobId());
 		$folder = new ilLearnLocFolderGUI($this, $this->object->getContainerId());
