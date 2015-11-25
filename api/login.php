@@ -15,4 +15,7 @@ $GLOBALS['COOKIE_PATH'] = "/";
 require_once("Services/Init/classes/class.ilInitialisation.php");
 ilInitialisation::initILIAS();
 $str = strstr($_SERVER['SCRIPT_URI'], 'Customizing', true) . $_GET['goto'];
+if ($_GET['redirect']) {
+	$str = strstr(ILIAS_HTTP_PATH, 'Customizing', true) . urldecode($_GET['redirect']);
+}
 ilUtil::redirect($str);
