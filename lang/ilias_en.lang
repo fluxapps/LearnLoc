@@ -59,3 +59,16 @@ msg_images_deleted#:#Media was deleted
 delete_images#:#Delete selected images
 block_title_init#:#Learning-Location Images
 block_title_comments#:#Images from Comments
+admin_form_title#:#Settings
+admin_range#:#Range
+admin_range_allow_override#:#Set Range in Object
+admin_campus_tour_header#:#Campus-Tour
+admin_campus_tour#:#Campus-Tour
+admin_campus_tour_node#:#ILIAS-Ref-Id
+admin_campus_tour_username#:#Username
+admin_campus_tour_password#:#Password
+#:#
+#:#
+#:#
+#:#
+#:#

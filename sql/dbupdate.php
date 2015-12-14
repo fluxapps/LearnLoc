@@ -153,3 +153,23 @@ SELECT init_mob_id AS id, 'mep' AS usage_type, id AS usage_id, 0 as usage_hist_n
 WHERE init_mob_id > 0;";
 //$ilDB->manipulate($q);
 ?>
+<#6>
+<?php
+global $ilDB;
+require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/Config/class.xlelConfig.php');
+xlelConfig::installDB();
+
+$res = $ilDB->query('SELECT * FROM rep_robj_xlel_conf;');
+while ($data = $ilDB->fetchObject($res)) {
+	$setting[$data->xlel_key] = $data->xlel_value;
+}
+xlelConfig::set(xlelConfig::F_CAMPUS_TOUR, (int)$setting['campus_tour']);
+xlelConfig::set(xlelConfig::F_CAMPUS_TOUR_NODE, (int)$setting['campus_tour_node']);
+xlelConfig::set(xlelConfig::F_CAMPUS_TOUR_USERNAME, $setting['campus_tour_username']);
+xlelConfig::set(xlelConfig::F_CAMPUS_TOUR_PASSWORD, $setting['campus_tour_password']);
+?>
+<#7>
+<?php
+require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/CheckIn/class.xlelCheckIn.php');
+xlelCheckIn::installDB();
+?>
