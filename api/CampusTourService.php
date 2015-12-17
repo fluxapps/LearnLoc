@@ -1,40 +1,39 @@
 <?php
 
-
 namespace LearnLocApi;
+
+require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/Config/class.xlelConfig.php');
 
 /**
  * Class CampusTourService
  *
  * @author Stefan Wanzenried <sw@studer-raimann.ch>
  */
-class CampusTourService implements Service
-{
+class CampusTourService implements Service {
 
-    /**
-     * @var int
-     */
-    protected $ref_id = 0;
+	/**
+	 * @var int
+	 */
+	protected $ref_id = 0;
+	/**
+	 * @var Service
+	 */
+	protected $locations_service;
 
-    /**
-     * @var Service
-     */
-    protected $locations_service;
 
-    /**
-     * @param int $ref_id Ref-ID of the campus tour node
-     */
-    public function __construct($ref_id = 0)
-    {
-        $this->ref_id = ($ref_id > 0) ? $ref_id : (int) \xlelConfig::get(\xlelConfig::F_CAMPUS_TOUR_NODE);
-        $this->locations_service = new LocationsService($this->ref_id);
-    }
+	/**
+	 * @param int $ref_id Ref-ID of the campus tour node
+	 */
+	public function __construct($ref_id = 0) {
+		$this->ref_id = ($ref_id > 0) ? $ref_id : (int)\xlelConfig::get(\xlelConfig::F_CAMPUS_TOUR_NODE);
+		$this->locations_service = new LocationsService($this->ref_id);
+	}
 
-    /**
-     * @return array|mixed
-     */
-    public function getResponse()
-    {
-        return $this->locations_service->getResponse();
-    }
+
+	/**
+	 * @return array|mixed
+	 */
+	public function getResponse() {
+		return $this->locations_service->getResponse();
+	}
 }
