@@ -238,20 +238,13 @@ class ilObjLearnLocGUI extends ilObjectPluginGUI {
 		$this->form->addItem($cb);
 
 		// location property
-
-		// FSX FIXME
-		//if(!ilGoogleMapUtil::isActivated()) {
 		$this->lng->loadLanguageModule("gmaps");
+		
 		$loc_prop = new ilLocationInputGUI($this->txt("location_selector"), "location");
 		$loc_prop->setZoom(10);
 		$this->form->addItem($loc_prop);
-		/*}
-		else {
-			$non = new ilNonEditableValueGUI($this->txt("location_selector"), "no_map");
-			$non->setValue($this->txt("no_map_api"));
-			$this->form->addItem($non);
-		}*/
 
+		// Image
 		$imgs = new ilImageFileInputGUI($this->txt("init_mob_id_selector"), "image");
 		$imgs->setSuffixes(array(
 			"jpg",

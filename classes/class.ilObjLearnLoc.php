@@ -49,7 +49,7 @@ class ilObjLearnLoc extends ilObjectPlugin {
 	/**
 	 * @var int
 	 */
-	protected $elevation;
+	protected $elevation = 16;
 	/**
 	 * @var string
 	 */

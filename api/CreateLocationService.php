@@ -74,7 +74,7 @@ class CreateLocationService implements Service
         $location->setOnline(1);
         $location->setLatitude($this->get('latitude'));
         $location->setLongitude($this->get('longitude'));
-        $location->setElevation(6);
+        $location->setElevation(16);
         $location->setAddress($this->get('address'));
         if ($this->get('image')) {
             $mob = new \ilLearnLocMedia();
