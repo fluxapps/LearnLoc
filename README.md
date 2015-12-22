@@ -2,7 +2,7 @@
 
 With this Plugin you can use the ILIAS Learning Location App, available at:  
 - [Google-PlayStore](https://play.google.com/store/apps/details?id=ch.studerraimann.ilias.learnloc)  
-- [Apple AppStore](#) Coming Soon  
+- [Apple AppStore](https://itunes.apple.com/ch/app/ilias-lernorte/id1066335052) Coming Soon  
 
 Navigate with Augmented Reality to Learning Locations and open ILIAS Modules associated with this Point of Learning (opened in Browser).
 
