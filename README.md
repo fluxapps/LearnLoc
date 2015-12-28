@@ -2,7 +2,7 @@
 
 With this Plugin you can use the ILIAS Learning Location App, available at:  
 - [Google-PlayStore](https://play.google.com/store/apps/details?id=ch.studerraimann.ilias.learnloc)  
-- [Apple AppStore](https://itunes.apple.com/ch/app/ilias-lernorte/id1066335052)  
+- [Apple AppStore](https://itunes.apple.com/ch/app/ilias-lernorte/id1066335052)
 
 Navigate with Augmented Reality to Learning Locations and open ILIAS Modules associated with this Point of Learning (opened in Browser).
 
@@ -11,8 +11,8 @@ Start at your ILIAS root directory
 ```bash
 mkdir -p Customizing/global/plugins/Services/Repository/RepositoryObject  
 cd Customizing/global/plugins/Services/Repository/RepositoryObject
-git clone https://github.com/studer-raimann/LiveVoting.git  
-chown -R www-data:www-data LiveVoting #ensure that the user of your Webserver has full access to this directory
+git clone https://github.com/studer-raimann/LearnLoc.git  
+chown -R www-data:www-data LearnLoc #ensure that the user of your Webserver has full access to this directory
 ```  
 As ILIAS administrator go to "Administration->Plugins" and install/activate the plugin.  
 

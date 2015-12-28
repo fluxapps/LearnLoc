@@ -36,8 +36,8 @@ class ilObjLearnLocAccess extends ilObjectPluginAccess {
 	/**
 	 * @param string $a_cmd
 	 * @param string $a_permission
-	 * @param int    $a_ref_id
-	 * @param int    $a_obj_id
+	 * @param int $a_ref_id
+	 * @param int $a_obj_id
 	 * @param string $a_user_id
 	 *
 	 * @return bool
@@ -49,8 +49,8 @@ class ilObjLearnLocAccess extends ilObjectPluginAccess {
 		}
 		switch ($a_permission) {
 			case 'read':
-				if (! ilObjLearnLocAccess::checkOnline($a_obj_id)
-					&& ! $ilAccess->checkAccessOfUser($a_user_id, 'write', '', $a_ref_id)
+				if (!ilObjLearnLocAccess::checkOnline($a_obj_id)
+					&& !$ilAccess->checkAccessOfUser($a_user_id, 'write', '', $a_ref_id)
 				) {
 					return false;
 				}
@@ -62,18 +62,30 @@ class ilObjLearnLocAccess extends ilObjectPluginAccess {
 
 
 	/**
+	 * @var array
+	 */
+	protected static $online_cache = array();
+
+
+	/**
 	 * @param $a_id
 	 *
 	 * @return bool
 	 */
 	static function checkOnline($a_id) {
+		if (isset(self::$online_cache[$a_id])) {
+			return self::$online_cache[$a_id];
+		}
 		global $ilDB;
-		$set = $ilDB->query(
-			'SELECT is_online FROM rep_robj_xlel_data ' . ' WHERE id = ' . $ilDB->quote($a_id, 'integer'));
+		$set = $ilDB->query('SELECT is_online FROM rep_robj_xlel_data ' . ' WHERE id = ' . $ilDB->quote($a_id, 'integer'));
 		$rec = $ilDB->fetchAssoc($set);
 
-		return (boolean)$rec['is_online'];
+		$is_online = (boolean)$rec['is_online'];
+		self::$online_cache[$a_id] = $is_online;
+
+		return $is_online;
 	}
+
 
 	/**
 	 * @param $a_id
@@ -83,8 +95,8 @@ class ilObjLearnLocAccess extends ilObjectPluginAccess {
 	static function checkOnlineForRefId($a_id) {
 		global $ilDB;
 		$q = "SELECT * FROM rep_robj_xlel_data AS dat
-JOIN object_reference AS ref ON ref.obj_id = dat.id
-WHERE ref.ref_id = ".$ilDB->quote($a_id, 'integer');
+				JOIN object_reference AS ref ON ref.obj_id = dat.id
+				WHERE ref.ref_id = " . $ilDB->quote($a_id, 'integer');
 
 		$set = $ilDB->query($q);
 		$rec = $ilDB->fetchAssoc($set);
