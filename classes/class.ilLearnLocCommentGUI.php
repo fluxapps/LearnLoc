@@ -74,8 +74,8 @@ class ilLearnLocCommentGUI {
 		}
 		$conf->addItem('comment_id', $_GET['comment_id'], $newComment->getTitle() . ': ' . $newComment->getBody());
 
-		$conf->setConfirm($lng->txt('delete'), 'deleteComment');
-		$conf->setCancel($lng->txt('cancel'), 'cancelDeleteComment');
+		$conf->setConfirm($lng->txt('common_delete'), 'deleteComment');
+		$conf->setCancel($lng->txt('common_cancel'), 'cancelDeleteComment');
 
 		$tpl->setContent($conf->getHTML());
 	}
@@ -155,12 +155,12 @@ class ilLearnLocCommentGUI {
 		$this->cmform->setTableWidth('100%');
 
 		// Title
-		$ti = new ilTextInputGUI($this->pl->txt("title"), "title");
+		$ti = new ilTextInputGUI($this->pl->txt("common_title"), "title");
 		$ti->setRequired(true);
 		$this->cmform->addItem($ti);
 
 		// Description
-		$ta = new ilTextAreaInputGUI($this->pl->txt("body"), "body");
+		$ta = new ilTextAreaInputGUI($this->pl->txt("common_body"), "body");
 		$ta->setRequired(true);
 		$this->cmform->addItem($ta);
 
@@ -170,7 +170,7 @@ class ilLearnLocCommentGUI {
 			$this->cmform->addItem($hi);
 		}
 
-		$imgs = new ilImageFileInputGUI($this->pl->txt("image"), "image");
+		$imgs = new ilImageFileInputGUI($this->pl->txt("common_image"), "image");
 		$imgs->setSuffixes(array(
 			"jpg",
 			"jpeg"
@@ -192,7 +192,7 @@ class ilLearnLocCommentGUI {
 	public function getHTML() {
 		require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/Block/class.ilLearnLocBlockGUI.php');
 		$block = new ilLearnLocBlockGUI();
-		$block->setTitle($this->pl->txt('comments'));
+		$block->setTitle($this->pl->txt('common_comments'));
 
 		require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/Comments/class.xlelCommentRenderGUI.php');
 		//

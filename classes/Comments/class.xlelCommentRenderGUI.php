@@ -120,12 +120,12 @@ class xlelCommentRenderGUI {
 		$cmform->setTableWidth('100%');
 
 		// Title
-		$ti = new ilTextInputGUI($this->pl->txt("title"), "title");
+		$ti = new ilTextInputGUI($this->pl->txt("common_title"), "title");
 		$ti->setRequired(true);
 		$cmform->addItem($ti);
 
 		// Description
-		$ta = new ilTextAreaInputGUI($this->pl->txt("body"), "body");
+		$ta = new ilTextAreaInputGUI($this->pl->txt("common_body"), "body");
 		$ta->setRequired(true);
 		$cmform->addItem($ta);
 
@@ -135,7 +135,7 @@ class xlelCommentRenderGUI {
 			$cmform->addItem($hi);
 		}
 
-		$imgs = new ilImageFileInputGUI($this->pl->txt("image"), "image");
+		$imgs = new ilImageFileInputGUI($this->pl->txt("common_image"), "image");
 		$imgs->setSuffixes(array(
 			"jpg",
 			"jpeg"

@@ -185,8 +185,8 @@ class ilObjLearnLocGUI extends ilObjectPluginGUI {
 		require_once('Services/Component/classes/class.ilComponent.php');
 
 		if ($ilAccess->checkAccess('read', '', $this->object->getRefId())) {
-			$this->tabs->addTab('content', $this->txt('content'), $this->ctrl->getLinkTarget($this, 'showContent'));
-			$this->tabs->addTab('media', $this->txt('media'), $this->ctrl->getLinkTarget($this, 'showMedia'));
+			$this->tabs->addTab('content', $this->txt('common_content'), $this->ctrl->getLinkTarget($this, 'showContent'));
+			$this->tabs->addTab('media', $this->txt('common_media'), $this->ctrl->getLinkTarget($this, 'showMedia'));
 		}
 
 		if ($ilAccess->checkAccess('write', '', $this->object->getRefId())
@@ -196,7 +196,7 @@ class ilObjLearnLocGUI extends ilObjectPluginGUI {
 		}
 
 		if ($ilAccess->checkAccess('write', '', $this->object->getRefId())) {
-			$this->tabs->addTab('properties', $this->txt('properties'), $this->ctrl->getLinkTarget($this, 'editProperties'));
+			$this->tabs->addTab('properties', $this->txt('common_properties'), $this->ctrl->getLinkTarget($this, 'editProperties'));
 		}
 
 		$this->addInfoTab();
@@ -225,16 +225,16 @@ class ilObjLearnLocGUI extends ilObjectPluginGUI {
 		$this->form = new ilPropertyFormGUI();
 
 		// title
-		$ti = new ilTextInputGUI($this->txt("title"), "title");
+		$ti = new ilTextInputGUI($this->txt("common_title"), "title");
 		$ti->setRequired(true);
 		$this->form->addItem($ti);
 
 		// description
-		$ta = new ilTextAreaInputGUI($this->txt("description"), "desc");
+		$ta = new ilTextAreaInputGUI($this->txt("common_description"), "desc");
 		$this->form->addItem($ta);
 
 		// online
-		$cb = new ilCheckboxInputGUI($this->lng->txt("online"), "online");
+		$cb = new ilCheckboxInputGUI($this->lng->txt("common_online"), "online");
 		$this->form->addItem($cb);
 
 		// location property
@@ -253,7 +253,7 @@ class ilObjLearnLocGUI extends ilObjectPluginGUI {
 		));
 		$this->form->addItem($imgs);
 
-		$this->form->addCommandButton("updateProperties", $this->txt("save"));
+		$this->form->addCommandButton("updateProperties", $this->txt("common_save"));
 
 		$this->form->setTitle($this->txt("edit_properties"));
 		$this->form->setFormAction($ilCtrl->getFormAction($this));

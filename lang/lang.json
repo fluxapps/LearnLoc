@@ -1,0 +1,524 @@
+{
+    "plugin_prefix": "rep_robj_xlel",
+    "languages": [
+        "de",
+        "en"
+    ],
+    "entries": {
+        "obj": {
+            "xlel": {
+                "translations": {
+                    "de": "Lernort",
+                    "en": "Learn Location"
+                }
+            },
+            "xlel_duplicate": {
+                "translations": {
+                    "de": "Kopieren",
+                    "en": "Copy"
+                }
+            },
+            "xlel_select": {
+                "translations": {
+                    "de": "lernort ausw\u00c3\u00a4hlen",
+                    "en": "Choose Learn Location"
+                }
+            }
+        },
+        "objs": {
+            "xlel": {
+                "translations": {
+                    "de": "Lernorte",
+                    "en": "Learn Locations"
+                }
+            },
+            "xlel_duplicate": {
+                "translations": {
+                    "de": "Lernort kopieren",
+                    "en": "Copy Learn Location"
+                },
+                "last_used": "08.03.2016"
+            }
+        },
+        "xlel": {
+            "add": {
+                "translations": {
+                    "de": "Lernort hinzuf\u00c3\u00bcgen",
+                    "en": "Add Learn Location"
+                },
+                "last_used": "08.03.2016"
+            },
+            "new": {
+                "translations": {
+                    "de": "Neuen Lernort erstellen",
+                    "en": "Add new Learn Location"
+                },
+                "last_used": "08.03.2016"
+            },
+            "read": {
+                "translations": {
+                    "de": "Leserechte auf lernort",
+                    "en": "Write-Access to Learn Location"
+                }
+            },
+            "write": {
+                "translations": {
+                    "de": "Lernort bearbeiten",
+                    "en": "Edit Learn Location"
+                }
+            },
+            "delete": {
+                "translations": {
+                    "de": "Lernort l\u00c3\u00b6schen",
+                    "en": "Delete Learn Location"
+                }
+            },
+            "visible": {
+                "translations": {
+                    "de": "Lernort ist sichtbar",
+                    "en": "Learn Location is visible"
+                }
+            },
+            "edit_permission": {
+                "translations": {
+                    "de": "Rechteeinstellungen \u00c3\u00a4ndern",
+                    "en": "Edit Permissions"
+                }
+            }
+        },
+        "crs": {
+            "create_xlel": {
+                "translations": {
+                    "de": "Lernort erstellen",
+                    "en": "Create Learn Location"
+                }
+            }
+        },
+        "grp": {
+            "create_xlel": {
+                "translations": {
+                    "de": "Lernort erstellen",
+                    "en": "Create Learn Location"
+                }
+            }
+        },
+        "fold": {
+            "create_xlel": {
+                "translations": {
+                    "de": "lernort erstellen",
+                    "en": "Create Learn Location"
+                }
+            }
+        },
+        "root": {
+            "create_xlel": {
+                "translations": {
+                    "de": "Lernort erstellen",
+                    "en": "Create Learn Location"
+                }
+            }
+        },
+        "cat": {
+            "create_xlel": {
+                "translations": {
+                    "de": "Lernort erstellen",
+                    "en": "Create Learn Location"
+                }
+            }
+        },
+        "edit": {
+            "properties": {
+                "translations": {
+                    "de": "Einstellungen bearbeiten",
+                    "en": "Edit Settings"
+                },
+                "last_used": "08.03.2016"
+            }
+        },
+        "learnloc": {
+            "plugin_configuration": {
+                "translations": {
+                    "de": "LearningLocation Plugin Configuration",
+                    "en": "LearningLocation Plugin Configuration"
+                }
+            }
+        },
+        "saving": {
+            "invoked": {
+                "translations": {
+                    "de": "Save procedure has been executed. Please note that this example does not save anything to DB.",
+                    "en": "Save procedure has been executed. Please note that this example does not save anything to DB."
+                }
+            }
+        },
+        "location": {
+            "selector": {
+                "translations": {
+                    "de": "Ort ausw\u00c3\u00a4hlen",
+                    "en": "Choose Location"
+                },
+                "last_used": "08.03.2016"
+            }
+        },
+        "init": {
+            "mob_id_selector": {
+                "translations": {
+                    "de": "Neues Bild zum Lernort hinzuf\u00c3\u00bcgen",
+                    "en": "Add new Image to Learn Location"
+                },
+                "last_used": "08.03.2016"
+            }
+        },
+        "no": {
+            "map_api": {
+                "translations": {
+                    "de": "Bitte aktivieren Sie die Google-Maps API f\u00c3\u00bcr diese ILIAS-Installation. Kontaktieren Sie Ihre lokale ILIAS-Administration.",
+                    "en": "Please activate the Google-Maps API."
+                }
+            }
+        },
+        "images": {
+            "init": {
+                "translations": {
+                    "de": "Bilder Lernort",
+                    "en": "Images Learn Location"
+                }
+            },
+            "comments": {
+                "translations": {
+                    "de": "Bilder Kommentare",
+                    "en": "Images Comments"
+                }
+            }
+        },
+        "new": {
+            "comment": {
+                "translations": {
+                    "de": "Neuer Kommentar",
+                    "en": "New Comment"
+                }
+            },
+            "answer": {
+                "translations": {
+                    "de": "Antworten",
+                    "en": "Answer"
+                }
+            }
+        },
+        "save": {
+            "new_comment": {
+                "translations": {
+                    "de": "Kommentar speichern",
+                    "en": "Save Comment"
+                }
+            }
+        },
+        "delete": {
+            "comment": {
+                "translations": {
+                    "de": "l\u00c3\u00b6schen",
+                    "en": "Delete"
+                }
+            },
+            "images": {
+                "translations": {
+                    "de": "Ausgew\u00c3\u00a4hlte Bilder l\u00c3\u00b6schen",
+                    "en": "Delete selected images"
+                }
+            }
+        },
+        "add": {
+            "new_items": {
+                "translations": {
+                    "de": "zum Ordner wechseln, um Objekte hinzuzuf\u00c3\u00bcgen",
+                    "en": "Choose Folder to add new Objects"
+                }
+            }
+        },
+        "folder": {
+            "content": {
+                "translations": {
+                    "de": "Material",
+                    "en": "Content"
+                },
+                "last_used": "08.03.2016"
+            }
+        },
+        "comment": {
+            "saved": {
+                "translations": {
+                    "de": "Kommentar gespeichert",
+                    "en": "Comment saved"
+                }
+            }
+        },
+        "confirm": {
+            "delete_header": {
+                "translations": {
+                    "de": "M\u00c3\u00b6chten Sie die Medien wirklich l\u00c3\u00b6schen?",
+                    "en": "Do you really want to delete this media?"
+                }
+            }
+        },
+        "export": {
+            "arcgis": {
+                "translations": {
+                    "de": "Export",
+                    "en": "Export"
+                },
+                "last_used": "08.03.2016"
+            },
+            "csv": {
+                "translations": {
+                    "de": "Export CSV",
+                    "en": "Export CSV"
+                },
+                "last_used": "08.03.2016"
+            },
+            "gpx": {
+                "translations": {
+                    "de": "Export GPX",
+                    "en": "Export GPX"
+                },
+                "last_used": "08.03.2016"
+            }
+        },
+        "keywords": {
+            "export": {
+                "translations": {
+                    "de": "Keywords",
+                    "en": "Keywords"
+                }
+            },
+            "save": {
+                "translations": {
+                    "de": "Keywords speichern",
+                    "en": "Save Keywords"
+                }
+            },
+            "update": {
+                "translations": {
+                    "de": "Update Keywords",
+                    "en": "Update Keywords"
+                }
+            },
+            "delete": {
+                "translations": {
+                    "de": "Keywords l\u00c3\u00b6schen",
+                    "en": "Delete Keywords"
+                }
+            },
+            "title": {
+                "translations": {
+                    "de": "Keywords",
+                    "en": "Keywords"
+                }
+            },
+            "edit": {
+                "translations": {
+                    "de": "Keywords bearbeiten",
+                    "en": "Edit Keywords"
+                }
+            },
+            "info": {
+                "translations": {
+                    "de": "Keywords Komma-getrennt",
+                    "en": "Enter keywords coma-separated"
+                }
+            }
+        },
+        "msg": {
+            "images_deleted": {
+                "translations": {
+                    "de": "Medien wurden gel\u00c3\u00b6scht",
+                    "en": "Media was deleted"
+                }
+            }
+        },
+        "block": {
+            "title_init": {
+                "translations": {
+                    "de": "Bilder zum Lernort",
+                    "en": "Learning-Location Images"
+                },
+                "last_used": "08.03.2016"
+            },
+            "title_comments": {
+                "translations": {
+                    "de": "Bilder aus Kommentaren",
+                    "en": "Images from Comments"
+                }
+            }
+        },
+        "admin": {
+            "form_title": {
+                "translations": {
+                    "de": "Einstellungen",
+                    "en": "Settings"
+                },
+                "last_used": "08.03.2016"
+            },
+            "range": {
+                "translations": {
+                    "de": "Range",
+                    "en": "Range"
+                },
+                "last_used": "08.03.2016"
+            },
+            "range_allow_override": {
+                "translations": {
+                    "de": "Range in Objekt festlegen",
+                    "en": "Set Range in Object"
+                },
+                "last_used": "08.03.2016"
+            },
+            "campus_tour_header": {
+                "translations": {
+                    "de": "Campus-Tour",
+                    "en": "Campus-Tour"
+                },
+                "last_used": "08.03.2016"
+            },
+            "campus_tour": {
+                "translations": {
+                    "de": "Campus-Tour",
+                    "en": "Campus-Tour"
+                },
+                "last_used": "08.03.2016"
+            },
+            "campus_tour_node": {
+                "translations": {
+                    "de": "ILIAS-Ref-ID",
+                    "en": "ILIAS-Ref-Id"
+                },
+                "last_used": "08.03.2016"
+            },
+            "campus_tour_username": {
+                "translations": {
+                    "de": "Benutzername",
+                    "en": "Username"
+                },
+                "last_used": "08.03.2016"
+            },
+            "campus_tour_password": {
+                "translations": {
+                    "de": "Passwort",
+                    "en": "Password"
+                },
+                "last_used": "08.03.2016"
+            },
+            "form_button_save": {
+                "translations": {
+                    "de": "Speichern",
+                    "en": "Save"
+                },
+                "last_used": "08.03.2016"
+            },
+            "form_button_cancel": {
+                "translations": {
+                    "de": "Abbrechen",
+                    "en": "Cancel"
+                },
+                "last_used": "08.03.2016"
+            }
+        },
+        "tab": {
+            "settings": {
+                "translations": {
+                    "de": "Einstellungen",
+                    "en": "Settings"
+                },
+                "last_used": "08.03.2016"
+            }
+        },
+        "common": {
+            "content": {
+                "translations": {
+                    "de": "Inhalt",
+                    "en": "Content"
+                },
+                "last_used": "08.03.2016"
+            },
+            "properties": {
+                "translations": {
+                    "de": "Einstellungen",
+                    "en": "Settings"
+                },
+                "last_used": "08.03.2016"
+            },
+            "title": {
+                "translations": {
+                    "de": "Titel",
+                    "en": "Title"
+                },
+                "last_used": "08.03.2016"
+            },
+            "description": {
+                "translations": {
+                    "de": "Beschreibung",
+                    "en": "Description"
+                },
+                "last_used": "08.03.2016"
+            },
+            "save": {
+                "translations": {
+                    "de": "Speichern",
+                    "en": "Save"
+                },
+                "last_used": "08.03.2016"
+            },
+            "cancel": {
+                "translations": {
+                    "de": "Abbrechen",
+                    "en": "Cancel"
+                }
+            },
+            "edit": {
+                "translations": {
+                    "de": "Bearbeiten",
+                    "en": "Edit"
+                },
+                "last_used": "08.03.2016"
+            },
+            "status": {
+                "translations": {
+                    "de": "Status",
+                    "en": "Status"
+                },
+                "last_used": "08.03.2016"
+            },
+            "offline": {
+                "translations": {
+                    "de": "Offline",
+                    "en": "Offline"
+                },
+                "last_used": "08.03.2016"
+            },
+            "media": {
+                "translations": {
+                    "de": "Bilder",
+                    "en": "Gallery"
+                },
+                "last_used": "08.03.2016"
+            },
+            "comments": {
+                "translations": {
+                    "de": "Kommentare",
+                    "en": "Comments"
+                }
+            },
+            "body": {
+                "translations": {
+                    "de": "Kommentar",
+                    "en": "Comment"
+                }
+            },
+            "image": {
+                "translations": {
+                    "de": "Bild",
+                    "en": "Image"
+                }
+            }
+        }
+    }
+}

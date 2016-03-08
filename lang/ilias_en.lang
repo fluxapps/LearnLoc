@@ -1,9 +1,8 @@
-<!-- language file start -->
 obj_xlel#:#Learn Location
-objs_xlel#:#Learn Locations
 obj_xlel_duplicate#:#Copy
-objs_xlel_duplicate#:#Copy Learn Location
 obj_xlel_select#:#Choose Learn Location
+objs_xlel#:#Learn Locations
+objs_xlel_duplicate#:#Copy Learn Location
 xlel_add#:#Add Learn Location
 xlel_new#:#Add new Learn Location
 xlel_read#:#Write-Access to Learn Location
@@ -16,16 +15,7 @@ grp_create_xlel#:#Create Learn Location
 fold_create_xlel#:#Create Learn Location
 root_create_xlel#:#Create Learn Location
 cat_create_xlel#:#Create Learn Location
-content#:#Content
-properties#:#Settings
 edit_properties#:#Edit Settings
-title#:#Title
-description#:#Description
-save#:#Save
-cancel#:#Cancel
-edit#:#Edit
-status#:#Status
-offline#:#Offline
 learnloc_plugin_configuration#:#LearningLocation Plugin Configuration
 saving_invoked#:#Save procedure has been executed. Please note that this example does not save anything to DB.
 location_selector#:#Choose Location
@@ -33,14 +23,11 @@ init_mob_id_selector#:#Add new Image to Learn Location
 no_map_api#:#Please activate the Google-Maps API.
 images_init#:#Images Learn Location
 images_comments#:#Images Comments
-media#:#Gallery
-comments#:#Comments
 new_comment#:#New Comment
 new_answer#:#Answer
 save_new_comment#:#Save Comment
 delete_comment#:#Delete
-body#:#Comment
-image#:#Image
+delete_images#:#Delete selected images
 add_new_items#:#Choose Folder to add new Objects
 folder_content#:#Content
 comment_saved#:#Comment saved
@@ -56,7 +43,6 @@ keywords_title#:#Keywords
 keywords_edit#:#Edit Keywords
 keywords_info#:#Enter keywords coma-separated
 msg_images_deleted#:#Media was deleted
-delete_images#:#Delete selected images
 block_title_init#:#Learning-Location Images
 block_title_comments#:#Images from Comments
 admin_form_title#:#Settings
@@ -67,8 +53,19 @@ admin_campus_tour#:#Campus-Tour
 admin_campus_tour_node#:#ILIAS-Ref-Id
 admin_campus_tour_username#:#Username
 admin_campus_tour_password#:#Password
-#:#
-#:#
-#:#
-#:#
-#:#
+admin_form_button_save#:#Save
+admin_form_button_cancel#:#Cancel
+tab_settings#:#Settings
+common_content#:#Content
+common_properties#:#Settings
+common_title#:#Title
+common_description#:#Description
+common_save#:#Save
+common_cancel#:#Cancel
+common_edit#:#Edit
+common_status#:#Status
+common_offline#:#Offline
+common_media#:#Gallery
+common_comments#:#Comments
+common_body#:#Comment
+common_image#:#Image

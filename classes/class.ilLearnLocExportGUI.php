@@ -102,10 +102,10 @@ class ilLearnLocExportGUI extends ilExportGUI {
 		$this->form->setTitle($this->pl->txt('keywords_export'));
 		$this->form->setFormAction($ilCtrl->getFormAction($this));
 
-		$ti = new ilTextAreaInputGUI($this->pl->txt('keywords'), 'keywords');
+		$ti = new ilTextAreaInputGUI($this->pl->txt('common_keywords'), 'keywords');
 		$ti->setInfo($this->pl->txt('keywords_info'));
 		$this->form->addItem($ti);
-		$this->form->addCommandButton('returnToList', $this->pl->txt('cancel'));
+		$this->form->addCommandButton('returnToList', $this->pl->txt('common_cancel'));
 
 		if($mode == 'create') {
 			$this->form->addCommandButton('saveKeywords', $this->pl->txt('keywords_save'));
@@ -154,7 +154,7 @@ class ilLearnLocExportGUI extends ilExportGUI {
 			$this->form->addItem($ti);
 		}
 
-		$this->form->addCommandButton('returnToList', $this->pl->txt('cancel'));
+		$this->form->addCommandButton('returnToList', $this->pl->txt('common_cancel'));
 		$this->form->addCommandButton('export'.ucfirst($type).'File', $this->pl->txt('export_'.$type));
 
 		return $this->form;
