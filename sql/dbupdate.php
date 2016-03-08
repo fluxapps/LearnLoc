@@ -95,18 +95,18 @@
 		include_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/class.ilLearnLocPlugin.php');
 
 		$fields = array(
-			ilLearnLocPlugin::_getType() . '_key' => array(
+			ilLearnLocPlugin::TYPE . '_key' => array(
 				'type' => 'text',
 				'length' => 64,
 			),
-			ilLearnLocPlugin::_getType() . '_value' => array(
+			ilLearnLocPlugin::TYPE . '_value' => array(
 				'type' => 'text',
 				'length' => 64,
 			)
 		);
 
-		$ilDB->createTable('rep_robj_'.ilLearnLocPlugin::_getType().'_conf', $fields);
-		$ilDB->addPrimaryKey('rep_robj_'.ilLearnLocPlugin::_getType().'_conf', array(ilLearnLocPlugin::_getType() . '_key'));
+		$ilDB->createTable('rep_robj_'.ilLearnLocPlugin::TYPE.'_conf', $fields);
+		$ilDB->addPrimaryKey('rep_robj_'.ilLearnLocPlugin::TYPE.'_conf', array(ilLearnLocPlugin::TYPE . '_key'));
 		?>
 <#3>
 	<?php

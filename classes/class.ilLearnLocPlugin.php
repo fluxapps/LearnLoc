@@ -10,6 +10,7 @@ require_once('./Services/Repository/classes/class.ilRepositoryObjectPlugin.php')
  */
 class ilLearnLocPlugin extends ilRepositoryObjectPlugin {
 
+	const TYPE = 'xlel';
 	/**
 	 * @var ilLearnLocPlugin
 	 */
@@ -38,7 +39,7 @@ class ilLearnLocPlugin extends ilRepositoryObjectPlugin {
 
 
 	public static function _getType() {
-		return 'xlel';
+		return self::TYPE;
 	}
 
 
