@@ -37,7 +37,7 @@
                     "de": "Lernort kopieren",
                     "en": "Copy Learn Location"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
             }
         },
         "xlel": {
@@ -46,14 +46,14 @@
                     "de": "Lernort hinzuf\u00c3\u00bcgen",
                     "en": "Add Learn Location"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
             },
             "new": {
                 "translations": {
                     "de": "Neuen Lernort erstellen",
                     "en": "Add new Learn Location"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
             },
             "read": {
                 "translations": {
@@ -132,7 +132,7 @@
                     "de": "Einstellungen bearbeiten",
                     "en": "Edit Settings"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
             }
         },
         "learnloc": {
@@ -157,7 +157,7 @@
                     "de": "Ort ausw\u00c3\u00a4hlen",
                     "en": "Choose Location"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
             }
         },
         "init": {
@@ -166,7 +166,7 @@
                     "de": "Neues Bild zum Lernort hinzuf\u00c3\u00bcgen",
                     "en": "Add new Image to Learn Location"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
             }
         },
         "no": {
@@ -197,7 +197,7 @@
                     "de": "Neuer Kommentar",
                     "en": "New Comment"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
             },
             "answer": {
                 "translations": {
@@ -212,7 +212,7 @@
                     "de": "Kommentar speichern",
                     "en": "Save Comment"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
             }
         },
         "delete": {
@@ -243,7 +243,7 @@
                     "de": "Material",
                     "en": "Content"
                 },
-                "last_used": "09.03.2016"
+                "last_used": "11.03.2016"
             }
         },
         "comment": {
@@ -252,12 +252,12 @@
                     "de": "Kommentar gespeichert",
                     "en": "Comment saved"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
             },
             "deleted": {
                 "translations": {
-                    "de": "MISSING",
-                    "en": "MISSING"
+                    "de": "Gel\u00f6scht",
+                    "en": "Deleted"
                 }
             }
         },
@@ -276,28 +276,28 @@
                     "de": "Export",
                     "en": "Export"
                 },
-                "last_used": "09.03.2016"
+                "last_used": "11.03.2016"
             },
             "csv": {
                 "translations": {
                     "de": "Export CSV",
                     "en": "Export CSV"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
             },
             "gpx": {
                 "translations": {
                     "de": "Export GPX",
                     "en": "Export GPX"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
             },
             "keywords": {
                 "translations": {
                     "de": "Export Keywords",
                     "en": "Export Keywords"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
             }
         },
         "keywords": {
@@ -306,14 +306,14 @@
                     "de": "Keywords",
                     "en": "Keywords"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
             },
             "save": {
                 "translations": {
                     "de": "Keywords speichern",
                     "en": "Save Keywords"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
             },
             "update": {
                 "translations": {
@@ -338,14 +338,14 @@
                     "de": "Keywords bearbeiten",
                     "en": "Edit Keywords"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
             },
             "info": {
                 "translations": {
                     "de": "Keywords Komma-getrennt",
                     "en": "Enter keywords coma-separated"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
             }
         },
         "msg": {
@@ -362,7 +362,7 @@
                     "de": "Bilder zum Lernort",
                     "en": "Learning-Location Images"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
             },
             "title_comments": {
                 "translations": {
@@ -458,49 +458,49 @@
                     "de": "Inhalt",
                     "en": "Content"
                 },
-                "last_used": "09.03.2016"
+                "last_used": "11.03.2016"
             },
             "properties": {
                 "translations": {
                     "de": "Einstellungen",
                     "en": "Settings"
                 },
-                "last_used": "09.03.2016"
+                "last_used": "11.03.2016"
             },
             "title": {
                 "translations": {
                     "de": "Titel",
                     "en": "Title"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
             },
             "description": {
                 "translations": {
                     "de": "Beschreibung",
                     "en": "Description"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
             },
             "save": {
                 "translations": {
                     "de": "Speichern",
                     "en": "Save"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
             },
             "cancel": {
                 "translations": {
                     "de": "Abbrechen",
                     "en": "Cancel"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
             },
             "edit": {
                 "translations": {
                     "de": "Bearbeiten",
                     "en": "Edit"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
             },
             "status": {
                 "translations": {
@@ -521,7 +521,7 @@
                     "de": "Bilder",
                     "en": "Gallery"
                 },
-                "last_used": "09.03.2016"
+                "last_used": "11.03.2016"
             },
             "comments": {
                 "translations": {
@@ -534,14 +534,14 @@
                     "de": "Kommentar",
                     "en": "Comment"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
             },
             "image": {
                 "translations": {
                     "de": "Bild",
                     "en": "Image"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
             },
             "delete": {
                 "translations": {
@@ -555,7 +555,14 @@
                     "de": "Keywords",
                     "en": "Keywords"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "11.03.2016"
+            },
+            "online": {
+                "translations": {
+                    "de": "Online",
+                    "en": "Online"
+                },
+                "last_used": "11.03.2016"
             }
         }
     }

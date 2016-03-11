@@ -234,7 +234,7 @@ class ilObjLearnLocGUI extends ilObjectPluginGUI {
 		$this->form->addItem($ta);
 
 		// online
-		$cb = new ilCheckboxInputGUI($this->lng->txt("common_online"), "online");
+		$cb = new ilCheckboxInputGUI($this->txt("common_online"), "online");
 		$this->form->addItem($cb);
 
 		// location property
