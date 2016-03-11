@@ -31,10 +31,12 @@ delete_images#:#Delete selected images
 add_new_items#:#Choose Folder to add new Objects
 folder_content#:#Content
 comment_saved#:#Comment saved
+comment_deleted#:#MISSING
 confirm_delete_header#:#Do you really want to delete this media?
 export_arcgis#:#Export
 export_csv#:#Export CSV
 export_gpx#:#Export GPX
+export_keywords#:#Export Keywords
 keywords_export#:#Keywords
 keywords_save#:#Save Keywords
 keywords_update#:#Update Keywords
@@ -69,3 +71,5 @@ common_media#:#Gallery
 common_comments#:#Comments
 common_body#:#Comment
 common_image#:#Image
+common_delete#:#Delete
+common_keywords#:#Keywords

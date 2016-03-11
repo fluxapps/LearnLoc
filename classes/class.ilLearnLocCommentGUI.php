@@ -74,8 +74,8 @@ class ilLearnLocCommentGUI {
 		}
 		$conf->addItem('comment_id', $_GET['comment_id'], $newComment->getTitle() . ': ' . $newComment->getBody());
 
-		$conf->setConfirm($lng->txt('common_delete'), 'deleteComment');
-		$conf->setCancel($lng->txt('common_cancel'), 'cancelDeleteComment');
+		$conf->setConfirm($this->pl->txt('common_delete'), 'deleteComment');
+		$conf->setCancel($this->pl->txt('common_cancel'), 'cancelDeleteComment');
 
 		$tpl->setContent($conf->getHTML());
 	}
@@ -195,25 +195,6 @@ class ilLearnLocCommentGUI {
 		$block->setTitle($this->pl->txt('common_comments'));
 
 		require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/Comments/class.xlelCommentRenderGUI.php');
-		//
-		//		$this->html = $this->pl->getTemplate("tpl.com_row.html", true, false);
-		//		$this->html->setVariable("XLEL_COMMENTLIST_TITEL", $this->pl->txt('comments'));
-		//
-		//		if (count($this->comments) > 0) {
-		//			foreach ($this->comments as $comment) {
-		//				$this->setCommentRow($comment);
-		//				if (is_array($comment->children)) {
-		//					foreach ($comment->children as $child) {
-		//						$this->setCommentRow($child, true);
-		//					}
-		//					$this->html->touchBlock("xlel_thread");
-		//				}
-		//			}
-		//		} else {
-		//			$this->html->setCurrentBlock("xlel_comment_noitem");
-		//			$this->html->setVariable("XLEL_COMMENT_NOITEM", $this->parent_obj->object->lng->txt('rep_robj_xlel_no_items'));
-		//			$this->html->parseCurrentBlock();
-		//		}
 
 		$xlelCommentRenderGUI = new xlelCommentRenderGUI($this->comments);
 		$block->setContentHtml($xlelCommentRenderGUI->getHTML());

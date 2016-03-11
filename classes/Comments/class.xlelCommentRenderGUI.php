@@ -57,7 +57,7 @@ class xlelCommentRenderGUI {
 			if ($ilUser->getId() == $comment->getUserId()) {
 				$b = xlelIconButton::getInstance();
 				$b->setIcon('remove');
-				$b->setUrl($ilCtrl->getLinkTargetByClass('ilLearnLocCommentGUI', 'delete'));
+				$b->setUrl($ilCtrl->getLinkTargetByClass('ilLearnLocCommentGUI', 'confirmDeleteComment'));
 				$tpl->setVariable('BUTTON_DELETE', $b->render());
 			}
 			if ($comment->getMediaId()) {
@@ -93,9 +93,9 @@ class xlelCommentRenderGUI {
 						$tpl->setVariable('BUTTON_DELETE_CHILD', $b->render());
 					}
 
-					//					$tpl->touchBlock('response');
 					$tpl->setVariable('RESPONSE_TITLE', $child->getTitle());
 					$tpl->setVariable('RESPONSE_BODY', $child->getBody());
+					$tpl->touchBlock('response');
 				}
 			} else {
 				//				$tpl->touchBlock('response');

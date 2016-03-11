@@ -196,7 +196,8 @@
                 "translations": {
                     "de": "Neuer Kommentar",
                     "en": "New Comment"
-                }
+                },
+                "last_used": "08.03.2016"
             },
             "answer": {
                 "translations": {
@@ -210,7 +211,8 @@
                 "translations": {
                     "de": "Kommentar speichern",
                     "en": "Save Comment"
-                }
+                },
+                "last_used": "08.03.2016"
             }
         },
         "delete": {
@@ -241,7 +243,7 @@
                     "de": "Material",
                     "en": "Content"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "09.03.2016"
             }
         },
         "comment": {
@@ -249,6 +251,13 @@
                 "translations": {
                     "de": "Kommentar gespeichert",
                     "en": "Comment saved"
+                },
+                "last_used": "08.03.2016"
+            },
+            "deleted": {
+                "translations": {
+                    "de": "MISSING",
+                    "en": "MISSING"
                 }
             }
         },
@@ -257,7 +266,8 @@
                 "translations": {
                     "de": "M\u00c3\u00b6chten Sie die Medien wirklich l\u00c3\u00b6schen?",
                     "en": "Do you really want to delete this media?"
-                }
+                },
+                "last_used": "08.03.2016"
             }
         },
         "export": {
@@ -266,7 +276,7 @@
                     "de": "Export",
                     "en": "Export"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "09.03.2016"
             },
             "csv": {
                 "translations": {
@@ -281,6 +291,13 @@
                     "en": "Export GPX"
                 },
                 "last_used": "08.03.2016"
+            },
+            "keywords": {
+                "translations": {
+                    "de": "Export Keywords",
+                    "en": "Export Keywords"
+                },
+                "last_used": "08.03.2016"
             }
         },
         "keywords": {
@@ -288,13 +305,15 @@
                 "translations": {
                     "de": "Keywords",
                     "en": "Keywords"
-                }
+                },
+                "last_used": "08.03.2016"
             },
             "save": {
                 "translations": {
                     "de": "Keywords speichern",
                     "en": "Save Keywords"
-                }
+                },
+                "last_used": "08.03.2016"
             },
             "update": {
                 "translations": {
@@ -318,13 +337,15 @@
                 "translations": {
                     "de": "Keywords bearbeiten",
                     "en": "Edit Keywords"
-                }
+                },
+                "last_used": "08.03.2016"
             },
             "info": {
                 "translations": {
                     "de": "Keywords Komma-getrennt",
                     "en": "Enter keywords coma-separated"
-                }
+                },
+                "last_used": "08.03.2016"
             }
         },
         "msg": {
@@ -437,14 +458,14 @@
                     "de": "Inhalt",
                     "en": "Content"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "09.03.2016"
             },
             "properties": {
                 "translations": {
                     "de": "Einstellungen",
                     "en": "Settings"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "09.03.2016"
             },
             "title": {
                 "translations": {
@@ -471,7 +492,8 @@
                 "translations": {
                     "de": "Abbrechen",
                     "en": "Cancel"
-                }
+                },
+                "last_used": "08.03.2016"
             },
             "edit": {
                 "translations": {
@@ -499,7 +521,7 @@
                     "de": "Bilder",
                     "en": "Gallery"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "09.03.2016"
             },
             "comments": {
                 "translations": {
@@ -511,13 +533,29 @@
                 "translations": {
                     "de": "Kommentar",
                     "en": "Comment"
-                }
+                },
+                "last_used": "08.03.2016"
             },
             "image": {
                 "translations": {
                     "de": "Bild",
                     "en": "Image"
-                }
+                },
+                "last_used": "08.03.2016"
+            },
+            "delete": {
+                "translations": {
+                    "de": "L\u00f6schen",
+                    "en": "Delete"
+                },
+                "last_used": "08.03.2016"
+            },
+            "keywords": {
+                "translations": {
+                    "de": "Keywords",
+                    "en": "Keywords"
+                },
+                "last_used": "08.03.2016"
             }
         }
     }

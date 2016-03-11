@@ -33,28 +33,66 @@ require_once('class.ilLearnLocDummyExport.php');
  * $Id$
  */
 class ilLearnLocGpxExport extends ilLearnLocDummyExport {
+
+	/**
+	 * @param mixed $data
+	 * @return mixed
+	 */
 	public function getExportData($data) {
-		$xml = new SimpleXMLElement("<gpx></gpx>");
-		$xml->addAttribute('encoding', 'UTF-8');
+		/*
+
+
+		<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="Wikipedia"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+ <!-- Kommentare sehen so aus -->
+ <metadata>
+  <name>Dateiname</name>
+  <desc>Validiertes GPX-Beispiel ohne Sonderzeichen</desc>
+  <author>
+   <name>Autorenname</name>
+  </author>
+ </metadata>
+ <wpt lat="52.518611" lon="13.376111">
+  <ele>35.0</ele>
+  <time>2011-12-31T23:59:59Z</time>
+  <name>Reichstag (Berlin)</name>
+  <sym>City</sym>
+ </wpt>
+</gpx>
+
+		 */
+//		$xml = new SimpleXMLElement("<gpx></gpx>");
+		$xml = simplexml_load_file('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/templates/garmin.gpx');
+		$xml->addAttribute('creator', 'ILIAS LearnLoc');
+
 
 		$metadata = $xml->addChild('metadata');
 		$metadata->addChild("name", $this->getTitle());
 		$metadata->addChild("desc", $this->getDescription());
 		$metadata->addChild("copyright", "ILIAS E-Learning");
 		$metadata->addChild("time", time());
+
 		if(count($data) > 0) {
 			$extensions = $metadata->addChild("extensions");
 			foreach($data as $k => $v) {
 				$extensions->addChild($k, $v);
 			}
 		}
+
 		$wp = $xml->addChild('wpt');
-		$wp->addAttribute('lat', $this->getLatitude());
-		$wp->addAttribute('lon', $this->getLongitude());
+		$wp->addAttribute('lat', (float)$this->getLatitude());
+		$wp->addAttribute('lon', (float)$this->getLongitude());
 		$wp->addChild("time", time());
 		$wp->addChild("ele", 500);
+		$wp->addChild("sym", "Waypoint");
 		$wp->addChild("name", $this->getTitle());
 		$wp->addChild("desc", $this->getDescription());
+		$extensions = $wp->addChild("extensions");
+		$gpxxWaypointExtension = $extensions->addChild("gpxx:WaypointExtension");
+		$gpxxWaypointExtension->addChild("gpxx:DisplayMode", "SymbolAndName");
+
 
 		return $xml->asXML();
 	}
