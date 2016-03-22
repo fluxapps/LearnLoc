@@ -36,13 +36,13 @@ class ilLearnLocCommentGUI {
 	 * @param ilObjLearnLocGUI $parent_obj
 	 */
 	public function __construct(ilObjLearnLocGUI $parent_obj) {
-		global $ilTpl, $ilCtrl;
+		global $tpl, $ilCtrl;
 
 		$this->ref_id = $parent_obj->object->getId();
 		$this->parent_obj = $parent_obj;
 		$this->pl = ilLearnLocPlugin::getInstance();
 		$this->ctrl = $ilCtrl;
-		$this->tpl = $ilTpl;
+		$this->tpl = $tpl;
 		$this->comments = ilLearnLocComment::_getAllForRefId($this->ref_id);
 		$this->parent_obj->tpl->setTitleIcon($this->pl->_getIcon('xlel', 'b'));
 	}
@@ -52,11 +52,10 @@ class ilLearnLocCommentGUI {
 		global $ilCtrl;
 
 		$cmd = $ilCtrl->getCmd();
-		$this->$cmd();
+		$this->{$cmd}();
 
 		return true;
 	}
-
 
 	public function confirmDeleteComment() {
 		global $ilCtrl, $lng, $tpl, $ilUser;
@@ -83,7 +82,7 @@ class ilLearnLocCommentGUI {
 
 	public function saveComment() {
 		global $ilUser, $ilCtrl;
-		$this->getInitCommentForm();
+		$form = $this->getInitCommentForm();
 
 		if ($this->cmform->checkInput($_POST['parent_id'])) {
 			$newComment = new ilLearnLocComment();
@@ -108,6 +107,7 @@ class ilLearnLocCommentGUI {
 			$ilCtrl->redirect($this->parent_obj, "");
 		}
 		$this->cmform->setValuesByPost();
+		$this->tpl->setContent($this->cmform->getHTML());
 	}
 
 
