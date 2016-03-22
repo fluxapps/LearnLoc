@@ -173,3 +173,33 @@ xlelConfig::set(xlelConfig::F_CAMPUS_TOUR_PASSWORD, $setting['campus_tour_passwo
 require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/CheckIn/class.xlelCheckIn.php');
 xlelCheckIn::installDB();
 ?>
+<#8>
+<?php
+$res = $ilDB->query("SELECT * FROM rep_robj_xlel_data");
+while ($data = $ilDB->fetchObject($res)) {
+	$r = $ilDB->query('SELECT COUNT(*) AS cnt FROM mob_usage WHERE id = ' . $ilDB->quote($data->init_mob_id, 'integer'));
+	$has_set = $ilDB->fetchObject($r);
+	if ($has_set->cnt < 1) {
+		$ilDB->insert('mob_usage', array(
+			'id'            => array( 'integer', $data->init_mob_id ),
+			'usage_type'    => array( 'text', 'mep' ),
+			'usage_id'      => array( 'integer', $data->id ),
+			'usage_hist_nr' => array( 'integer', 0 ),
+		));
+	}
+}
+
+$res = $ilDB->query("SELECT * FROM rep_robj_xlel_comments");
+while ($data = $ilDB->fetchObject($res)) {
+	$r = $ilDB->query('SELECT COUNT(*) AS cnt FROM mob_usage WHERE id = ' . $ilDB->quote($data->media_id, 'integer'));
+	$has_set = $ilDB->fetchObject($r);
+	if ($has_set->cnt < 1) {
+		$ilDB->insert('mob_usage', array(
+			'id'            => array( 'integer', $data->media_id ),
+			'usage_type'    => array( 'text', 'mep' ),
+			'usage_id'      => array( 'integer', $data->ref_id ),
+			'usage_hist_nr' => array( 'integer', 0 ),
+		));
+	}
+}
+?>
