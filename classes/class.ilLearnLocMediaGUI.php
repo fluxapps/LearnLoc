@@ -141,8 +141,8 @@ class ilLearnLocMediaGUI {
 		}
 		$conf->addHiddenItem('part', $_GET['part']);
 
-		$conf->setConfirm($lng->txt('delete'), 'deleteImage');
-		$conf->setCancel($lng->txt('cancel'), 'cancelDeleteImage');
+		$conf->setConfirm($lng->txt('common_delete'), 'deleteImage');
+		$conf->setCancel($lng->txt('common_cancel'), 'cancelDeleteImage');
 		$tpl->setContent($conf->getHTML());
 	}
 

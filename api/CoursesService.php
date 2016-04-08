@@ -102,7 +102,7 @@ class CoursesService implements Service {
 		 */
 		$ref_ids = array();
 		$courses = array();
-		foreach (\ilObject2::_getObjectsByType(\ilLearnLocPlugin::_getType()) as $xlel) {
+		foreach (\ilObject2::_getObjectsByType(\ilLearnLocPlugin::TYPE) as $xlel) {
 			if (!\ilObjLearnLocAccess::checkOnline($xlel['obj_id'])) {
 				continue;
 			}

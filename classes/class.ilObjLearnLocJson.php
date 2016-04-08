@@ -204,9 +204,9 @@ class ilObjLearnLocJson {
 	public function getCourses() {
 		global $ilAccess, $ilUser, $tree;
 		$ref_ids = array();
-		foreach (ilObject2::_getObjectsByType(ilLearnLocPlugin::_getType()) as $xlel) {
+		foreach (ilObject2::_getObjectsByType(ilLearnLocPlugin::TYPE) as $xlel) {
 			foreach (ilObject2::_getAllReferences($xlel['obj_id']) as $xlel_ref) {
-				if ($ilAccess->checkAccessOfUser($ilUser->getId(), "read", "", $xlel_ref, ilLearnLocPlugin::_getType())
+				if ($ilAccess->checkAccessOfUser($ilUser->getId(), "read", "", $xlel_ref, ilLearnLocPlugin::TYPE)
 					AND $ilAccess->checkAccessOfUser($ilUser->getId(), "read", "view", $tree->getParentId($xlel_ref))
 				) {
 					$obj = ilObjectFactory::getInstanceByRefId($tree->getParentId($xlel_ref));
@@ -271,7 +271,7 @@ class ilObjLearnLocJson {
 		global $tree;
 		$cont = ilObjectFactory::getInstanceByRefId($this->getDF('course-id'));
 		$subitems = $cont->getSubItems();
-		foreach ($subitems[ilLearnLocPlugin::_getType()] as $ref_id) {
+		foreach ($subitems[ilLearnLocPlugin::TYPE] as $ref_id) {
 			$xlelObj = ilObjectFactory::getInstanceByRefId($ref_id['ref_id']);
 			$locations[] = array(
 				"id" => $xlelObj->getId(),
@@ -344,7 +344,7 @@ class ilObjLearnLocJson {
 	 */
 	public function getLearnLocsForContObj(&$obj) {
 		global $tree;
-		foreach ($this->getTypeIdsForContObj($obj, ilLearnLocPlugin::_getType()) as $ref_id) {
+		foreach ($this->getTypeIdsForContObj($obj, ilLearnLocPlugin::TYPE) as $ref_id) {
 			$xlelObj = ilObjectFactory::getInstanceByRefId($ref_id);
 			$return[] = array(
 				'id' => $xlelObj->getId(),
@@ -375,9 +375,9 @@ class ilObjLearnLocJson {
 		global $ilAccess, $ilUser, $tree;
 		$subitems = $obj->getSubItems();
 		foreach ($subitems[$type] as $ref_id) {
-			if ($type == ilLearnLocPlugin::_getType()
+			if ($type == ilLearnLocPlugin::TYPE
 				OR
-				count($this->getTypeIdsForContObj(ilObjectFactory::getInstanceByRefId($ref_id['ref_id']), ilLearnLocPlugin::_getType()))
+				count($this->getTypeIdsForContObj(ilObjectFactory::getInstanceByRefId($ref_id['ref_id']), ilLearnLocPlugin::TYPE))
 					> 0
 				OR ($ilAccess->checkAccessOfUser($ilUser->getId(), 'create', '', $ref_id['ref_id'], 'xlel')
 					AND ! ilObjLearnLoc::_isPool($ref_id['ref_id']))

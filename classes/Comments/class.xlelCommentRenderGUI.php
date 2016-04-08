@@ -31,7 +31,10 @@ class xlelCommentRenderGUI {
 	 * @return string
 	 */
 	public function getHTML() {
-		$tpl = ilLearnLocPlugin::getInstance()->getTemplate("ilias5/tpl.comments.html", true, true);
+		global $tpl;
+		$tpl->addCss('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/templates/default.css');
+
+		$template = ilLearnLocPlugin::getInstance()->getTemplate("ilias5/tpl.comments.html", true, true);
 		global $ilCtrl, $ilUser;
 		/**
 		 * @var $ilCtrl ilCtrl
@@ -42,67 +45,78 @@ class xlelCommentRenderGUI {
 		$b->setCaption('rep_robj_xlel_new_comment');
 		$b->setUrl($ilCtrl->getLinkTargetByClass('ilLearnLocCommentGUI', 'addComment'));
 		$toolbar->addButtonInstance($b);
-		$tpl->setVariable('TOOLBAR', $toolbar->getHTML());
+		$template->setVariable('TOOLBAR', $toolbar->getHTML());
 		foreach ($this->getComments() as $comment) {
-			$tpl->touchBlock('comment');
-			$tpl->setVariable('TITLE', $comment->getTitle());
-			$tpl->setVariable('BODY', $comment->getBody());
+			$template->touchBlock('comment');
+			$template->setVariable('TITLE', $comment->getTitle());
+			$template->setVariable('USER', ilObjUser::_lookupLogin($comment->getUserId()));
+			$template->setVariable('DATE', $comment->getCreationDate());
+			$template->setVariable('BODY', $comment->getBody());
 			$ilCtrl->setParameterByClass('ilLearnLocCommentGUI', 'comment_id', $comment->getId());
 
 			$b = xlelIconButton::getInstance();
 			$b->setIcon('share-alt');
 			$b->setUrl($ilCtrl->getLinkTargetByClass('ilLearnLocCommentGUI', 'addComment'));
-			$tpl->setVariable('BUTTON_RESPONSE', $b->render());
+			$template->setVariable('BUTTON_RESPONSE', $b->render());
 
 			if ($ilUser->getId() == $comment->getUserId()) {
 				$b = xlelIconButton::getInstance();
 				$b->setIcon('remove');
-				$b->setUrl($ilCtrl->getLinkTargetByClass('ilLearnLocCommentGUI', 'delete'));
-				$tpl->setVariable('BUTTON_DELETE', $b->render());
+				$b->setUrl($ilCtrl->getLinkTargetByClass('ilLearnLocCommentGUI', 'confirmDeleteComment'));
+				$template->setVariable('BUTTON_DELETE', $b->render());
 			}
 			if ($comment->getMediaId()) {
 				$img = new ilLearnLocMedia($comment->getMediaId());
 				$img->setOptions(array(
-					'w' => self::SIZE,
-					'h' => self::SIZE,
-					'crop' => true,
-					'scale' => false,
-					'canvas-color' => '#ffffff'
+					'w'            => self::SIZE,
+					'h'            => self::SIZE,
+					'crop'         => true,
+					'scale'        => false,
+					'canvas-color' => '#ffffff',
 				));
-				$tpl->setVariable('IMG_SRC', $img->getFirstImageForImgTag());
+				$template->setVariable('IMG_SRC', $img->getFirstImageForImgTag());
+			} else {
+				$template->setVariable('IMG_SRC', './Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/templates/images/placeholder.png');
 			}
 
 			if ($comment->hasChildren()) {
-				foreach ($comment->getChildren() as $child) {
+				$count = count($comment->getChildren());
+				foreach ($comment->getChildren() as $i => $child) {
 					if ($child->getMediaId()) {
 						$img = new ilLearnLocMedia($child->getMediaId());
 						$img->setOptions(array(
-							'w' => self::SIZE,
-							'h' => self::SIZE,
-							'crop' => true,
-							'scale' => false,
-							'canvas-color' => '#ffffff'
+							'w'            => self::SIZE,
+							'h'            => self::SIZE,
+							'crop'         => true,
+							'scale'        => false,
+							'canvas-color' => '#ffffff',
 						));
-						$tpl->setVariable('RESPONSE_IMG_SRC', $img->getFirstImageForImgTag());
+						$template->setVariable('RESPONSE_IMG_SRC', $img->getFirstImageForImgTag());
+					} else {
+						$template->setVariable('RESPONSE_IMG_SRC', './Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/templates/images/placeholder.png');
 					}
 					if ($ilUser->getId() == $child->getUserId()) {
 						$ilCtrl->setParameterByClass('ilLearnLocCommentGUI', 'comment_id', $child->getId());
 						$b = xlelIconButton::getInstance();
 						$b->setIcon('remove');
 						$b->setUrl($ilCtrl->getLinkTargetByClass('ilLearnLocCommentGUI', 'confirmDeleteComment'));
-						$tpl->setVariable('BUTTON_DELETE_CHILD', $b->render());
+						$template->setVariable('BUTTON_DELETE_CHILD', $b->render());
 					}
 
-					//					$tpl->touchBlock('response');
-					$tpl->setVariable('RESPONSE_TITLE', $child->getTitle());
-					$tpl->setVariable('RESPONSE_BODY', $child->getBody());
+					$template->setVariable('RESPONSE_TITLE', $child->getTitle());
+					$template->setVariable('RESPONSE_BODY', $child->getBody());
+					$template->setVariable('RESPONSE_USER', ilObjUser::_lookupLogin($child->getUserId()));
+					$template->setVariable('RESPONSE_DATE', $child->getCreationDate());
+					if ($i < ($count - 1)) {
+						$template->touchBlock('response');
+					}
 				}
 			} else {
 				//				$tpl->touchBlock('response');
 			}
 		}
 
-		return $tpl->get();
+		return $template->get();
 	}
 
 
@@ -120,12 +134,12 @@ class xlelCommentRenderGUI {
 		$cmform->setTableWidth('100%');
 
 		// Title
-		$ti = new ilTextInputGUI($this->pl->txt("title"), "title");
+		$ti = new ilTextInputGUI($this->pl->txt("common_title"), "title");
 		$ti->setRequired(true);
 		$cmform->addItem($ti);
 
 		// Description
-		$ta = new ilTextAreaInputGUI($this->pl->txt("body"), "body");
+		$ta = new ilTextAreaInputGUI($this->pl->txt("common_body"), "body");
 		$ta->setRequired(true);
 		$cmform->addItem($ta);
 
@@ -135,10 +149,10 @@ class xlelCommentRenderGUI {
 			$cmform->addItem($hi);
 		}
 
-		$imgs = new ilImageFileInputGUI($this->pl->txt("image"), "image");
+		$imgs = new ilImageFileInputGUI($this->pl->txt("common_image"), "image");
 		$imgs->setSuffixes(array(
 			"jpg",
-			"jpeg"
+			"jpeg",
 		));
 		$cmform->addItem($imgs);
 
