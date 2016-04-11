@@ -1,5 +1,6 @@
 <?php
 require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/class.ilLearnLocCommentGUI.php');
+require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/class.ilObjLearnLocAccess.php');
 
 /**
  * Class xlelCommentRenderGUI
@@ -31,7 +32,7 @@ class xlelCommentRenderGUI {
 	 * @return string
 	 */
 	public function getHTML() {
-		global $tpl;
+		global $tpl, $rbacreview;
 		$tpl->addCss('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/templates/default.css');
 
 		$template = ilLearnLocPlugin::getInstance()->getTemplate("ilias5/tpl.comments.html", true, true);
@@ -59,7 +60,7 @@ class xlelCommentRenderGUI {
 			$b->setUrl($ilCtrl->getLinkTargetByClass('ilLearnLocCommentGUI', 'addComment'));
 			$template->setVariable('BUTTON_RESPONSE', $b->render());
 
-			if ($ilUser->getId() == $comment->getUserId()) {
+			if ($ilUser->getId() == $comment->getUserId() || ilObjLearnLocAccess::_checkPermission('write')) {
 				$b = xlelIconButton::getInstance();
 				$b->setIcon('remove');
 				$b->setUrl($ilCtrl->getLinkTargetByClass('ilLearnLocCommentGUI', 'confirmDeleteComment'));
@@ -95,7 +96,7 @@ class xlelCommentRenderGUI {
 					} else {
 						$template->setVariable('RESPONSE_IMG_SRC', './Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/templates/images/placeholder.png');
 					}
-					if ($ilUser->getId() == $child->getUserId()) {
+					if ($ilUser->getId() == $child->getUserId() || ilObjLearnLocAccess::_checkPermission('write')) {
 						$ilCtrl->setParameterByClass('ilLearnLocCommentGUI', 'comment_id', $child->getId());
 						$b = xlelIconButton::getInstance();
 						$b->setIcon('remove');
