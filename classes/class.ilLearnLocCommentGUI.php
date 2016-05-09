@@ -36,13 +36,13 @@ class ilLearnLocCommentGUI {
 	 * @param ilObjLearnLocGUI $parent_obj
 	 */
 	public function __construct(ilObjLearnLocGUI $parent_obj) {
-		global $ilTpl, $ilCtrl;
+		global $tpl, $ilCtrl;
 
 		$this->ref_id = $parent_obj->object->getId();
 		$this->parent_obj = $parent_obj;
 		$this->pl = ilLearnLocPlugin::getInstance();
 		$this->ctrl = $ilCtrl;
-		$this->tpl = $ilTpl;
+		$this->tpl = $tpl;
 		$this->comments = ilLearnLocComment::_getAllForRefId($this->ref_id);
 		$this->parent_obj->tpl->setTitleIcon($this->pl->_getIcon('xlel', 'b'));
 	}
@@ -52,11 +52,10 @@ class ilLearnLocCommentGUI {
 		global $ilCtrl;
 
 		$cmd = $ilCtrl->getCmd();
-		$this->$cmd();
+		$this->{$cmd}();
 
 		return true;
 	}
-
 
 	public function confirmDeleteComment() {
 		global $ilCtrl, $lng, $tpl, $ilUser;
@@ -74,8 +73,8 @@ class ilLearnLocCommentGUI {
 		}
 		$conf->addItem('comment_id', $_GET['comment_id'], $newComment->getTitle() . ': ' . $newComment->getBody());
 
-		$conf->setConfirm($lng->txt('delete'), 'deleteComment');
-		$conf->setCancel($lng->txt('cancel'), 'cancelDeleteComment');
+		$conf->setConfirm($this->pl->txt('common_delete'), 'deleteComment');
+		$conf->setCancel($this->pl->txt('common_cancel'), 'cancelDeleteComment');
 
 		$tpl->setContent($conf->getHTML());
 	}
@@ -83,7 +82,7 @@ class ilLearnLocCommentGUI {
 
 	public function saveComment() {
 		global $ilUser, $ilCtrl;
-		$this->getInitCommentForm();
+		$form = $this->getInitCommentForm();
 
 		if ($this->cmform->checkInput($_POST['parent_id'])) {
 			$newComment = new ilLearnLocComment();
@@ -108,6 +107,7 @@ class ilLearnLocCommentGUI {
 			$ilCtrl->redirect($this->parent_obj, "");
 		}
 		$this->cmform->setValuesByPost();
+		$this->tpl->setContent($this->cmform->getHTML());
 	}
 
 
@@ -155,12 +155,12 @@ class ilLearnLocCommentGUI {
 		$this->cmform->setTableWidth('100%');
 
 		// Title
-		$ti = new ilTextInputGUI($this->pl->txt("title"), "title");
+		$ti = new ilTextInputGUI($this->pl->txt("common_title"), "title");
 		$ti->setRequired(true);
 		$this->cmform->addItem($ti);
 
 		// Description
-		$ta = new ilTextAreaInputGUI($this->pl->txt("body"), "body");
+		$ta = new ilTextAreaInputGUI($this->pl->txt("common_body"), "body");
 		$ta->setRequired(true);
 		$this->cmform->addItem($ta);
 
@@ -170,7 +170,7 @@ class ilLearnLocCommentGUI {
 			$this->cmform->addItem($hi);
 		}
 
-		$imgs = new ilImageFileInputGUI($this->pl->txt("image"), "image");
+		$imgs = new ilImageFileInputGUI($this->pl->txt("common_image"), "image");
 		$imgs->setSuffixes(array(
 			"jpg",
 			"jpeg"
@@ -192,28 +192,9 @@ class ilLearnLocCommentGUI {
 	public function getHTML() {
 		require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/Block/class.ilLearnLocBlockGUI.php');
 		$block = new ilLearnLocBlockGUI();
-		$block->setTitle($this->pl->txt('comments'));
+		$block->setTitle($this->pl->txt('common_comments'));
 
 		require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/Comments/class.xlelCommentRenderGUI.php');
-		//
-		//		$this->html = $this->pl->getTemplate("tpl.com_row.html", true, false);
-		//		$this->html->setVariable("XLEL_COMMENTLIST_TITEL", $this->pl->txt('comments'));
-		//
-		//		if (count($this->comments) > 0) {
-		//			foreach ($this->comments as $comment) {
-		//				$this->setCommentRow($comment);
-		//				if (is_array($comment->children)) {
-		//					foreach ($comment->children as $child) {
-		//						$this->setCommentRow($child, true);
-		//					}
-		//					$this->html->touchBlock("xlel_thread");
-		//				}
-		//			}
-		//		} else {
-		//			$this->html->setCurrentBlock("xlel_comment_noitem");
-		//			$this->html->setVariable("XLEL_COMMENT_NOITEM", $this->parent_obj->object->lng->txt('rep_robj_xlel_no_items'));
-		//			$this->html->parseCurrentBlock();
-		//		}
 
 		$xlelCommentRenderGUI = new xlelCommentRenderGUI($this->comments);
 		$block->setContentHtml($xlelCommentRenderGUI->getHTML());

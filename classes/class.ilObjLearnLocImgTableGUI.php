@@ -63,11 +63,9 @@ class ilObjLearnLocImgTableGUI extends ilTable2GUI
 				$this->addColumn($this->lng->txt("rep_robj_xlel_".$key), $key, 'auto');
 			}
 		}
-		
-		//$this->addMultiCommand('export', $this->lng->txt('export'));
+
 
 		$this->setPrefix('');
-		//$this->setSelectAllCheckbox('sel');
 		
 		$this->setRowTemplate("tpl.show_log.html", "Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc");
 		

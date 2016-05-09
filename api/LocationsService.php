@@ -69,7 +69,7 @@ class LocationsService implements Service {
 	protected function getLocations($container) {
 		global $tree;
 
-		foreach ($this->getTypeIdsForContObj($container, \ilLearnLocPlugin::_getType()) as $ref_id) {
+		foreach ($this->getTypeIdsForContObj($container, \ilLearnLocPlugin::TYPE) as $ref_id) {
 			$location = \ilObjLearnLoc::getInstance($ref_id);
 			if (!$location->getOnline()) {
 				continue;
@@ -103,8 +103,8 @@ class LocationsService implements Service {
 		$subitems = $container->getSubItems();
 		if (isset($subitems[$type])) {
 			foreach ($subitems[$type] as $ref_id) {
-				if ($type == \ilLearnLocPlugin::_getType()
-					OR count($this->getTypeIdsForContObj(\ilObjectFactory::getInstanceByRefId($ref_id['ref_id']), \ilLearnLocPlugin::_getType())) > 0
+				if ($type == \ilLearnLocPlugin::TYPE
+					OR count($this->getTypeIdsForContObj(\ilObjectFactory::getInstanceByRefId($ref_id['ref_id']), \ilLearnLocPlugin::TYPE)) > 0
 					OR ($ilAccess->checkAccessOfUser($ilUser->getId(), 'create', '', $ref_id['ref_id'], 'xlel')
 						AND !\ilObjLearnLoc::_isPool($ref_id['ref_id']))
 				) {

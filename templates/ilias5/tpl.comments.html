@@ -5,27 +5,28 @@
 		<div class="row">
 			<div class="col-md-2">
 				<!-- BEGIN img -->
-				<img class="media-object img-thumbnail" src="{IMG_SRC}">
+				<img class="media-object img-thumbnail xlel-thumbnail" src="{IMG_SRC}">
 				<!-- END img -->
 			</div>
 			<div class="col-md-9">
-				<h5>{TITLE}</h5>
+				<h5><span class="label label-default">{USER}, {DATE}</span> {TITLE}</h5>
 				<p>{BODY}</p>
 			</div>
 			<div class="col-md-1">
 				{BUTTON_RESPONSE}
 				{BUTTON_DELETE}
 			</div>
+			<hr>
 		</div>
 		<!-- BEGIN response -->
 		<div class="row">
 			<div class="col-md-3">
 				<!-- BEGIN response_img -->
-				<img class="media-object img-thumbnail" src="{RESPONSE_IMG_SRC}">
+				<img class="media-object img-thumbnail xlel-thumbnail" src="{RESPONSE_IMG_SRC}">
 				<!-- END response_img -->
 			</div>
 			<div class="col-md-8">
-				<h5>{RESPONSE_TITLE}</h5>
+				<h5><span class="label label-default">{RESPONSE_USER}, {RESPONSE_DATE}</span> {RESPONSE_TITLE} </h5>
 				<p>{RESPONSE_BODY}</p>
 			</div><div class="col-md-1">
 				{BUTTON_DELETE_CHILD}

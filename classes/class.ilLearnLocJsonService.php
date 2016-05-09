@@ -220,9 +220,9 @@ class ilLearnLocJsonService {
 	public function getCourses() {
 		global $ilAccess, $ilUser, $tree, $ilDB;
 		$ref_ids = array();
-		foreach (ilObject2::_getObjectsByType(ilLearnLocPlugin::_getType()) as $xlel) {
+		foreach (ilObject2::_getObjectsByType(ilLearnLocPlugin::TYPE) as $xlel) {
 			foreach (ilObject2::_getAllReferences($xlel['obj_id']) as $xlel_ref) {
-				$read_access = $ilAccess->checkAccessOfUser($ilUser->getId(), "read", "", $xlel_ref, ilLearnLocPlugin::_getType());
+				$read_access = $ilAccess->checkAccessOfUser($ilUser->getId(), "read", "", $xlel_ref, ilLearnLocPlugin::TYPE);
 				$read_access_course = $ilAccess->checkAccessOfUser($ilUser->getId(), "read", "view", $tree->getParentId($xlel_ref));
 				if ($read_access AND $read_access_course) {
 					$obj = ilObjectFactory::getInstanceByRefId($tree->getParentId($xlel_ref));
@@ -275,7 +275,7 @@ class ilLearnLocJsonService {
 		global $tree;
 		$cont = ilObjectFactory::getInstanceByRefId($this->getDF('course-id'));
 		$subitems = $cont->getSubItems();
-		foreach ($subitems[ilLearnLocPlugin::_getType()] as $ref_id) {
+		foreach ($subitems[ilLearnLocPlugin::TYPE] as $ref_id) {
 			$xlelObj = ilObjectFactory::getInstanceByRefId($ref_id['ref_id']);
 			$locations[] = array(
 				"id" => $xlelObj->getId(),
@@ -348,7 +348,7 @@ class ilLearnLocJsonService {
 	 */
 	private function getLearnLocsForContObj($obj) {
 		global $tree;
-		foreach ($this->getTypeIdsForContObj($obj, ilLearnLocPlugin::_getType()) as $ref_id) {
+		foreach ($this->getTypeIdsForContObj($obj, ilLearnLocPlugin::TYPE) as $ref_id) {
 			$xlelObj = ilObjLearnLoc::getInstance($ref_id);
 			$return[] = array(
 				'id' => $xlelObj->getId(),
@@ -383,12 +383,12 @@ class ilLearnLocJsonService {
 		 */
 		$subitems = $obj->getSubItems();
 		$ref_ids = array();
-		$is_xlel = $type == ilLearnLocPlugin::_getType();
+		$is_xlel = $type == ilLearnLocPlugin::TYPE;
 		foreach ($subitems[$type] as $ref_id) {
 			$online = ilObjLearnLocAccess::checkOnlineForRefId($ref_id['ref_id']);
 			$has_xlels = false;
 			if(!$is_xlel) {
-				$has_xlels = count($this->getTypeIdsForContObj(ilObjectFactory::getInstanceByRefId($ref_id['ref_id']), ilLearnLocPlugin::_getType())) > 0;
+				$has_xlels = count($this->getTypeIdsForContObj(ilObjectFactory::getInstanceByRefId($ref_id['ref_id']), ilLearnLocPlugin::TYPE)) > 0;
 			}
 			$can_create_xlel = $ilAccess->checkAccessOfUser($ilUser->getId(), 'create', '', $ref_id['ref_id'], 'xlel');
 			$is_pool = ilObjLearnLoc::_isPool($ref_id['ref_id']);
