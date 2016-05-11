@@ -57,6 +57,7 @@ class ilLearnLocCommentGUI {
 		return true;
 	}
 
+
 	public function confirmDeleteComment() {
 		global $ilCtrl, $lng, $tpl, $ilUser;
 
@@ -115,7 +116,7 @@ class ilLearnLocCommentGUI {
 		global $ilCtrl, $ilUser;
 
 		$comment = new ilLearnLocComment($_POST['comment_id']);
-		if ($ilUser->getId() != $comment->getUserId()) {
+		if ($ilUser->getId() != $comment->getUserId() && !ilObjLearnLocAccess::_checkPermission('write')) {
 			ilUtil::sendFailure('Access denied', true);
 			/**
 			 * @var $ilCtrl ilCtrl
@@ -138,7 +139,6 @@ class ilLearnLocCommentGUI {
 		global $tpl;
 		$tpl->setContent($this->getInitCommentForm($_GET['comment_id']));
 	}
-
 
 
 	/**
@@ -173,7 +173,7 @@ class ilLearnLocCommentGUI {
 		$imgs = new ilImageFileInputGUI($this->pl->txt("common_image"), "image");
 		$imgs->setSuffixes(array(
 			"jpg",
-			"jpeg"
+			"jpeg",
 		));
 		$this->cmform->addItem($imgs);
 
