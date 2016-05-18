@@ -66,18 +66,10 @@ class ilLearnLocMediaGUI {
 	}
 
 
+	/**
+	 * @deprecated
+	 */
 	public function _setCssAndJs() {
-		global $tpl;
-		$pl = ilLearnLocPlugin::getInstance();
-		$dir = $pl->getDirectory() . "/templates/";
-
-		//		$tpl->addJavaScript($dir . 'js/jquery-ui-1.8.20.custom/js/jquery-1.7.2.min.js');
-		//		$tpl->addJavaScript($dir . 'js/jquery-ui-1.8.20.custom/js/jquery-ui-1.8.20.custom.min.js');
-		//		$tpl->addCss($dir . "js/coin-slider/coin-slider-styles.css");
-		//		$tpl->addJavaScript($dir . "js/coin-slider/coin-slider.min.js");
-		//		$tpl->addCss($dir . "main.css");
-		//		$tpl->addCss($dir . "js/lightbox/css/lightbox.css");
-		//		$tpl->addJavaScript($dir . "js/lightbox/js/lightbox.js");
 	}
 
 
@@ -85,7 +77,7 @@ class ilLearnLocMediaGUI {
 	 * getLearnLocGallery
 	 */
 	public function getOverviewHTML() {
-		global $ilCtrl;
+
 		if (! is_object($this->object)) {
 			return "<div class='no_image'></div>";
 		}
@@ -94,8 +86,8 @@ class ilLearnLocMediaGUI {
 
 		$data = $this->object->getImages();
 
+		$ilMediaPlayerGUI = new ilMediaPlayerGUI();
 		if (is_array($data) && count($data) > 0) {
-			$ilMediaPlayerGUI = new ilMediaPlayerGUI();
 
 			$this->object->setOptions(array(
 				'w' => 900,
@@ -188,8 +180,6 @@ class ilLearnLocMediaGUI {
 		$block = new ilLearnLocBlockGUI();
 		$block->setTitle($pl->txt('block_title_' . $part));
 
-		self::_setCssAndJs();
-
 		$sz = 200;
 		$wz = 300;
 		$bsz = 960;
@@ -202,6 +192,7 @@ class ilLearnLocMediaGUI {
 		if ($checkAccess AND ($part == 'init' OR $part == 'comments2')) {
 			$deletable = true;
 		}
+
 		$del_img = array();
 		$first = true;
 
@@ -258,8 +249,10 @@ class ilLearnLocMediaGUI {
 
 		if ($deletable AND count($images_small) > 1) {
 			$ilCtrl->setParameterByClass('ilLearnLocMediaGUI', 'part', $part);
+			$sorthtml->setCurrentBlock('delete_picture');
 			$sorthtml->setVariable('BUTTON_NEW', $pl->txt('delete_images'));
 			$sorthtml->setVariable('FORM_TARGET', $ilCtrl->getFormActionByClass('ilLearnLocMediaGUI', 'confirmDeleteImage'));
+			$sorthtml->parseCurrentBlock();
 		}
 
 		$block->setContentHtml($sorthtml->get());
