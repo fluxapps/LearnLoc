@@ -181,6 +181,10 @@ while ($data = $ilDB->fetchObject($res)) {
 	//			$r = $ilDB->query('SELECT COUNT(*) AS cnt FROM mob_usage WHERE id = ' . $ilDB->quote($data->init_mob_id, 'integer'));
 	//			$has_set = $ilDB->fetchObject($r);
 	//			if ((int)$has_set->cnt < 1) {
+	if(!$data->init_mob_id OR !$data->id) {
+		continue;
+	}
+
 	$ilDB->insert('mob_usage', array(
 		'id'            => array( 'integer', $data->init_mob_id ),
 		'usage_type'    => array( 'text', 'mep' ),
@@ -196,6 +200,11 @@ while ($data = $ilDB->fetchObject($res)) {
 	//			$r = $ilDB->query('SELECT COUNT(*) AS cnt FROM mob_usage WHERE id = ' . $ilDB->quote($data->media_id, 'integer'));
 	//			$has_set = $ilDB->fetchObject($r);
 	//			if ((int)$has_set->cnt < 1) {
+
+	if (!$data->media_id OR !$data->ref_id) {
+		continue;
+	}
+
 	$ilDB->insert('mob_usage', array(
 		'id'            => array( 'integer', $data->media_id ),
 		'usage_type'    => array( 'text', 'mep' ),
