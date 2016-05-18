@@ -106,7 +106,7 @@ class ilLearnLocMedia {
 	/**
 	 * Create New LearnLoc Media Object
 	 */
-	public function create($id = NULL, $is_ref_id = false) {
+	public function create($id = null, $is_ref_id = false) {
 		$this->media_object->setTitle($this->getTitle());
 		$this->media_object->create();
 		$this->media_object->createDirectory();
@@ -236,7 +236,7 @@ class ilLearnLocMedia {
 
 		$base = dirname($imagePath);
 
-		if (! is_dir($base . "/cache") AND $base) {
+		if (!is_dir($base . "/cache") AND $base) {
 			mkdir($base . "/cache");
 			chmod($base . "/cache", 0755);
 		}
@@ -244,16 +244,16 @@ class ilLearnLocMedia {
 		$cacheFolder = ILIAS_ABSOLUTE_PATH . '/' . str_ireplace('./', '', $base . "/cache/");
 		$remoteFolder = '';
 		$defaults = array(
-			'crop' => false,
-			'scale' => false,
-			'thumbnail' => false,
-			'maxOnly' => false,
-			'canvas-color' => 'transparent',
-			'output-filename' => false,
-			'cacheFolder' => $cacheFolder,
-			'remoteFolder' => $remoteFolder,
-			'quality' => 90,
-			'cache_http_minutes' => 20
+			'crop'               => false,
+			'scale'              => false,
+			'thumbnail'          => false,
+			'maxOnly'            => false,
+			'canvas-color'       => 'transparent',
+			'output-filename'    => false,
+			'cacheFolder'        => $cacheFolder,
+			'remoteFolder'       => $remoteFolder,
+			'quality'            => 90,
+			'cache_http_minutes' => 20,
 		);
 
 		$opts = array_merge($defaults, $this->getOptions());
@@ -310,13 +310,15 @@ class ilLearnLocMedia {
 		if (false !== $opts['output-filename']) {
 			$newPath = $opts['output-filename'];
 		} else {
-			if (! empty($w) and ! empty($h)):
+			if (!empty($w) and !empty($h)):
 				$newPath = $cacheFolder . $filename . '_w' . $w . '_h' . $h . (isset($opts['crop'])
-					&& $opts['crop'] == true ? "_cp" : "") . (isset($opts['scale'])
-					&& $opts['scale'] == true ? "_sc" : "") . '.' . $ext;
-			elseif (! empty($w)):
+				                                                               && $opts['crop'] == true ? "_cp" : "") . (isset($opts['scale'])
+				                                                                                                         && $opts['scale']
+				                                                                                                            == true ? "_sc" : "")
+				           . '.' . $ext;
+			elseif (!empty($w)):
 				$newPath = $cacheFolder . $filename . '_w' . $w . '.' . $ext;
-			elseif (! empty($h)):
+			elseif (!empty($h)):
 				$newPath = $cacheFolder . $filename . '_h' . $h . '.' . $ext;
 			else:
 				$newPath = $cacheFolder . $filename . '.' . $ext;
@@ -337,7 +339,7 @@ class ilLearnLocMedia {
 		endif;
 
 		if ($create == true):
-			if (! empty($w) and ! empty($h)):
+			if (!empty($w) and !empty($h)):
 
 				list($width, $height) = getimagesize($imagePath);
 				$resize = $w;
@@ -355,33 +357,44 @@ class ilLearnLocMedia {
 				endif;
 
 				if (true === $opts['scale']):
-					$cmd = $path_to_convert . " " . escapeshellarg($imagePath) . " -resize " . escapeshellarg($resize) . " -quality "
-						. escapeshellarg($opts['quality']) . " " . escapeshellarg($newPath);
+					$cmd = $path_to_convert . " " . $this->myescapeshellarg($imagePath) . " -resize " . escapeshellarg($resize) . " -quality "
+					       . escapeshellarg($opts['quality']) . " " . escapeshellarg($newPath);
 				else:
-					$cmd = $path_to_convert . " " . escapeshellarg($imagePath) . " -resize " . escapeshellarg($resize) . " -size " . escapeshellarg($w
-							. "x" . $h) . " xc:" . escapeshellarg($opts['canvas-color']) . " +swap -gravity center -composite -quality "
-						. escapeshellarg($opts['quality']) . " " . escapeshellarg($newPath);
+					$cmd = $path_to_convert . " " . $this->myescapeshellarg($imagePath) . " -resize " . escapeshellarg($resize) . " -size " . escapeshellarg($w
+					                                                                                                                                . "x"
+					                                                                                                                                . $h)
+					       . " xc:" . escapeshellarg($opts['canvas-color']) . " +swap -gravity center -composite -quality "
+					       . escapeshellarg($opts['quality']) . " " . escapeshellarg($newPath);
 
 				endif;
 
 			else:
-				$cmd = $path_to_convert . " " . escapeshellarg($imagePath) . " -thumbnail " . (! empty($h) ? 'x' : '') . $w . ""
-					. (isset($opts['maxOnly']) && $opts['maxOnly'] == true ? "\>" : "") . " -quality " . escapeshellarg($opts['quality']) . " "
-					. escapeshellarg($newPath);
+				$cmd = $path_to_convert . " " . $this->myescapeshellarg($imagePath) . " -thumbnail " . (!empty($h) ? 'x' : '') . $w . ""
+				       . (isset($opts['maxOnly']) && $opts['maxOnly'] == true ? "\>" : "") . " -quality " . escapeshellarg($opts['quality']) . " "
+				       . escapeshellarg($newPath);
 			endif;
 
 			//ilUtil::execConvert(str_ireplace($path_to_convert, '' ,$cmd));
-			//var_dump($cmd); // FSX
-			//			exit;
+//			echo($cmd); // FSX
+//			exit;
 			exec($cmd);
-//			var_dump($newPath); // FSX
 
+			//			var_dump($newPath); // FSX
 
 			return $newPath;
 
 		endif;
 
 		return $newPath;
+	}
+
+
+	/**
+	 * @param $arg
+	 * @return string
+	 */
+	protected function myescapeshellarg($arg) {
+		return "'" . str_replace("'", "\\'", $arg) . "'";
 	}
 
 
@@ -429,7 +442,7 @@ class ilLearnLocMedia {
 	 * @return array
 	 */
 	public function getOptions() {
-		if (! is_array($this->options)) {
+		if (!is_array($this->options)) {
 			return array();
 		}
 
