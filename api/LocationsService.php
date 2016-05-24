@@ -33,11 +33,11 @@ class LocationsService implements Service {
 
 		return array(
 			"course" => array(
-				"id" => $container->getRefId(),
+				"id"          => $container->getRefId(),
 				"description" => str_ireplace("\r\n", '<br/>', $container->getLongDescription()),
-				"locations" => array( "location" => $locations ),
-				"folder" => array( "folders" => $folders )
-			)
+				"locations"   => array( "location" => $locations ),
+				"folder"      => array( "folders" => $folders ),
+			),
 		);
 	}
 
@@ -51,10 +51,10 @@ class LocationsService implements Service {
 		foreach ($this->getTypeIdsForContObj($container, 'fold') as $ref_id) {
 			$folder = \ilObjectFactory::getInstanceByRefId($ref_id);
 			$folders[] = array(
-				'id' => $folder->getRefId(),
-				'title' => $folder->getTitle(),
+				'id'       => $folder->getRefId(),
+				'title'    => $folder->getTitle(),
 				'location' => $this->getLocations($folder),
-				'folder' => $this->getFolders($folder)
+				'folder'   => $this->getFolders($folder),
 			);
 		}
 
@@ -67,24 +67,31 @@ class LocationsService implements Service {
 	 * @return array
 	 */
 	protected function getLocations($container) {
-		global $tree;
+		global $tree, $ilAccess, $ilUser;
+		/**
+		 * @var $ilAccess \ilAccessHandler
+		 */
 
 		foreach ($this->getTypeIdsForContObj($container, \ilLearnLocPlugin::TYPE) as $ref_id) {
 			$location = \ilObjLearnLoc::getInstance($ref_id);
 			if (!$location->getOnline()) {
-				continue;
+				if (!$ilAccess->checkAccessOfUser($ilUser->getId(), "write", "", $ref_id) ? 1 : 0) {
+					continue;
+				}
 			}
 			$return[] = array(
-				'id' => $location->getId(),
-				'title' => $location->getTitle(),
-				'latitude' => $location->getLatitude(),
-				'longitude' => $location->getLongitude(),
-				'elevation' => 0,
-				'link' => $this->url . 'login.php?target=fold_' . $location->getContainerId() . '&full=1',
-				'description' => str_ireplace("\r\n", '<br/>', $location->getLongDescription()),
-				'show_if_near' => 0,
-				'mat_count' => count($tree->getChilds($location->getContainerId())),
-				'allow-comments' => ($this->nologin ? 0 : 1)
+				'id'             => $location->getId(),
+				'title'          => $location->getTitle(),
+				'offline'         => $location->getOnline() ? 0 : 1,
+				'latitude'       => $location->getLatitude(),
+				'longitude'      => $location->getLongitude(),
+				'elevation'      => 0,
+				'link'           => $this->url . 'login.php?target=fold_' . $location->getContainerId() . '&full=1',
+				'description'    => str_ireplace("\r\n", '<br/>', $location->getLongDescription()),
+				'show_if_near'   => 0,
+				'mat_count'      => count($tree->getChilds($location->getContainerId())),
+				'allow-comments' => ($this->nologin ? 0 : 1),
+				'images'         => $location->getImagesDataAsArray(),
 			);
 		}
 
@@ -104,9 +111,9 @@ class LocationsService implements Service {
 		if (isset($subitems[$type])) {
 			foreach ($subitems[$type] as $ref_id) {
 				if ($type == \ilLearnLocPlugin::TYPE
-					OR count($this->getTypeIdsForContObj(\ilObjectFactory::getInstanceByRefId($ref_id['ref_id']), \ilLearnLocPlugin::TYPE)) > 0
-					OR ($ilAccess->checkAccessOfUser($ilUser->getId(), 'create', '', $ref_id['ref_id'], 'xlel')
-						AND !\ilObjLearnLoc::_isPool($ref_id['ref_id']))
+				    OR count($this->getTypeIdsForContObj(\ilObjectFactory::getInstanceByRefId($ref_id['ref_id']), \ilLearnLocPlugin::TYPE)) > 0
+				    OR ($ilAccess->checkAccessOfUser($ilUser->getId(), 'create', '', $ref_id['ref_id'], 'xlel')
+				        AND !\ilObjLearnLoc::_isPool($ref_id['ref_id']))
 				) {
 					$ref_ids[] = $ref_id['ref_id'];
 				}
