@@ -48,6 +48,12 @@ $app->configureMode('production', function () use ($app, $settings) {
 // Add Auth middleware which takes care of creating a session and bootstrapping ILIAS
 $app->add(new AuthMiddleware());
 
+$env = $app->environment();
+if ($_REQUEST['get_request'] === 'true') {
+	$env['HTTP_X_HTTP_METHOD_OVERRIDE'] = 'GET';
+}
+
+
 // Disable CORS
 $app->response->headers->set('Access-Control-Allow-Origin', '*');
 
