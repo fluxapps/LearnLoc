@@ -108,16 +108,16 @@ class ilObjLearnLoc extends ilObjectPlugin {
 	 */
 	protected function returnArrayForDB($insert = false) {
 		$data = array(
-			'id' => array( 'integer', $this->getId() ),
-			'is_online' => array( 'integer', $this->getOnline() ? $this->getOnline() : 0 ),
-			'latitude' => array( 'float', $this->getLatitude() ),
-			'longitude' => array( 'float', $this->getLongitude() ),
-			'elevation' => array( 'float', $this->getElevation() ),
-			'address' => array( 'text', $this->getAddress() ),
-			'init_mob_id' => array( 'integer', $this->getInitMobId() ),
+			'id'             => array( 'integer', $this->getId() ),
+			'is_online'      => array( 'integer', $this->getOnline() ? $this->getOnline() : 0 ),
+			'latitude'       => array( 'float', $this->getLatitude() ),
+			'longitude'      => array( 'float', $this->getLongitude() ),
+			'elevation'      => array( 'float', $this->getElevation() ),
+			'address'        => array( 'text', $this->getAddress() ),
+			'init_mob_id'    => array( 'integer', $this->getInitMobId() ),
 			'comment_mob_id' => array( 'integer', $this->getCommentMobId() ),
-			'container_id' => array( 'integer', $this->getContainerId() ),
-			'export_kw' => array( 'text', $this->getExportKeywords() ),
+			'container_id'   => array( 'integer', $this->getContainerId() ),
+			'export_kw'      => array( 'text', $this->getExportKeywords() ),
 		);
 
 		return $data;
@@ -171,10 +171,47 @@ class ilObjLearnLoc extends ilObjectPlugin {
 				$this->createFolder();
 			}
 			if ($this->getContainerId() AND $tree->isSaved($this->getContainerId())) {
-//				ilUtil::sendInfo('folder was deleted');
+				//				ilUtil::sendInfo('folder was deleted');
 				$this->createFolder();
 			}
 		}
+	}
+
+
+	/**
+	 * @return array
+	 */
+	public function getImagesDataAsArray() {
+		$media = new \ilLearnLocMedia($this->getInitMobId());
+		$media->setOptions(array(
+			'w'    => 960,
+			'h'    => 240,
+			'crop' => true,
+		));
+
+		$header = base64_encode(file_get_contents($media->resizeFirstImage()));
+
+		$media->setOptions(array(
+			'w'    => 960,
+			'h'    => 960,
+			'crop' => true,
+		));
+
+		$std = base64_encode(file_get_contents($media->resizeFirstImage()));
+
+		$media->setOptions(array(
+			'w'    => 64,
+			'h'    => 64,
+			'crop' => true,
+		));
+
+		$thumb = base64_encode(file_get_contents($media->resizeFirstImage()));
+
+		return array(
+			'header' => 'data:image/jpg;base64,' . $header,
+			'std'    => 'data:image/jpg;base64,' . $std,
+			'thumb'  => 'data:image/jpg;base64,' . $thumb,
+		);
 	}
 
 
@@ -388,7 +425,7 @@ class ilObjLearnLoc extends ilObjectPlugin {
 	 * @return bool|string
 	 * @deprecated
 	 */
-	public static function resize($imagePath, $opts = NULL, $absolute = false) {
+	public static function resize($imagePath, $opts = null, $absolute = false) {
 		$base = dirname($imagePath);
 		if (!is_dir($base . "/cache")) {
 			mkdir($base . "/cache");
@@ -396,16 +433,16 @@ class ilObjLearnLoc extends ilObjectPlugin {
 		}
 		$cacheFolder = $base . "/cache/";
 		$defaults = array(
-			'crop' => false,
-			'scale' => false,
-			'thumbnail' => false,
-			'maxOnly' => false,
-			'canvas-color' => 'transparent',
-			'output-filename' => false,
-			'cacheFolder' => $cacheFolder,
+			'crop'               => false,
+			'scale'              => false,
+			'thumbnail'          => false,
+			'maxOnly'            => false,
+			'canvas-color'       => 'transparent',
+			'output-filename'    => false,
+			'cacheFolder'        => $cacheFolder,
 			//			'remoteFolder' => $remoteFolder,
-			'quality' => 90,
-			'cache_http_minutes' => 20
+			'quality'            => 90,
+			'cache_http_minutes' => 20,
 		);
 		$opts = array_merge($defaults, $opts);
 		$cacheFolder = $opts['cacheFolder'];
@@ -448,8 +485,10 @@ class ilObjLearnLoc extends ilObjectPlugin {
 		} else {
 			if (!empty($w) and !empty($h)):
 				$newPath = $cacheFolder . $filename . '_w' . $w . '_h' . $h . (isset($opts['crop'])
-					&& $opts['crop'] == true ? "_cp" : "") . (isset($opts['scale'])
-					&& $opts['scale'] == true ? "_sc" : "") . '.' . $ext;
+				                                                               && $opts['crop'] == true ? "_cp" : "") . (isset($opts['scale'])
+				                                                                                                         && $opts['scale']
+				                                                                                                            == true ? "_sc" : "")
+				           . '.' . $ext;
 			elseif (!empty($w)):
 				$newPath = $cacheFolder . $filename . '_w' . $w . '.' . $ext;
 			elseif (!empty($h)):
@@ -487,16 +526,18 @@ class ilObjLearnLoc extends ilObjectPlugin {
 				endif;
 				if (true === $opts['scale']):
 					$cmd = $path_to_convert . " " . escapeshellarg($imagePath) . " -resize " . escapeshellarg($resize) . " -quality "
-						. escapeshellarg($opts['quality']) . " " . escapeshellarg($newPath);
+					       . escapeshellarg($opts['quality']) . " " . escapeshellarg($newPath);
 				else:
 					$cmd = $path_to_convert . " " . escapeshellarg($imagePath) . " -resize " . escapeshellarg($resize) . " -size " . escapeshellarg($w
-							. "x" . $h) . " xc:" . escapeshellarg($opts['canvas-color']) . " +swap -gravity center -composite -quality "
-						. escapeshellarg($opts['quality']) . " " . escapeshellarg($newPath);
+					                                                                                                                                . "x"
+					                                                                                                                                . $h)
+					       . " xc:" . escapeshellarg($opts['canvas-color']) . " +swap -gravity center -composite -quality "
+					       . escapeshellarg($opts['quality']) . " " . escapeshellarg($newPath);
 				endif;
 			else:
 				$cmd = $path_to_convert . " " . escapeshellarg($imagePath) . " -thumbnail " . (!empty($h) ? 'x' : '') . $w . ""
-					. (isset($opts['maxOnly']) && $opts['maxOnly'] == true ? "\>" : "") . " -quality " . escapeshellarg($opts['quality']) . " "
-					. escapeshellarg($newPath);
+				       . (isset($opts['maxOnly']) && $opts['maxOnly'] == true ? "\>" : "") . " -quality " . escapeshellarg($opts['quality']) . " "
+				       . escapeshellarg($newPath);
 			endif;
 			//echo $cmd;
 
@@ -518,7 +559,6 @@ class ilObjLearnLoc extends ilObjectPlugin {
 		/**
 		 * @var $ilDB ilDB
 		 */
-
 	}
 }
 
