@@ -105,6 +105,47 @@ class ilLearnLocComment {
 	}
 
 
+	/**
+	 * @return array
+	 */
+	public function getImagesDataAsArray() {
+		if(!$this->getMediaId()) {
+			return array();
+		}
+		$media = new \ilLearnLocMedia($this->getMediaId());
+		$media->setOptions(array(
+			'w'    => 960,
+			'h'    => 240,
+			'crop' => true,
+		));
+
+		$header = base64_encode(file_get_contents($media->resizeFirstImage()));
+
+		$media->setOptions(array(
+			'w'    => 960,
+			'h'    => 960,
+			'crop' => true,
+		));
+
+		$std = base64_encode(file_get_contents($media->resizeFirstImage()));
+
+		$media->setOptions(array(
+			'w'    => 64,
+			'h'    => 64,
+			'crop' => true,
+		));
+
+		$thumb = base64_encode(file_get_contents($media->resizeFirstImage()));
+
+		return array(
+			'header' => 'data:image/jpg;base64,' . $header,
+			'std'    => 'data:image/jpg;base64,' . $std,
+			'thumb'  => 'data:image/jpg;base64,' . $thumb,
+			'id'  => $this->getMediaId(),
+		);
+	}
+
+
 	public function create() {
 		global $ilDB;
 
@@ -269,7 +310,7 @@ class ilLearnLocComment {
 	 * @param $from
 	 * @param $count
 	 *
-	 * @return array
+	 * @return ilLearnLocComment[]
 	 */
 	public static function _getNumberOfCommentsForObjId($a_ref_id, $from, $count) {
 		global $ilDB;

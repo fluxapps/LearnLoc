@@ -76,7 +76,7 @@ class CreateCommentService implements Service
         $comment->setBody($this->get('body'));
         $comment->setParentId($this->parent_id);
         $comment->setUserId($this->user_id);
-        if ($this->get('image')) {
+        if (strlen($this->get('image'))>80) {
             $mob = new \ilLearnLocMedia();
             $mob->setTitle('lelcommentmob');
             $mob->create();

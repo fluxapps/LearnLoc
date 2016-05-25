@@ -42,7 +42,10 @@ class CommentsService implements Service
     public function getResponse()
     {
         global $ilUser;
-
+        /**
+         * @var $comment \ilLearnLocComment
+         * @var $child \ilLearnLocComment
+         */
         $return = array(
             'comments' => array(
                 'count' => 0,
@@ -61,6 +64,7 @@ class CommentsService implements Service
                     'username' => $ilUser->_lookupFullname($child->getUserId()),
                     'date' => strtotime($child->getCreationDate()),
                     'haspicture' => ($child->getMediaId() > 0) ? 1 : 0,
+                    'images' => $child->getImagesDataAsArray()
                 );
             }
             $return['comments']['comment'][] = array(
@@ -70,6 +74,7 @@ class CommentsService implements Service
                 'username' => $ilUser->_lookupFullname($comment->getUserId()),
                 'date' => strtotime($comment->getCreationDate()),
                 'haspicture' => ($comment->getMediaId() > 0) ? 1 : 0,
+                'images' => $comment->getImagesDataAsArray(),
                 'replies' => $replies
             );
         }

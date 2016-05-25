@@ -1,6 +1,6 @@
 <?php
 $id = "xlel";
-$version = "2.2.6";
+$version = "2.2.7";
 $ilias_min_version = "5.0.0";
 $ilias_max_version = "5.1.999";
 $responsible = "Fabian Schmid";
