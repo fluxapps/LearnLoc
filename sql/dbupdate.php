@@ -214,3 +214,20 @@ while ($data = $ilDB->fetchObject($res)) {
 	//			}
 }
 ?>
+<#9>
+<?php
+$res = $ilDB->query("SELECT * FROM rep_robj_xlel_data");
+while ($data = $ilDB->fetchObject($res)) {
+	if (!$data->init_mob_id OR !$data->id) {
+		continue;
+	}
+	ilObjMediaObject::_saveUsage($data->init_mob_id, 'mep', $data->id);
+}
+$res = $ilDB->query("SELECT * FROM rep_robj_xlel_comments");
+while ($data = $ilDB->fetchObject($res)) {
+	if (!$data->media_id OR !$data->ref_id) {
+		continue;
+	}
+	ilObjMediaObject::_saveUsage($data->media_id, 'mep', $data->ref_id);
+}
+?>
