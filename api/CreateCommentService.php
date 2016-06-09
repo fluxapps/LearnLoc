@@ -79,7 +79,7 @@ class CreateCommentService implements Service
         if (strlen($this->get('image'))>80) {
             $mob = new \ilLearnLocMedia();
             $mob->setTitle('lelcommentmob');
-            $mob->create();
+            $mob->create($this->location_id);
             $name = '/img_ws_' . time() . '_' . rand(1000, 9999) . '.jpg';
             $file_upload = $mob->getPath() . $name;
             file_put_contents($file_upload, base64_decode($this->get('image')));

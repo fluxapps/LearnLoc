@@ -64,8 +64,7 @@ class CreateLocationService implements Service
     }
 
 
-    protected function createLocation()
-    {
+    protected function createLocation() {
         $location = new \ilObjLearnLoc();
         $location->create();
         $location->setTitle($this->get('title'));
@@ -76,10 +75,14 @@ class CreateLocationService implements Service
         $location->setLongitude($this->get('longitude'));
         $location->setElevation(16);
         $location->setAddress($this->get('address'));
+        $location->createReference();
+        $location->setPermissions($this->parent_id);
+        $location->putInTree($this->parent_id);
+
         if ($this->get('image')) {
             $mob = new \ilLearnLocMedia();
             $mob->setTitle('lelinitmob');
-            $mob->create();
+            $mob->create($location->getId());
             $name = '/img_ws_' . time() . '_' . rand(1000, 9999) . '.jpg';
             $file_upload = $mob->getPath() . $name;
             $img = str_replace('data:image/png;base64,', '', $this->get('image'));
@@ -91,11 +94,8 @@ class CreateLocationService implements Service
             $mob->setFile($file);
             $mob->addImage();
             $location->setInitMobId($mob->getId());
+            $location->update();
         }
-        $location->update();
-        $location->createReference();
-        $location->setPermissions($this->parent_id);
-        $location->putInTree($this->parent_id);
     }
 
 
