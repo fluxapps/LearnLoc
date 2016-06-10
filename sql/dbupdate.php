@@ -216,6 +216,7 @@ while ($data = $ilDB->fetchObject($res)) {
 ?>
 <#9>
 <?php
+require_once('./Services/MediaObjects/classes/class.ilObjMediaObject.php');
 $res = $ilDB->query("SELECT * FROM rep_robj_xlel_data");
 while ($data = $ilDB->fetchObject($res)) {
 	if (!$data->init_mob_id OR !$data->id) {
