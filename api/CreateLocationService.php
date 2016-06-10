@@ -66,15 +66,14 @@ class CreateLocationService implements Service
 
     protected function createLocation() {
         $location = new \ilObjLearnLoc();
-        $location->create();
         $location->setTitle($this->get('title'));
         $location->setDescription($this->get('description'));
-        $location->update();
-        $location->setOnline(1);
+        $location->setOnline(true);
         $location->setLatitude($this->get('latitude'));
         $location->setLongitude($this->get('longitude'));
         $location->setElevation(16);
         $location->setAddress($this->get('address'));
+        $location->create();
         $location->createReference();
         $location->setPermissions($this->parent_id);
         $location->putInTree($this->parent_id);
