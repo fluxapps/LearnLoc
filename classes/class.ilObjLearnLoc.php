@@ -189,7 +189,7 @@ class ilObjLearnLoc extends ilObjectPlugin {
 			'crop' => true,
 		));
 
-		$header = base64_encode(file_get_contents($media->resizeFirstImage()));
+		$header = base64_encode(@file_get_contents($media->resizeFirstImage()));
 
 		$media->setOptions(array(
 			'w'    => 960,
@@ -197,7 +197,7 @@ class ilObjLearnLoc extends ilObjectPlugin {
 			'crop' => true,
 		));
 
-		$std = base64_encode(file_get_contents($media->resizeFirstImage()));
+		$std = base64_encode(@file_get_contents($media->resizeFirstImage()));
 
 		$media->setOptions(array(
 			'w'    => 64,
@@ -205,7 +205,7 @@ class ilObjLearnLoc extends ilObjectPlugin {
 			'crop' => true,
 		));
 
-		$thumb = base64_encode(file_get_contents($media->resizeFirstImage()));
+		$thumb = base64_encode(@file_get_contents($media->resizeFirstImage()));
 
 		return array(
 			'header' => 'data:image/jpg;base64,' . $header,
