@@ -190,7 +190,6 @@ class ilObjLearnLoc extends ilObjectPlugin {
 		));
 
 		$header = base64_encode(@file_get_contents($media->resizeFirstImage()));
-
 		$media->setOptions(array(
 			'w'    => 960,
 			'h'    => 960,
