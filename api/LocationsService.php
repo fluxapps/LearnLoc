@@ -79,23 +79,43 @@ class LocationsService implements Service {
 					continue;
 				}
 			}
-			$return[] = array(
-				'id'             => $location->getId(),
-				'title'          => $location->getTitle(),
-				'offline'         => $location->getOnline() ? 0 : 1,
-				'latitude'       => $location->getLatitude(),
-				'longitude'      => $location->getLongitude(),
-				'elevation'      => 0,
-				'link'           => $this->url . 'login.php?target=fold_' . $location->getContainerId() . '&full=1',
-				'description'    => str_ireplace("\r\n", '<br/>', $location->getLongDescription()),
-				'show_if_near'   => 0,
-				'mat_count'      => count($tree->getChilds($location->getContainerId())),
-				'allow-comments' => ($this->nologin ? 0 : 1),
-				'images'         => $location->getImagesDataAsArray(),
-			);
+			$return[] = $this->getLocation($ref_id);
 		}
 
 		return $return;
+	}
+
+
+	/**
+	 * @param $ref_id
+	 * @return array|null
+	 */
+	public function getLocation($ref_id) {
+		global $tree, $ilAccess, $ilUser;
+		/**
+		 * @var $ilAccess \ilAccessHandler
+		 */
+		$location = \ilObjLearnLoc::getInstance($ref_id);
+		if (!$location->getOnline()) {
+			if (!$ilAccess->checkAccessOfUser($ilUser->getId(), "write", "", $ref_id) ? 1 : 0) {
+				return null;
+			}
+		}
+
+		return array(
+			'id'             => $location->getId(),
+			'title'          => $location->getTitle(),
+			'offline'        => $location->getOnline() ? 0 : 1,
+			'latitude'       => $location->getLatitude(),
+			'longitude'      => $location->getLongitude(),
+			'elevation'      => 0,
+			'link'           => $this->url . 'login.php?target=fold_' . $location->getContainerId() . '&full=1',
+			'description'    => str_ireplace("\r\n", '<br/>', $location->getLongDescription()),
+			'show_if_near'   => 0,
+			'mat_count'      => count($tree->getChilds($location->getContainerId())),
+			'allow-comments' => ($this->nologin ? 0 : 1),
+			'images'         => $location->getImagesDataAsArray(),
+		);
 	}
 
 
