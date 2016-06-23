@@ -71,7 +71,7 @@ class LocationsService implements Service {
 		/**
 		 * @var $ilAccess \ilAccessHandler
 		 */
-
+		$return = array();
 		foreach ($this->getTypeIdsForContObj($container, \ilLearnLocPlugin::TYPE) as $ref_id) {
 			$location = \ilObjLearnLoc::getInstance($ref_id);
 			if (!$location->getOnline()) {
@@ -94,6 +94,7 @@ class LocationsService implements Service {
 		global $tree, $ilAccess, $ilUser;
 		/**
 		 * @var $ilAccess \ilAccessHandler
+		 * @var $tree \ilTree
 		 */
 		$location = \ilObjLearnLoc::getInstance($ref_id);
 		if (!$location->getOnline()) {
