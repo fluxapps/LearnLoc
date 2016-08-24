@@ -21,7 +21,6 @@
 	+-----------------------------------------------------------------------------+
 */
 
-require_once('./Services/Database/classes/class.ilDB.php');
 require_once("./Modules/Folder/classes/class.ilObjFolder.php");
 @include_once('./classes/class.ilLink.php');
 @include_once('./Services/Link/classes/class.ilLink.php');
@@ -42,7 +41,7 @@ class ilLearnLocFolder extends ilObjFolder {
 	function __construct(ilObjLearnLoc $parent_obj, $a_id = 0) {
 		$this->parent_obj = $parent_obj;
 		$this->parent_id = $parent_obj->getId();
-		parent::ilObjFolder($a_id);
+		parent::__construct($a_id);
 	}
 
 

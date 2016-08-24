@@ -25,7 +25,7 @@ class CampusTourService implements Service {
 	 * @param int $ref_id Ref-ID of the campus tour node
 	 */
 	public function __construct($ref_id = 0) {
-		$this->ref_id = ($ref_id > 0) ? $ref_id : (int)\xlelConfig::get(\xlelConfig::F_CAMPUS_TOUR_NODE);
+		$this->ref_id = ($ref_id > 0) ? $ref_id : (int)\xlelConfig::getWithName(\xlelConfig::F_CAMPUS_TOUR_NODE);
 		$this->locations_service = new LocationsService($this->ref_id);
 	}
 

@@ -35,7 +35,7 @@ class xlelConfig extends ActiveRecord {
 	 * @return bool
 	 */
 	public static function isConfigUpToDate() {
-		return self::get(self::F_CONFIG_VERSION) == self::CONFIG_VERSION;
+		return self::getWithName(self::F_CONFIG_VERSION) == self::CONFIG_VERSION;
 	}
 
 
@@ -44,7 +44,7 @@ class xlelConfig extends ActiveRecord {
 	 *
 	 * @return mixed
 	 */
-	public static function get($name) {
+	public static function getWithName($name) {
 		if (!self::$cache_loaded[$name]) {
 			$obj = new self($name);
 			self::$cache[$name] = json_decode($obj->getValue());

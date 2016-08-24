@@ -21,7 +21,6 @@
 	+-----------------------------------------------------------------------------+
 */
 
-require_once('./Services/Database/classes/class.ilDB.php');
 require_once('./Services/MediaObjects/classes/class.ilObjMediaObject.php');
 
 /**

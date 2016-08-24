@@ -89,7 +89,7 @@ class xlelConfigFormGUI extends ilPropertyFormGUI {
 	private function getValuesForItem($item, &$array) {
 		if (self::checkItem($item)) {
 			$key = $item->getPostVar();
-			$array[$key] = xlelConfig::get($key);
+			$array[$key] = xlelConfig::getWithName($key);
 			//			echo '<pre>' . print_r($array, 1) . '</pre>';
 			if (self::checkForSubItem($item)) {
 				foreach ($item->getSubItems() as $subitem) {

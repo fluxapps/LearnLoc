@@ -252,8 +252,8 @@ class ilLearnLocJsonService {
 	public function getCampusTour() {
 		global $ilUser, $ilAccess;
 		require_once('class.ilLearnLocConfigGUI.php');
-		if (xlelConfig::get('campus_tour_node')) {
-			$crs = xlelConfig::get('campus_tour_node');
+		if (xlelConfig::getWithName('campus_tour_node')) {
+			$crs = xlelConfig::getWithName('campus_tour_node');
 		} else {
 			$crs = 126717;
 		}

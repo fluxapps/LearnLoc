@@ -21,7 +21,6 @@
 	+-----------------------------------------------------------------------------+
 */
 
-require_once('./Services/Database/classes/class.ilDB.php');
 require_once('./Services/Export/classes/class.ilExport.php');
 require_once('class.ilLearnLocDummyExport.php');
 
