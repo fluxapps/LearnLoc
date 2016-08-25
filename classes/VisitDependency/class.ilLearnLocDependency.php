@@ -117,6 +117,18 @@ class ilLearnLocDependency extends ActiveRecord {
 		return $paths;
 	}
 
+	/**
+	 * @param $user_id int
+	 * @return bool
+	 */
+	public function resolved($user_id) {
+		$visits = ilLearnLocVisit::where(array(
+			'user_id' => $user_id,
+			'learn_loc_id' => $this->getParent()
+		))->count();
+		return $visits >  0;
+	}
+
 
 	public function checkCircle($originalId, $currentId) {
 		if($originalId == $currentId)

@@ -104,7 +104,7 @@ class LocationsService implements Service {
 		}
 
 		return array(
-			'id'             => $location->getId(),
+			'id'             => $location->getRefId(),
 			'title'          => $location->getTitle(),
 			'offline'        => $location->getOnline() ? 0 : 1,
 			'latitude'       => $location->getLatitude(),

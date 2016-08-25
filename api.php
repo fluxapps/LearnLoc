@@ -6,10 +6,12 @@ use LearnLocApi\CoursesService;
 use LearnLocApi\CreateCommentService;
 use LearnLocApi\CreateLocationService;
 use LearnLocApi\DependencyService;
+use LearnLocApi\DependencyUnlockedService;
 use LearnLocApi\LocationImageService;
 use LearnLocApi\LocationsService;
 use LearnLocApi\CommentImageService;
 use LearnLocApi\PingService;
+use LearnLocApi\VisitService;
 use Slim\Slim;
 
 require 'vendor/autoload.php';
@@ -102,6 +104,7 @@ $app->get('/', function () use ($app) {
 		'GET /comment/:id/image' => 'Returns image of comment',
 		'GET /comment/:id/thumb' => 'Returns thumbnail image of comment',
 		'POST /location/:id/comment' => 'Create a new Comment. Post parameters (url-encoded): title, body, image, parent_id',
+		'GET /location/:id/dependencies' => 'return all chains of dependencies for the given learn location',
 		'POST /course/:id' => 'Create a new location under the given course (Ref-ID). Post parameters (url-encoded): title, description, latitude, longitude, image, address'
 	));
 });
@@ -128,6 +131,11 @@ $app->get('/course/:id/locations', function ($id) use ($app) {
 
 $app->get('/location/:id/dependencies', function ($id) use ($app) {
 	$service = new DependencyService($id);
+	response($service->getResponse());
+});
+
+$app->get('/location/:id/unlocked', function ($id) use ($app) {
+	$service = new DependencyUnlockedService($id);
 	response($service->getResponse());
 });
 
@@ -167,6 +175,11 @@ $app->get('/location/:id/comments', function ($id) use ($app) {
 	$start = $app->request()->get('start') ? (int)$app->request()->get('start') : 0;
 	$count = $app->request()->get('count') ? (int)$app->request()->get('count') : 100;
 	$service = new CommentsService($id, $start, $count);
+	response($service->getResponse());
+});
+
+$app->get('/location/:id/visit', function ($id) use ($app) {
+	$service = new VisitService($id);
 	response($service->getResponse());
 });
 

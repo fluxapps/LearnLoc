@@ -71,7 +71,7 @@ class CreateCommentService implements Service
     protected function createComment()
     {
         $comment = new \ilLearnLocComment();
-        $comment->setRefId($this->location_id); // It's the object ID!
+        $comment->setRefId($this->location_id);
         $comment->setTitle($this->get('title'));
         $comment->setBody($this->get('body'));
         $comment->setParentId($this->parent_id);
@@ -79,7 +79,7 @@ class CreateCommentService implements Service
         if (strlen($this->get('image'))>80) {
             $mob = new \ilLearnLocMedia();
             $mob->setTitle('lelcommentmob');
-            $mob->create($this->location_id);
+            $mob->create($this->location_id, true);
             $name = '/img_ws_' . time() . '_' . rand(1000, 9999) . '.jpg';
             $file_upload = $mob->getPath() . $name;
             file_put_contents($file_upload, base64_decode($this->get('image')));

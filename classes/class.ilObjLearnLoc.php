@@ -25,6 +25,7 @@ require_once('./Services/Repository/classes/class.ilObjectPlugin.php');
 @include_once('./classes/class.ilLink.php');
 @include_once('./Services/Link/classes/class.ilLink.php');
 require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/Folder/class.ilLearnLocFolder.php');
+require_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/VisitDependency/class.ilLearnLocVisit.php");
 
 /**
  * Class ilObjLearnLoc
@@ -100,6 +101,15 @@ class ilObjLearnLoc extends ilObjectPlugin {
 
 	final function initType() {
 		$this->setType("xlel");
+	}
+
+	public function visitLocation($userId) {
+		$now = new DateTime();
+		$visit = new ilLearnLocVisit();
+		$visit->setLearnLocId($this->getRefId());
+		$visit->setUserId($userId);
+		$visit->setTimestamp($now->getTimestamp());
+		$visit->create();
 	}
 
 

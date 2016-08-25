@@ -10,7 +10,8 @@
                 "translations": {
                     "de": "Lernort",
                     "en": "Learn Location"
-                }
+                },
+                "last_used": "25.08.2016"
             },
             "xlel_duplicate": {
                 "translations": {
@@ -59,31 +60,36 @@
                 "translations": {
                     "de": "Leserechte auf lernort",
                     "en": "Write-Access to Learn Location"
-                }
+                },
+                "last_used": "25.08.2016"
             },
             "write": {
                 "translations": {
                     "de": "Lernort bearbeiten",
                     "en": "Edit Learn Location"
-                }
+                },
+                "last_used": "25.08.2016"
             },
             "delete": {
                 "translations": {
                     "de": "Lernort löschen",
                     "en": "Delete Learn Location"
-                }
+                },
+                "last_used": "25.08.2016"
             },
             "visible": {
                 "translations": {
                     "de": "Lernort ist sichtbar",
                     "en": "Learn Location is visible"
-                }
+                },
+                "last_used": "25.08.2016"
             },
             "edit_permission": {
                 "translations": {
                     "de": "Rechteeinstellungen ändern",
                     "en": "Edit Permissions"
-                }
+                },
+                "last_used": "25.08.2016"
             }
         },
         "crs": {
@@ -132,7 +138,7 @@
                     "de": "Einstellungen bearbeiten",
                     "en": "Edit Settings"
                 },
-                "last_used": "11.03.2016"
+                "last_used": "25.08.2016"
             }
         },
         "learnloc": {
@@ -157,7 +163,7 @@
                     "de": "Ort auswählen",
                     "en": "Choose Location"
                 },
-                "last_used": "11.03.2016"
+                "last_used": "25.08.2016"
             }
         },
         "init": {
@@ -166,7 +172,7 @@
                     "de": "Neues Bild zum Lernort hinzufügen",
                     "en": "Add new Image to Learn Location"
                 },
-                "last_used": "11.03.2016"
+                "last_used": "25.08.2016"
             }
         },
         "no": {
@@ -472,14 +478,14 @@
                     "de": "Titel",
                     "en": "Title"
                 },
-                "last_used": "11.03.2016"
+                "last_used": "25.08.2016"
             },
             "description": {
                 "translations": {
                     "de": "Beschreibung",
                     "en": "Description"
                 },
-                "last_used": "11.03.2016"
+                "last_used": "25.08.2016"
             },
             "save": {
                 "translations": {
@@ -562,7 +568,7 @@
                     "de": "Online",
                     "en": "Online"
                 },
-                "last_used": "11.03.2016"
+                "last_used": "25.08.2016"
             },
             "dependencies": {
                 "translations": {
