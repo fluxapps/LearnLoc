@@ -20,7 +20,7 @@
             },
             "xlel_select": {
                 "translations": {
-                    "de": "lernort ausw\u00e4hlen",
+                    "de": "lernort auswählen",
                     "en": "Choose Learn Location"
                 }
             }
@@ -43,7 +43,7 @@
         "xlel": {
             "add": {
                 "translations": {
-                    "de": "Lernort hinzuf\u00fcgen",
+                    "de": "Lernort hinzufügen",
                     "en": "Add Learn Location"
                 },
                 "last_used": "11.03.2016"
@@ -69,7 +69,7 @@
             },
             "delete": {
                 "translations": {
-                    "de": "Lernort l\u00f6schen",
+                    "de": "Lernort löschen",
                     "en": "Delete Learn Location"
                 }
             },
@@ -81,7 +81,7 @@
             },
             "edit_permission": {
                 "translations": {
-                    "de": "Rechteeinstellungen \u00e4ndern",
+                    "de": "Rechteeinstellungen ändern",
                     "en": "Edit Permissions"
                 }
             }
@@ -154,7 +154,7 @@
         "location": {
             "selector": {
                 "translations": {
-                    "de": "Ort ausw\u00e4hlen",
+                    "de": "Ort auswählen",
                     "en": "Choose Location"
                 },
                 "last_used": "11.03.2016"
@@ -163,7 +163,7 @@
         "init": {
             "mob_id_selector": {
                 "translations": {
-                    "de": "Neues Bild zum Lernort hinzuf\u00fcgen",
+                    "de": "Neues Bild zum Lernort hinzufügen",
                     "en": "Add new Image to Learn Location"
                 },
                 "last_used": "11.03.2016"
@@ -172,7 +172,7 @@
         "no": {
             "map_api": {
                 "translations": {
-                    "de": "Bitte aktivieren Sie die Google-Maps API f\u00fcr diese ILIAS-Installation. Kontaktieren Sie Ihre lokale ILIAS-Administration.",
+                    "de": "Bitte aktivieren Sie die Google-Maps API für diese ILIAS-Installation. Kontaktieren Sie Ihre lokale ILIAS-Administration.",
                     "en": "Please activate the Google-Maps API."
                 }
             }
@@ -218,13 +218,13 @@
         "delete": {
             "comment": {
                 "translations": {
-                    "de": "l\u00f6schen",
+                    "de": "löschen",
                     "en": "Delete"
                 }
             },
             "images": {
                 "translations": {
-                    "de": "Ausgew\u00e4hlte Bilder l\u00f6schen",
+                    "de": "Ausgewählte Bilder löschen",
                     "en": "Delete selected images"
                 }
             }
@@ -232,7 +232,7 @@
         "add": {
             "new_items": {
                 "translations": {
-                    "de": "zum Ordner wechseln, um Objekte hinzuzuf\u00fcgen",
+                    "de": "zum Ordner wechseln, um Objekte hinzuzufügen",
                     "en": "Choose Folder to add new Objects"
                 }
             }
@@ -243,7 +243,7 @@
                     "de": "Material",
                     "en": "Content"
                 },
-                "last_used": "11.04.2016"
+                "last_used": "25.08.2016"
             }
         },
         "comment": {
@@ -256,7 +256,7 @@
             },
             "deleted": {
                 "translations": {
-                    "de": "Gel\u00f6scht",
+                    "de": "Gelöscht",
                     "en": "Deleted"
                 }
             }
@@ -264,7 +264,7 @@
         "confirm": {
             "delete_header": {
                 "translations": {
-                    "de": "M\u00f6chten Sie die Medien wirklich l\u00f6schen?",
+                    "de": "Möchten Sie die Medien wirklich löschen?",
                     "en": "Do you really want to delete this media?"
                 },
                 "last_used": "08.03.2016"
@@ -276,7 +276,7 @@
                     "de": "Export",
                     "en": "Export"
                 },
-                "last_used": "11.04.2016"
+                "last_used": "25.08.2016"
             },
             "csv": {
                 "translations": {
@@ -317,13 +317,13 @@
             },
             "update": {
                 "translations": {
-                    "de": "Schl\u00fcsselw\u00e4rter updaten",
+                    "de": "Schlüsselwärter updaten",
                     "en": "Update Keywords"
                 }
             },
             "delete": {
                 "translations": {
-                    "de": "Keywords l\u00f6schen",
+                    "de": "Keywords löschen",
                     "en": "Delete Keywords"
                 }
             },
@@ -351,7 +351,7 @@
         "msg": {
             "images_deleted": {
                 "translations": {
-                    "de": "Medien wurden gel\u00f6scht",
+                    "de": "Medien wurden gelöscht",
                     "en": "Media was deleted"
                 }
             }
@@ -458,14 +458,14 @@
                     "de": "Inhalt",
                     "en": "Content"
                 },
-                "last_used": "11.04.2016"
+                "last_used": "25.08.2016"
             },
             "properties": {
                 "translations": {
                     "de": "Einstellungen",
                     "en": "Settings"
                 },
-                "last_used": "11.04.2016"
+                "last_used": "25.08.2016"
             },
             "title": {
                 "translations": {
@@ -486,7 +486,7 @@
                     "de": "Speichern",
                     "en": "Save"
                 },
-                "last_used": "11.03.2016"
+                "last_used": "25.08.2016"
             },
             "cancel": {
                 "translations": {
@@ -500,28 +500,28 @@
                     "de": "Bearbeiten",
                     "en": "Edit"
                 },
-                "last_used": "11.04.2016"
+                "last_used": "25.08.2016"
             },
             "status": {
                 "translations": {
                     "de": "Status",
                     "en": "Status"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "25.08.2016"
             },
             "offline": {
                 "translations": {
                     "de": "Offline",
                     "en": "Offline"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "25.08.2016"
             },
             "media": {
                 "translations": {
                     "de": "Bilder",
                     "en": "Gallery"
                 },
-                "last_used": "11.04.2016"
+                "last_used": "25.08.2016"
             },
             "comments": {
                 "translations": {
@@ -545,7 +545,7 @@
             },
             "delete": {
                 "translations": {
-                    "de": "L\u00f6schen",
+                    "de": "Löschen",
                     "en": "Delete"
                 },
                 "last_used": "08.03.2016"
@@ -563,6 +563,82 @@
                     "en": "Online"
                 },
                 "last_used": "11.03.2016"
+            },
+            "dependencies": {
+                "translations": {
+                    "de": "Abhängigkeiten",
+                    "en": "Dependencies"
+                },
+                "last_used": "25.08.2016"
+            },
+            "editParent": {
+                "translations": {
+                    "de": "Vorgänger definieren",
+                    "en": "Define parent dependency"
+                },
+                "last_used": "25.08.2016"
+            },
+            "dependency_title": {
+                "translations": {
+                    "de": "Abhängigkeiten",
+                    "en": "Dependencies"
+                },
+                "last_used": "25.08.2016"
+            },
+            "dependency": {
+                "translations": {
+                    "de": "MISSING",
+                    "en": "MISSING"
+                }
+            },
+            "dependency_chain": {
+                "translations": {
+                    "de": "Abhängikeitsketten mit diesem Lernort",
+                    "en": "Dependency chain with this Learn Location"
+                },
+                "last_used": "25.08.2016"
+            },
+            "dependency_description": {
+                "translations": {
+                    "de": "Lernorte mit Abhängigkeiten müssen in der vorgegebenen Reihenfolge besucht werden, damit die Inhalte angezeigt werden. Untenstehend sind alle Abhängigkeitsketten aufgelistet, die diesen Lernort beinhalten.",
+                    "en": "Learning locations with dependencies have to be visited in the given in order for the contents to be available. You can see all dependency chains containing this learning location below."
+                },
+                "last_used": "25.08.2016"
+            },
+            "parent_saved": {
+                "translations": {
+                    "de": "MISSING",
+                    "en": "MISSING"
+                }
+            },
+            "cannot_save_same_parent_as_child": {
+                "translations": {
+                    "de": "Sie können nicht den gleichen Lernort als Abhängigkeit definieren.",
+                    "en": "You can't choose this learning location as a dependency."
+                },
+                "last_used": "25.08.2016"
+            },
+            "no_circle_dependencies": {
+                "translations": {
+                    "de": "MISSING",
+                    "en": "MISSING"
+                }
+            },
+            "cannot_save_circular_dependencies": {
+                "translations": {
+                    "de": "Sie dürfen in den Abhängigkeiten keine Schlaufen einbinden. Der Benutzer hätte sonst keinen Anfangspunkt.",
+                    "en": "You can't define circles in the dependencies. Otherwise the user can't start at any learn location."
+                },
+                "last_used": "25.08.2016"
+            }
+        },
+        "dependency": {
+            "parent": {
+                "translations": {
+                    "de": "Vorgänger",
+                    "en": "Dependency Parent"
+                },
+                "last_used": "25.08.2016"
             }
         }
     }

@@ -7,7 +7,7 @@ require_once("./Services/ActiveRecord/class.ActiveRecord.php");
  *
  * @author Oskar Truffer <ot@studer-raimann.ch>
  */
-class LearnLocVisit extends ActiveRecord {
+class ilLearnLocVisit extends ActiveRecord {
 
 	/** @var string  */
 	protected static $TABLE_NAME = "xlel_visit";
@@ -16,6 +16,7 @@ class LearnLocVisit extends ActiveRecord {
 	 * @db_has_field        true
 	 * @db_is_primary       true
 	 * @db_is_notnull       true
+	 * @con_sequence        true
 	 * @db_fieldtype        integer
 	 * @db_length           8
 	 */

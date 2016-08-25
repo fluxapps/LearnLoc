@@ -74,3 +74,14 @@ common_image#:#Bild
 common_delete#:#Löschen
 common_keywords#:#Keywords
 common_online#:#Online
+common_dependencies#:#Abhängigkeiten
+common_editParent#:#Vorgänger definieren
+common_dependency_title#:#Abhängigkeiten
+common_dependency#:#MISSING
+common_dependency_chain#:#Abhängikeitsketten mit diesem Lernort
+common_dependency_description#:#Lernorte mit Abhängigkeiten müssen in der vorgegebenen Reihenfolge besucht werden, damit die Inhalte angezeigt werden. Untenstehend sind alle Abhängigkeitsketten aufgelistet, die diesen Lernort beinhalten.
+common_parent_saved#:#MISSING
+common_cannot_save_same_parent_as_child#:#Sie können nicht den gleichen Lernort als Abhängigkeit definieren.
+common_no_circle_dependencies#:#MISSING
+common_cannot_save_circular_dependencies#:#Sie dürfen in den Abhängigkeiten keine Schlaufen einbinden. Der Benutzer hätte sonst keinen Anfangspunkt.
+dependency_parent#:#Vorgänger

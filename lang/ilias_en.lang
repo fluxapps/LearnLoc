@@ -74,3 +74,14 @@ common_image#:#Image
 common_delete#:#Delete
 common_keywords#:#Keywords
 common_online#:#Online
+common_dependencies#:#Dependencies
+common_editParent#:#Define parent dependency
+common_dependency_title#:#Dependencies
+common_dependency#:#MISSING
+common_dependency_chain#:#Dependency chain with this Learn Location
+common_dependency_description#:#Learning locations with dependencies have to be visited in the given in order for the contents to be available. You can see all dependency chains containing this learning location below.
+common_parent_saved#:#MISSING
+common_cannot_save_same_parent_as_child#:#You can't choose this learning location as a dependency.
+common_no_circle_dependencies#:#MISSING
+common_cannot_save_circular_dependencies#:#You can't define circles in the dependencies. Otherwise the user can't start at any learn location.
+dependency_parent#:#Dependency Parent

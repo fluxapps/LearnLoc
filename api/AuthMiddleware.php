@@ -17,12 +17,18 @@ class AuthMiddleware extends Middleware {
 		chdir($base_dir);
 		require_once('include/inc.ilias_version.php');
 		require_once('Services/Component/classes/class.ilComponent.php');
-		if (\ilComponent::isVersionGreaterString(ILIAS_VERSION_NUMERIC, '4.2.999')) {
+		if (\ilComponent::isVersionGreaterString(ILIAS_VERSION_NUMERIC, '5.1.999')) {
+			require_once './Services/Context/classes/class.ilContext.php';
+			\ilContext::init(\ilContext::CONTEXT_WEB);
+			require_once './Services/Init/classes/class.ilInitialisation.php';
+			\ilInitialisation::initILIAS();
+		} elseif (\ilComponent::isVersionGreaterString(ILIAS_VERSION_NUMERIC, '4.2.999')) {
 			require_once './Services/Context/classes/class.ilContext.php';
 			\ilContext::init(\ilContext::CONTEXT_CRON);
 			require_once './Services/Init/classes/class.ilInitialisation.php';
 			\ilInitialisation::initILIAS();
-		} else {
+		}
+		else {
 			$_GET['baseClass'] = 'ilStartUpGUI';
 			require_once('./include/inc.get_pear.php');
 			require_once('./include/inc.header.php');

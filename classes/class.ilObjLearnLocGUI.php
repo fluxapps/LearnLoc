@@ -29,6 +29,7 @@ require_once('class.ilLearnLocMapGUI.php');
 require_once('class.ilLearnLocMediaGUI.php');
 require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/Folder/class.ilLearnLocFolderGUI.php');
 require_once('class.ilLearnLocExportGUI.php');
+require_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/VisitDependency/class.ilLearnLocDependencyGUI.php");
 
 /**
  * User Interface class for LearnLoc repository object.
@@ -46,7 +47,7 @@ require_once('class.ilLearnLocExportGUI.php');
  *   screens) and ilInfoScreenGUI (handles the info screen).
  *
  * @ilCtrl_isCalledBy ilObjLearnLocGUI: ilRepositoryGUI, ilAdministrationGUI, ilObjPluginDispatchGUI, ilCommonActionDispatcherGUI
- * @ilCtrl_Calls      ilObjLearnLocGUI: ilPermissionGUI, ilInfoScreenGUI, ilObjectCopyGUI, ilCommonActionDispatcherGUI, ilLearnLocMediaGUI, ilLearnLocMediaGUI
+ * @ilCtrl_Calls      ilObjLearnLocGUI: ilPermissionGUI, ilInfoScreenGUI, ilObjectCopyGUI, ilCommonActionDispatcherGUI, ilLearnLocMediaGUI, ilLearnLocMediaGUI, ilLearnLocDependencyGUI
  *
  */
 class ilObjLearnLocGUI extends ilObjectPluginGUI {
@@ -128,6 +129,13 @@ class ilObjLearnLocGUI extends ilObjectPluginGUI {
 				$this->tpl->show();
 				break;
 
+			case 'illearnlocdependencygui':
+				$this->prepareOutput();
+				$this->tabs->setTabActive('dependency');
+				$gui = new ilLearnLocDependencyGUI($this->ref_id);
+				$this->ctrl->forwardCommand($gui);
+				$this->tpl->show();
+				break;
 			default:
 				return parent::executeCommand();
 		}
@@ -197,6 +205,10 @@ class ilObjLearnLocGUI extends ilObjectPluginGUI {
 
 		if ($ilAccess->checkAccess('write', '', $this->object->getRefId())) {
 			$this->tabs->addTab('properties', $this->txt('common_properties'), $this->ctrl->getLinkTarget($this, 'editProperties'));
+		}
+
+		if ($ilAccess->checkAccess('write', '', $this->object->getRefId())) {
+			$this->tabs->addTab('dependency', $this->txt('common_dependencies'), $this->ctrl->getLinkTargetByClass('ilLearnLocDependencyGUI', 'show'));
 		}
 
 		$this->addInfoTab();

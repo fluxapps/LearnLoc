@@ -232,5 +232,36 @@ while ($data = $ilDB->fetchObject($res)) {
 	ilObjMediaObject::_saveUsage($data->media_id, 'mep', $data->ref_id);
 }
 ?>
+<#10>
+<?php
+require_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/VisitDependency/class.ilLearnLocVisit.php");
+ilLearnLocVisit::installDB();
+?>
+<#11>
+<?php
+require_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/VisitDependency/class.ilLearnLocDependency.php");
+ilLearnLocDependency::installDB();
+?>
+<#12>
+<?php
+require_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/VisitDependency/class.ilLearnLocDependency.php");
+ilLearnLocDependency::updateDB();
+require_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/VisitDependency/class.ilLearnLocVisit.php");
+ilLearnLocVisit::updateDB();
+?>
+<#13>
+<?php
 
+$fields = array(
+	'sequence' => array(
+		'type' => 'integer',
+		'length' => 4,
+		'notnull' => true
+	)
+);
+if(!$ilDB->tableExists('xlel_dependency_seq'))
+	$ilDB->createTable("xlel_dependency_seq", $fields);
+if(!$ilDB->tableExists('xlel_visit_seq'))
+	$ilDB->createTable("xlel_visit_seq", $fields);
+?>
 

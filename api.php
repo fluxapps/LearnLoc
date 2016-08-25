@@ -5,6 +5,7 @@ use LearnLocApi\CommentsService;
 use LearnLocApi\CoursesService;
 use LearnLocApi\CreateCommentService;
 use LearnLocApi\CreateLocationService;
+use LearnLocApi\DependencyService;
 use LearnLocApi\LocationImageService;
 use LearnLocApi\LocationsService;
 use LearnLocApi\CommentImageService;
@@ -122,6 +123,11 @@ $app->get('/allCourses', function () use ($app) {
 
 $app->get('/course/:id/locations', function ($id) use ($app) {
 	$service = new LocationsService($id);
+	response($service->getResponse());
+});
+
+$app->get('/location/:id/dependencies', function ($id) use ($app) {
+	$service = new DependencyService($id);
 	response($service->getResponse());
 });
 
