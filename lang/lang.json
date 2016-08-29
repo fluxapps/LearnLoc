@@ -11,7 +11,7 @@
                     "de": "Lernort",
                     "en": "Learn Location"
                 },
-                "last_used": "25.08.2016"
+                "last_used": "29.08.2016"
             },
             "xlel_duplicate": {
                 "translations": {
@@ -138,7 +138,7 @@
                     "de": "Einstellungen bearbeiten",
                     "en": "Edit Settings"
                 },
-                "last_used": "25.08.2016"
+                "last_used": "29.08.2016"
             }
         },
         "learnloc": {
@@ -163,7 +163,7 @@
                     "de": "Ort auswählen",
                     "en": "Choose Location"
                 },
-                "last_used": "25.08.2016"
+                "last_used": "29.08.2016"
             }
         },
         "init": {
@@ -172,7 +172,7 @@
                     "de": "Neues Bild zum Lernort hinzufügen",
                     "en": "Add new Image to Learn Location"
                 },
-                "last_used": "25.08.2016"
+                "last_used": "29.08.2016"
             }
         },
         "no": {
@@ -249,7 +249,7 @@
                     "de": "Material",
                     "en": "Content"
                 },
-                "last_used": "25.08.2016"
+                "last_used": "29.08.2016"
             }
         },
         "comment": {
@@ -282,7 +282,7 @@
                     "de": "Export",
                     "en": "Export"
                 },
-                "last_used": "25.08.2016"
+                "last_used": "29.08.2016"
             },
             "csv": {
                 "translations": {
@@ -464,35 +464,35 @@
                     "de": "Inhalt",
                     "en": "Content"
                 },
-                "last_used": "25.08.2016"
+                "last_used": "29.08.2016"
             },
             "properties": {
                 "translations": {
                     "de": "Einstellungen",
                     "en": "Settings"
                 },
-                "last_used": "25.08.2016"
+                "last_used": "29.08.2016"
             },
             "title": {
                 "translations": {
                     "de": "Titel",
                     "en": "Title"
                 },
-                "last_used": "25.08.2016"
+                "last_used": "29.08.2016"
             },
             "description": {
                 "translations": {
                     "de": "Beschreibung",
                     "en": "Description"
                 },
-                "last_used": "25.08.2016"
+                "last_used": "29.08.2016"
             },
             "save": {
                 "translations": {
                     "de": "Speichern",
                     "en": "Save"
                 },
-                "last_used": "25.08.2016"
+                "last_used": "29.08.2016"
             },
             "cancel": {
                 "translations": {
@@ -506,7 +506,7 @@
                     "de": "Bearbeiten",
                     "en": "Edit"
                 },
-                "last_used": "25.08.2016"
+                "last_used": "29.08.2016"
             },
             "status": {
                 "translations": {
@@ -527,7 +527,7 @@
                     "de": "Bilder",
                     "en": "Gallery"
                 },
-                "last_used": "25.08.2016"
+                "last_used": "29.08.2016"
             },
             "comments": {
                 "translations": {
@@ -568,14 +568,14 @@
                     "de": "Online",
                     "en": "Online"
                 },
-                "last_used": "25.08.2016"
+                "last_used": "29.08.2016"
             },
             "dependencies": {
                 "translations": {
                     "de": "Abhängigkeiten",
                     "en": "Dependencies"
                 },
-                "last_used": "25.08.2016"
+                "last_used": "29.08.2016"
             },
             "editParent": {
                 "translations": {
