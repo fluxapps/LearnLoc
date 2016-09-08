@@ -47,7 +47,8 @@ require_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/
  *   screens) and ilInfoScreenGUI (handles the info screen).
  *
  * @ilCtrl_isCalledBy ilObjLearnLocGUI: ilRepositoryGUI, ilAdministrationGUI, ilObjPluginDispatchGUI, ilCommonActionDispatcherGUI
- * @ilCtrl_Calls      ilObjLearnLocGUI: ilPermissionGUI, ilInfoScreenGUI, ilObjectCopyGUI, ilCommonActionDispatcherGUI, ilLearnLocMediaGUI, ilLearnLocMediaGUI, ilLearnLocDependencyGUI
+ * @ilCtrl_Calls      ilObjLearnLocGUI: ilPermissionGUI, ilInfoScreenGUI, ilObjectCopyGUI, ilCommonActionDispatcherGUI, ilLearnLocMediaGUI,
+ *                    ilLearnLocMediaGUI, ilLearnLocDependencyGUI
  *
  */
 class ilObjLearnLocGUI extends ilObjectPluginGUI {
@@ -198,7 +199,7 @@ class ilObjLearnLocGUI extends ilObjectPluginGUI {
 		}
 
 		if ($ilAccess->checkAccess('write', '', $this->object->getRefId())
-			AND ilComponent::isVersionGreaterString(ILIAS_VERSION_NUMERIC, '4.2.999')
+		    AND ilComponent::isVersionGreaterString(ILIAS_VERSION_NUMERIC, '4.2.999')
 		) {
 			$this->tabs->addTab('export_arcgis', $this->txt('export_arcgis'), $this->ctrl->getLinkTargetByClass('ilLearnLocExportGUI', 'listExportFiles'));
 		}
@@ -251,7 +252,7 @@ class ilObjLearnLocGUI extends ilObjectPluginGUI {
 
 		// location property
 		$this->lng->loadLanguageModule("gmaps");
-		
+
 		$loc_prop = new ilLocationInputGUI($this->txt("location_selector"), "location");
 		$loc_prop->setZoom(10);
 		$this->form->addItem($loc_prop);
@@ -261,7 +262,7 @@ class ilObjLearnLocGUI extends ilObjectPluginGUI {
 		$imgs->setSuffixes(array(
 			"jpg",
 			"jpeg",
-			'png'
+			'png',
 		));
 		$this->form->addItem($imgs);
 
@@ -380,6 +381,15 @@ class ilObjLearnLocGUI extends ilObjectPluginGUI {
 
 		$this->tpl->setContent($gal1 . $gal2);
 	}
-}
 
-?>
+
+	protected function initCreationForms($a_new_type) {
+		$forms = array(
+			self::CFORM_NEW => $this->initCreateForm($a_new_type),
+			// self::CFORM_IMPORT => $this->initImportForm($a_new_type),
+			//			self::CFORM_CLONE => $this->fillCloneTemplate(null, $a_new_type)
+		);
+
+		return $forms;
+	}
+}
