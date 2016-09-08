@@ -49,8 +49,8 @@ class ilLearnLocMapGUI {
 
 
 	public function getHTML(){
-
-		$map = new ilGoogleMapGUI();
+		require_once('./Services/Maps/classes/class.ilMapUtil.php');
+		$map = ilMapUtil::getMapGUI();
 		$map->setMapId("xlel_map");
 		$map->setWidth("200px");
 		$map->setHeight("200px");
