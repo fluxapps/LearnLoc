@@ -45,6 +45,7 @@ keywords_title#:#Keywords
 keywords_edit#:#Keywords bearbeiten
 keywords_info#:#Keywords Komma-getrennt
 msg_images_deleted#:#Medien wurden gelöscht
+msg_success_add#:#Gespeichert
 block_title_init#:#Bilder zum Lernort
 block_title_comments#:#Bilder aus Kommentaren
 admin_form_title#:#Einstellungen
@@ -57,6 +58,7 @@ admin_campus_tour_username#:#Benutzername
 admin_campus_tour_password#:#Passwort
 admin_form_button_save#:#Speichern
 admin_form_button_cancel#:#Abbrechen
+admin_dependencies#:#Reihenfolge aktivieren
 tab_settings#:#Einstellungen
 common_content#:#Inhalt
 common_properties#:#Einstellungen
@@ -80,7 +82,7 @@ common_dependency_title#:#Abhängigkeiten
 common_dependency#:#MISSING
 common_dependency_chain#:#Abhängikeitsketten mit diesem Lernort
 common_dependency_description#:#Lernorte mit Abhängigkeiten müssen in der vorgegebenen Reihenfolge besucht werden, damit die Inhalte angezeigt werden. Untenstehend sind alle Abhängigkeitsketten aufgelistet, die diesen Lernort beinhalten.
-common_parent_saved#:#MISSING
+common_parent_saved#:#Gespeichert
 common_cannot_save_same_parent_as_child#:#Sie können nicht den gleichen Lernort als Abhängigkeit definieren.
 common_no_circle_dependencies#:#MISSING
 common_cannot_save_circular_dependencies#:#Sie dürfen in den Abhängigkeiten keine Schlaufen einbinden. Der Benutzer hätte sonst keinen Anfangspunkt.

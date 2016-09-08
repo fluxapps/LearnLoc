@@ -38,7 +38,7 @@
                     "de": "Lernort kopieren",
                     "en": "Copy Learn Location"
                 },
-                "last_used": "11.03.2016"
+                "last_used": "08.09.2016"
             }
         },
         "xlel": {
@@ -47,14 +47,14 @@
                     "de": "Lernort hinzufügen",
                     "en": "Add Learn Location"
                 },
-                "last_used": "11.03.2016"
+                "last_used": "08.09.2016"
             },
             "new": {
                 "translations": {
                     "de": "Neuen Lernort erstellen",
                     "en": "Add new Learn Location"
                 },
-                "last_used": "11.03.2016"
+                "last_used": "08.09.2016"
             },
             "read": {
                 "translations": {
@@ -138,7 +138,7 @@
                     "de": "Einstellungen bearbeiten",
                     "en": "Edit Settings"
                 },
-                "last_used": "29.08.2016"
+                "last_used": "08.09.2016"
             }
         },
         "learnloc": {
@@ -163,7 +163,7 @@
                     "de": "Ort auswählen",
                     "en": "Choose Location"
                 },
-                "last_used": "29.08.2016"
+                "last_used": "08.09.2016"
             }
         },
         "init": {
@@ -172,7 +172,7 @@
                     "de": "Neues Bild zum Lernort hinzufügen",
                     "en": "Add new Image to Learn Location"
                 },
-                "last_used": "29.08.2016"
+                "last_used": "08.09.2016"
             }
         },
         "no": {
@@ -249,7 +249,7 @@
                     "de": "Material",
                     "en": "Content"
                 },
-                "last_used": "29.08.2016"
+                "last_used": "08.09.2016"
             }
         },
         "comment": {
@@ -282,7 +282,7 @@
                     "de": "Export",
                     "en": "Export"
                 },
-                "last_used": "29.08.2016"
+                "last_used": "08.09.2016"
             },
             "csv": {
                 "translations": {
@@ -360,6 +360,13 @@
                     "de": "Medien wurden gelöscht",
                     "en": "Media was deleted"
                 }
+            },
+            "success_add": {
+                "translations": {
+                    "de": "Gespeichert",
+                    "en": "Setting saved"
+                },
+                "last_used": "08.09.2016"
             }
         },
         "block": {
@@ -383,70 +390,77 @@
                     "de": "Einstellungen",
                     "en": "Settings"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "08.09.2016"
             },
             "range": {
                 "translations": {
                     "de": "Range",
                     "en": "Range"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "08.09.2016"
             },
             "range_allow_override": {
                 "translations": {
                     "de": "Range in Objekt festlegen",
                     "en": "Set Range in Object"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "08.09.2016"
             },
             "campus_tour_header": {
                 "translations": {
                     "de": "Campus-Tour",
                     "en": "Campus-Tour"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "08.09.2016"
             },
             "campus_tour": {
                 "translations": {
                     "de": "Campus-Tour",
                     "en": "Campus-Tour"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "08.09.2016"
             },
             "campus_tour_node": {
                 "translations": {
                     "de": "ILIAS-Ref-ID",
                     "en": "ILIAS-Ref-Id"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "08.09.2016"
             },
             "campus_tour_username": {
                 "translations": {
                     "de": "Benutzername",
                     "en": "Username"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "08.09.2016"
             },
             "campus_tour_password": {
                 "translations": {
                     "de": "Passwort",
                     "en": "Password"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "08.09.2016"
             },
             "form_button_save": {
                 "translations": {
                     "de": "Speichern",
                     "en": "Save"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "08.09.2016"
             },
             "form_button_cancel": {
                 "translations": {
                     "de": "Abbrechen",
                     "en": "Cancel"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "08.09.2016"
+            },
+            "dependencies": {
+                "translations": {
+                    "de": "Reihenfolge aktivieren",
+                    "en": "Activate Dependencies"
+                },
+                "last_used": "08.09.2016"
             }
         },
         "tab": {
@@ -455,7 +469,7 @@
                     "de": "Einstellungen",
                     "en": "Settings"
                 },
-                "last_used": "08.03.2016"
+                "last_used": "08.09.2016"
             }
         },
         "common": {
@@ -464,35 +478,35 @@
                     "de": "Inhalt",
                     "en": "Content"
                 },
-                "last_used": "29.08.2016"
+                "last_used": "08.09.2016"
             },
             "properties": {
                 "translations": {
                     "de": "Einstellungen",
                     "en": "Settings"
                 },
-                "last_used": "29.08.2016"
+                "last_used": "08.09.2016"
             },
             "title": {
                 "translations": {
                     "de": "Titel",
                     "en": "Title"
                 },
-                "last_used": "29.08.2016"
+                "last_used": "08.09.2016"
             },
             "description": {
                 "translations": {
                     "de": "Beschreibung",
                     "en": "Description"
                 },
-                "last_used": "29.08.2016"
+                "last_used": "08.09.2016"
             },
             "save": {
                 "translations": {
                     "de": "Speichern",
                     "en": "Save"
                 },
-                "last_used": "29.08.2016"
+                "last_used": "08.09.2016"
             },
             "cancel": {
                 "translations": {
@@ -506,28 +520,28 @@
                     "de": "Bearbeiten",
                     "en": "Edit"
                 },
-                "last_used": "29.08.2016"
+                "last_used": "08.09.2016"
             },
             "status": {
                 "translations": {
                     "de": "Status",
                     "en": "Status"
                 },
-                "last_used": "25.08.2016"
+                "last_used": "08.09.2016"
             },
             "offline": {
                 "translations": {
                     "de": "Offline",
                     "en": "Offline"
                 },
-                "last_used": "25.08.2016"
+                "last_used": "08.09.2016"
             },
             "media": {
                 "translations": {
                     "de": "Bilder",
                     "en": "Gallery"
                 },
-                "last_used": "29.08.2016"
+                "last_used": "08.09.2016"
             },
             "comments": {
                 "translations": {
@@ -568,28 +582,28 @@
                     "de": "Online",
                     "en": "Online"
                 },
-                "last_used": "29.08.2016"
+                "last_used": "08.09.2016"
             },
             "dependencies": {
                 "translations": {
                     "de": "Abhängigkeiten",
                     "en": "Dependencies"
                 },
-                "last_used": "29.08.2016"
+                "last_used": "08.09.2016"
             },
             "editParent": {
                 "translations": {
                     "de": "Vorgänger definieren",
                     "en": "Define parent dependency"
                 },
-                "last_used": "25.08.2016"
+                "last_used": "08.09.2016"
             },
             "dependency_title": {
                 "translations": {
                     "de": "Abhängigkeiten",
                     "en": "Dependencies"
                 },
-                "last_used": "25.08.2016"
+                "last_used": "08.09.2016"
             },
             "dependency": {
                 "translations": {
@@ -602,20 +616,21 @@
                     "de": "Abhängikeitsketten mit diesem Lernort",
                     "en": "Dependency chain with this Learn Location"
                 },
-                "last_used": "25.08.2016"
+                "last_used": "08.09.2016"
             },
             "dependency_description": {
                 "translations": {
                     "de": "Lernorte mit Abhängigkeiten müssen in der vorgegebenen Reihenfolge besucht werden, damit die Inhalte angezeigt werden. Untenstehend sind alle Abhängigkeitsketten aufgelistet, die diesen Lernort beinhalten.",
                     "en": "Learning locations with dependencies have to be visited in the given in order for the contents to be available. You can see all dependency chains containing this learning location below."
                 },
-                "last_used": "25.08.2016"
+                "last_used": "08.09.2016"
             },
             "parent_saved": {
                 "translations": {
-                    "de": "MISSING",
-                    "en": "MISSING"
-                }
+                    "de": "Gespeichert",
+                    "en": "Saved"
+                },
+                "last_used": "08.09.2016"
             },
             "cannot_save_same_parent_as_child": {
                 "translations": {
@@ -644,7 +659,7 @@
                     "de": "Vorgänger",
                     "en": "Dependency Parent"
                 },
-                "last_used": "25.08.2016"
+                "last_used": "08.09.2016"
             }
         }
     }

@@ -249,19 +249,3 @@ ilLearnLocDependency::updateDB();
 require_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/VisitDependency/class.ilLearnLocVisit.php");
 ilLearnLocVisit::updateDB();
 ?>
-<#13>
-<?php
-
-$fields = array(
-	'sequence' => array(
-		'type' => 'integer',
-		'length' => 4,
-		'notnull' => true
-	)
-);
-if(!$ilDB->tableExists('xlel_dependency_seq'))
-	$ilDB->createTable("xlel_dependency_seq", $fields);
-if(!$ilDB->tableExists('xlel_visit_seq'))
-	$ilDB->createTable("xlel_visit_seq", $fields);
-?>
-

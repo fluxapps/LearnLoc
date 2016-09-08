@@ -17,6 +17,7 @@ class xlelConfig extends ActiveRecord {
 	const F_CAMPUS_TOUR_PASSWORD = 'campus_tour_password';
 	const F_RANGE = 'range';
 	const F_RANGE_ALLOW_OVERRIDE = 'range_allow_override';
+	const F_DEPENDENCIES = 'dependencies';
 	/**
 	 * @var array
 	 */

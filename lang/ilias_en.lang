@@ -45,6 +45,7 @@ keywords_title#:#Keywords
 keywords_edit#:#Edit Keywords
 keywords_info#:#Enter keywords coma-separated
 msg_images_deleted#:#Media was deleted
+msg_success_add#:#Setting saved
 block_title_init#:#Learning-Location Images
 block_title_comments#:#Images from Comments
 admin_form_title#:#Settings
@@ -57,6 +58,7 @@ admin_campus_tour_username#:#Username
 admin_campus_tour_password#:#Password
 admin_form_button_save#:#Save
 admin_form_button_cancel#:#Cancel
+admin_dependencies#:#Activate Dependencies
 tab_settings#:#Settings
 common_content#:#Content
 common_properties#:#Settings
@@ -80,7 +82,7 @@ common_dependency_title#:#Dependencies
 common_dependency#:#MISSING
 common_dependency_chain#:#Dependency chain with this Learn Location
 common_dependency_description#:#Learning locations with dependencies have to be visited in the given in order for the contents to be available. You can see all dependency chains containing this learning location below.
-common_parent_saved#:#MISSING
+common_parent_saved#:#Saved
 common_cannot_save_same_parent_as_child#:#You can't choose this learning location as a dependency.
 common_no_circle_dependencies#:#MISSING
 common_cannot_save_circular_dependencies#:#You can't define circles in the dependencies. Otherwise the user can't start at any learn location.

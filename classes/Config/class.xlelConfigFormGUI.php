@@ -50,23 +50,26 @@ class xlelConfigFormGUI extends ilPropertyFormGUI {
 	protected function initForm() {
 		$this->setTitle($this->pl->txt('admin_form_title'));
 
-		$range = new ilNumberInputGUI($this->txt(xlelConfig::F_RANGE), xlelConfig::F_RANGE);
-//		$this->addItem($range);
-		$cb = new ilCheckboxInputGUI($this->txt(xlelConfig::F_RANGE_ALLOW_OVERRIDE), xlelConfig::F_RANGE_ALLOW_OVERRIDE);
-//		$this->addItem($cb);
-
-		$title = new ilFormSectionHeaderGUI();
-		$title->setTitle($this->txt('campus_tour_header'));
-		$this->addItem($title);
-		$cb = new ilCheckboxInputGUI($this->txt(xlelConfig::F_CAMPUS_TOUR), xlelConfig::F_CAMPUS_TOUR);
-		$node = new ilNumberInputGUI($this->txt(xlelConfig::F_CAMPUS_TOUR_NODE), xlelConfig::F_CAMPUS_TOUR_NODE);
-		$cb->addSubItem($node);
-		$username = new ilTextInputGUI($this->txt(xlelConfig::F_CAMPUS_TOUR_USERNAME), xlelConfig::F_CAMPUS_TOUR_USERNAME);
-		$cb->addSubItem($username);
-		$password = new ilTextInputGUI($this->txt(xlelConfig::F_CAMPUS_TOUR_PASSWORD), xlelConfig::F_CAMPUS_TOUR_PASSWORD);
-		$cb->addSubItem($password);
+		$cb = new ilCheckboxInputGUI($this->txt(xlelConfig::F_DEPENDENCIES), xlelConfig::F_DEPENDENCIES);
 		$this->addItem($cb);
 
+		$range = new ilNumberInputGUI($this->txt(xlelConfig::F_RANGE), xlelConfig::F_RANGE);
+		//		$this->addItem($range);
+		$cb = new ilCheckboxInputGUI($this->txt(xlelConfig::F_RANGE_ALLOW_OVERRIDE), xlelConfig::F_RANGE_ALLOW_OVERRIDE);
+		//		$this->addItem($cb);
+		/*
+				$title = new ilFormSectionHeaderGUI();
+				$title->setTitle($this->txt('campus_tour_header'));
+				$this->addItem($title);
+				$cb = new ilCheckboxInputGUI($this->txt(xlelConfig::F_CAMPUS_TOUR), xlelConfig::F_CAMPUS_TOUR);
+				$node = new ilNumberInputGUI($this->txt(xlelConfig::F_CAMPUS_TOUR_NODE), xlelConfig::F_CAMPUS_TOUR_NODE);
+				$cb->addSubItem($node);
+				$username = new ilTextInputGUI($this->txt(xlelConfig::F_CAMPUS_TOUR_USERNAME), xlelConfig::F_CAMPUS_TOUR_USERNAME);
+				$cb->addSubItem($username);
+				$password = new ilTextInputGUI($this->txt(xlelConfig::F_CAMPUS_TOUR_PASSWORD), xlelConfig::F_CAMPUS_TOUR_PASSWORD);
+				$cb->addSubItem($password);
+				$this->addItem($cb);
+		*/
 		$this->addCommandButtons();
 	}
 
