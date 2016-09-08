@@ -22,8 +22,7 @@
 */
 
 require_once('./Services/Repository/classes/class.ilObjectPlugin.php');
-@include_once('./classes/class.ilLink.php');
-@include_once('./Services/Link/classes/class.ilLink.php');
+require_once('./Services/Link/classes/class.ilLink.php');
 require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/Folder/class.ilLearnLocFolder.php');
 require_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/VisitDependency/class.ilLearnLocVisit.php");
 
@@ -114,6 +113,7 @@ class ilObjLearnLoc extends ilObjectPlugin {
 
 
 	/**
+	 * @param bool $insert
 	 * @return array
 	 */
 	protected function returnArrayForDB($insert = false) {
@@ -176,12 +176,11 @@ class ilObjLearnLoc extends ilObjectPlugin {
 		$this->setContainerId($rec->container_id);
 		$this->setExportKeywords($rec->export_kw);
 
-		if ($this->getRefId()) {
+		if ($this->getRefId() AND !$tree->isSaved($this->getRefId())) {
 			if (!$this->getContainerId() OR $this->getContainerId() == 0) {
 				$this->createFolder();
 			}
 			if ($this->getContainerId() AND $tree->isSaved($this->getContainerId())) {
-				//				ilUtil::sendInfo('folder was deleted');
 				$this->createFolder();
 			}
 		}
@@ -237,15 +236,13 @@ class ilObjLearnLoc extends ilObjectPlugin {
 	}
 
 
-	function doDelete() {
-		global $ilDB, $tree;
+	public function doDelete() {
+		global $ilDB;
+		/**
+		 * @var $tree
+		 */
 		$ilDB->manipulate("DELETE FROM rep_robj_xlel_data WHERE id = " . $ilDB->quote($this->getId(), "integer"));
-		// Delete Folder FSX: FIXME
-		if ($this->getContainerId() && !$tree->isSaved($this->getContainerId())) {
-			$folder = new ilLearnLocFolder($this, $this->getContainerId());
-			$folder->delete();
-		}
-		// FIXME: Medienobjekte
+		// We do not detele the folder here since this leads to problems in system check
 	}
 
 
