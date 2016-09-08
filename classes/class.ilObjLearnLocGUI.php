@@ -207,7 +207,7 @@ class ilObjLearnLocGUI extends ilObjectPluginGUI {
 		if ($ilAccess->checkAccess('write', '', $this->object->getRefId())) {
 			$this->tabs->addTab('properties', $this->txt('common_properties'), $this->ctrl->getLinkTarget($this, 'editProperties'));
 		}
-
+		require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/LearnLoc/classes/Config/class.xlelConfig.php');
 		if (xlelConfig::getWithName(xlelConfig::F_DEPENDENCIES) && $ilAccess->checkAccess('write', '', $this->object->getRefId())) {
 			$this->tabs->addTab('dependency', $this->txt('common_dependencies'), $this->ctrl->getLinkTargetByClass('ilLearnLocDependencyGUI', 'show'));
 		}
