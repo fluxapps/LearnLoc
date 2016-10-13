@@ -168,11 +168,11 @@ class ilObjLearnLoc extends ilObjectPlugin {
 
 		if ($this->getRefId()) {
 			if (!$this->getContainerId() OR $this->getContainerId() == 0) {
-				$this->createFolder();
+//				$this->createFolder();
 			}
 			if ($this->getContainerId() AND $tree->isSaved($this->getContainerId())) {
 				//				ilUtil::sendInfo('folder was deleted');
-				$this->createFolder();
+//				$this->createFolder();
 			}
 		}
 	}
