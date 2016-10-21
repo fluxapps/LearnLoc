@@ -262,7 +262,6 @@ class ilObjLearnLocGUI extends ilObjectPluginGUI {
 		$imgs->setSuffixes(array(
 			"jpg",
 			"jpeg",
-			'png',
 		));
 		$this->form->addItem($imgs);
 

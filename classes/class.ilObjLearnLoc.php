@@ -102,6 +102,7 @@ class ilObjLearnLoc extends ilObjectPlugin {
 		$this->setType("xlel");
 	}
 
+
 	public function visitLocation($userId) {
 		$now = new DateTime();
 		$visit = new ilLearnLocVisit();
@@ -178,10 +179,11 @@ class ilObjLearnLoc extends ilObjectPlugin {
 
 		if ($this->getRefId() AND !$tree->isSaved($this->getRefId())) {
 			if (!$this->getContainerId() OR $this->getContainerId() == 0) {
-				$this->createFolder();
+				// $this->createFolder();
 			}
 			if ($this->getContainerId() AND $tree->isSaved($this->getContainerId())) {
-				$this->createFolder();
+				// ilUtil::sendInfo('folder was deleted');
+				// $this->createFolder();
 			}
 		}
 	}
