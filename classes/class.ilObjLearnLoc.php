@@ -140,7 +140,6 @@ class ilObjLearnLoc extends ilObjectPlugin {
 		/**
 		 * @var $ilDB ilDB
 		 */
-		$this->createFolder();
 		$data = $this->returnArrayForDB(true);
 		$ilDB->insert(self::TABLE_NAME, $data);
 	}
