@@ -34,6 +34,8 @@ require_once("./Modules/Folder/classes/class.ilObjFolder.php");
  */
 class ilLearnLocFolder extends ilObjFolder {
 
+    const PERMISSION_VISIBLE = 2;
+
 	/**
 	 * @param ilObjLearnLoc $parent_obj
 	 * @param int           $a_id
@@ -61,9 +63,10 @@ class ilLearnLocFolder extends ilObjFolder {
 
 		$parentRoles = $rbacreview->getParentRoleIds($this->getRefId());
 
+
 		foreach ($parentRoles as $i => $parRol) {
 			$ops = $rbacreview->getOperationsOfRole($parRol["obj_id"], "fold", $parRol["parent"]); //getOperationsOfRole($parRol["obj_id"], "fold", $parRol["parent"]);
-			$key = array_search(2, $ops);
+			$key = array_search(self::PERMISSION_VISIBLE, $ops);
 			unset($ops[$key]);
 
 			$rbacadmin->revokePermission($this->getRefId(), $parRol["obj_id"]);

@@ -53,7 +53,7 @@ class xlelConfigFormGUI extends ilPropertyFormGUI {
 		ilUtil::sendInfo('Currently there are no settings for this plugin');
 
 		$cb = new ilCheckboxInputGUI($this->txt(xlelConfig::F_DEPENDENCIES), xlelConfig::F_DEPENDENCIES);
-//		$this->addItem($cb);
+        //$this->addItem($cb);
 
 		$range = new ilNumberInputGUI($this->txt(xlelConfig::F_RANGE), xlelConfig::F_RANGE);
 		//		$this->addItem($range);

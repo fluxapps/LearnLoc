@@ -76,6 +76,8 @@ class CreateLocationService implements Service {
 		$location->createReference();
 		$location->setPermissions($this->parent_id);
 		$location->putInTree($this->parent_id);
+        $location->createFolder();
+
 
 		if ($this->get('image')) {
 			$mob = new \ilLearnLocMedia();
